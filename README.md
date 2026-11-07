@@ -8,6 +8,30 @@ DEL learns algorithms from **policy-trajectory observations (PTOs)**: read symbo
 written symbols, and movements from expert executions. The controller receives
 observations and action targets, never the expert's internal state.
 
+![Observe PTOs pairing environment inputs with expert actions; learn differentiably with a state-tracking neural network for extreme length generalization; extract a discrete controller provably equivalent to the expert in the illustrated case.](docs/assets/binary_addition_overview.svg)
+
+Each PTO pairs environment inputs (read symbols) with expert actions (writes and movements)
+over an execution. DEL trains a state-tracking neural network to predict those actions.
+The [binary-addition case](analyses/metric_extraction/DFST/add2/warmup_50000_steps_250000/README.md)
+includes an extracted finite-state discrete controller and a proof of exact agreement
+with the expert for all nonempty binary operands.
+
+<details>
+<summary>Try the interactive binary-addition demo</summary>
+
+After [installing DEL](#install), run:
+
+```bash
+del animate grid:add2 '101+11'
+```
+
+The command opens the expert execution in a local browser. Change the input,
+pause playback, or advance one step at a time.
+See the [viewer guide](#interactive-tape-and-grid-viewer) for more controllers
+and trained-model playback.
+
+</details>
+
 This repository accompanies *Differentiable Exact Learning of Algorithms* and
 contains arithmetic Turing machines, arithmetic grid agents, the universal
 teleporting agent, and four differentiable controllers: **DFST, DFST_Softmax,
