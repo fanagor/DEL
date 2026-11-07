@@ -1,0 +1,474 @@
+% Standalone proof. Shared notation and prose conventions: analyses/README.md.
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsthm}
+\usepackage{newtxtext,newtxmath}
+\usepackage[a4paper,margin=21mm,headheight=15pt]{geometry}
+\usepackage{microtype,booktabs,array,tabularx,longtable}
+\usepackage[table]{xcolor}
+\usepackage{tikz,fancyhdr,enumitem,seqsplit}
+\definecolor{Teal}{HTML}{176B70}
+\definecolor{Ink}{HTML}{203443}
+\definecolor{Pale}{HTML}{EDF5F5}
+\definecolor{Line}{HTML}{C7D8DB}
+\definecolor{Muted}{HTML}{536974}
+\definecolor{Warm}{HTML}{F8F4EC}
+\usepackage[colorlinks=true,linkcolor=Teal,urlcolor=Teal]{hyperref}
+\color{Ink}
+\newcommand{\blank}{\lambda}
+\newcommand{\digits}{\{0,1\}}
+\newcommand{\ph}[1]{\mathsf{#1}}
+\newcommand{\EXPERT}{\mathcal E}
+\newcommand{\CTRL}{\mathcal C}
+\newcommand{\PTO}{\operatorname{PTO}}
+\newcommand{\triple}[3]{(#1,#2,\mathsf{#3})}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\hash}[1]{{\scriptsize\ttfamily\seqsplit{#1}}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\setlist[itemize]{nosep,leftmargin=1.2em}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\color{Muted}Universal Teleporting Agent}
+\fancyhead[R]{\small\sffamily\color{Muted}Annealing}
+\fancyfoot[L]{\scriptsize\sffamily\color{Muted}Exact PTO Equivalence}
+\fancyfoot[R]{\small\thepage}
+\renewcommand{\headrulewidth}{.35pt}
+\renewcommand{\footrulewidth}{0pt}
+\newcommand{\sectiontitle}[2]{\refstepcounter{section}\vspace*{2pt}{\LARGE\bfseries\color{Teal}\thesection\quad #2}\par\vspace{7pt}}
+\date{}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\begin{document}
+{\Huge\bfseries Exact PTO Equivalence\\[3pt]Universal Teleporting Agent}\par
+\vspace{10pt}
+{\Large Annealed Controller}\par
+{\small\color{Muted}\path{analyses/annealing/DFST_Softmax/universal/hidden_30_data_150/}}\par
+\vspace{7pt}
+
+\vspace{4pt}
+\sectiontitle{1 \enspace STATEMENT AND SCOPE}{Statement and Scope}\label{sec:common1}
+\textbf{Controllers.}
+The exported table \path{minimized_transition_table.pdf} defines controller
+$\CTRL$, with initial state $0$ and halt state $27$.
+The function $\code{universal\_tp}(\{\blank,0,1\})$ defines expert
+$\EXPERT$, with initial state $0$ and halt state $14$.
+The adjacent expert export matches this function entry for entry.
+All tables retain the exported state numbers.
+
+\textbf{Input Domain.}
+A simulated Turing machine has states $Q=\{0,\ldots,N-1\}$, $N\ge1$,
+tape alphabet $\Gamma=\{\blank,0,1\}$, and a total transition function
+\[
+\delta:Q\times\Gamma\longrightarrow Q\times\Gamma\times\{L,R,S\}.
+\]
+Motion $S$ stops after writing. Every successor belongs to $Q$.
+The simulated machine starts in state $0$ on input $v\in\{0,1\}^{*}$.
+Use the exact \code{encode\_tm} layout and initial head position described
+in Section~\ref{sec:encoding}. The domain permits arbitrary program sizes
+and finite, possibly empty binary inputs.
+
+\textbf{Execution Convention.}
+The symbol $\blank$ denotes a blank. A transition $(q',w,M)$ writes $w$,
+performs motion $M$, and enters state $q'$. Motions include the rune
+teleportations $X,Y,Z$. Section~\ref{sec:encoding} specifies the grid
+coordinates, rune records, and hidden-symbol restoration.
+
+\textbf{Policy-Trajectory Observations.}
+For program $\delta$ and input $v$, define the policy-trajectory observation
+(PTO) by
+\[
+\PTO(\delta,v)=\bigl((r_t,w_t,M_t)\bigr)_t,
+\]
+where $r_t$, $w_t$, and $M_t$ denote the read symbol, written symbol,
+and motion at controller step $t$. A finite execution contributes the final
+$S$ action exactly once, without halt-loop padding. Equality of infinite
+PTOs means equality of every finite prefix.
+
+\begin{theorem}[Exact PTO Equivalence]\label{thm:main}
+For every input in the stated domain,
+$\PTO_{\CTRL}(\delta,v)=\PTO_{\EXPERT}(\delta,v)$.
+The head positions, visible grids, and rune records agree at every step,
+including symbols hidden beneath runes. Either both controllers halt on
+the same step with the same final configuration, or both execute infinitely
+many steps with equal finite prefixes.
+\end{theorem}
+
+The theorem concerns autonomous executions of the exported discrete controller,
+including empty input. The invariant below also proves faithful simulation
+of the encoded Turing machine.
+\clearpage
+\sectiontitle{2 \enspace EXPERT BEHAVIOR}{Expert Behavior}\label{sec:common2}
+\subsection{Encoding and Rune Semantics}\label{sec:encoding}
+Let $\kappa=\max(1,\lceil\log_3 N\rceil)$. Encode each state with a fixed-width,
+most-significant-first ternary word using $L,R,S$ for $0,1,2$ respectively.
+Write this word as $c(q)$. The trit symbol $S$ encodes the value $2$; the motion $S$ stops execution.
+
+Order tape symbols as $\sigma_0=\blank<\sigma_1=0<\sigma_2=1$.
+For $\delta(q,\sigma_i)=(q',w,M)$, program row $r=3q+i$ contains
+\[
+\bigl[\sigma_i,\blank,c(q),0,c(q'),0,w,M\bigr]. \tag{1}
+\]
+The source and successor codes each occupy $\kappa$ separate cells. Thus the
+program has $3N$ rows, ordered by state and then by read symbol.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.28}\small
+\begin{tabular}{lll}
+\toprule\rowcolor{Pale}Columns & Field & Purpose\\\midrule
+$0$ & $\sigma_i$ & Simulated tape read symbol\\
+$1$ & $\blank$ & Bookmark column for rune $X$\\
+$2,\ldots,\kappa+1$ & $c(q)$ & Source-state code\\
+$\kappa+2$ & $0$ & First delimiter\\
+$\kappa+3,\ldots,2\kappa+2$ & $c(q')$ & Successor-state code\\
+$2\kappa+3$ & $0$ & Second delimiter\\
+$2\kappa+4$ & $w$ & Symbol to write\\
+$2\kappa+5$ & $M$ & Simulated move $L,R$ or $S$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Initial Placement.}
+Row $r$ occupies grid height $y=-r$, so $D$ advances down the table and
+$U$ moves up the table. Initially $X$ covers the blank at $(1,0)$; no cell
+contains $Y$ or $Z$.
+The input occupies columns $1,\ldots,|v|$ of row $3N$, at height $-3N$.
+The controller starts at $(1,-3N)$, including for empty input.
+The tape row extends infinitely in both horizontal directions.
+
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=.6cm,font=\small]
+\draw[fill=Pale,draw=Line] (0,0) rectangle (9,2.5);
+\node at (4.5,1.7) {program rows $0,\ldots,3N-1$};
+\node at (4.5,.8) {three rows per state: $\blank$, $0$, $1$};
+\draw[fill=Warm,draw=Line] (0,-1.15) rectangle (9,-.25);
+\node at (4.5,-.7) {simulated tape: $\cdots\blank\ \underline{v_1}\ v_2\cdots v_{|v|}\ \blank\cdots$};
+\node[left] at (-.1,-.7) {$y=-3N$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Rune Semantics.}
+Each of $X,Y,Z$ has one position and a hidden symbol. Writing a rune first
+restores the hidden symbol at the old rune position, then installs the rune over
+the symbol at the new position. Rewriting a rune in place preserves the hidden symbol. Writing an ordinary symbol at a rune removes that rune.
+A motion $X$, $Y$ or $Z$ jumps to the corresponding rune after the write.
+Ordinary motions move one cell; $S$ stops without moving.
+
+The \emph{logical program} means the program with every rune replaced by the corresponding hidden symbol. Correctness depends on preserving this logical program,
+not on treating a rune as a destructive overwrite.
+
+\newpage
+\subsection{Endpoint and Prefix Invariant}\label{sec:part2}
+\begin{lemma}[Endpoint and Prefix Invariant]\label{lem:geometry}
+At the start of every simulated step, the expert occupies state $0$ at the
+simulated tape head. Rune $X$ occupies column $1$ on the first or last row
+of the current simulated state's three-row block. After matching $j$
+successor trits, $X$ occupies column $1+j$ on a row with the correct
+length-$j$ successor prefix. The row index remains congruent to $0$ or $2$
+modulo $3$. The logical program remains unchanged.
+\end{lemma}
+\begin{proof}
+Initially $X$ occupies the first row of state $0$. Assume the invariant at
+the start of a simulated step. The expert reads the tape symbol, installs
+$Z$, jumps to $X$, and steps left. The symbol search selects the matching
+row within the current state's three-row block. The following right scan
+crosses column $1$ and the source code to the first delimiter, leaving $X$
+in place.
+
+For successor trit $t$, the expert places $Y$ on the trit, jumps to $X$, and
+steps right to the next source-code column. All rows sharing the matched
+prefix form one interval. Within that interval, next-trit values increase
+monotonically down the table. The successor state exists, so a nonempty
+subinterval contains next trit $t$. Moving down on a smaller trit, or up
+on a larger trit, reaches $t$ before leaving the matched-prefix interval.
+
+An immediate match preserves the endpoint. A downward search enters the
+target subinterval at the first row, with read symbol $\blank$; an upward
+search enters at the last row, with read symbol $1$. Both rows occupy
+endpoints of three-row state blocks. Writing $X$ advances the matched
+prefix by one trit. Jumping to $Y$ resumes instruction decoding.
+
+After all $\kappa$ trits, $X$ occupies a row in the successor state's block.
+The second delimiter triggers a leftward rewind of $X$ to column $1$ on
+the same row. The expert then applies the prescribed write and motion at
+$Z$. Rune relocation restores every covered program symbol, preserving
+the logical program. Each nonstopping motion establishes the next simulated step.
+\end{proof}
+
+\begin{lemma}[No Missing Middle Trit]\label{lem:middle}
+Within a fixed source-code prefix block, a vertical search cannot pass
+directly between an $L$ region and an $S$ region. A nonempty $R$ region
+separates the two regions.
+\end{lemma}
+\begin{proof}
+The state numbers fill the contiguous interval $0,\ldots,N-1$, with a common
+encoding width. A prefix block contains a possibly truncated interval of
+consecutive integers. A block containing next-trit values $L$ and $S$ also
+contains every state in the intervening $R$ subinterval. Each state
+contributes all three read-symbol rows.
+\end{proof}
+
+\begin{corollary}[Faithful Expert Simulation]\label{cor:simulation}
+Each simulated TM transition takes finitely many controller steps and
+performs the write and motion prescribed by $\delta$. The expert halts
+exactly when the simulated TM issues $S$.
+\end{corollary}
+\begin{proof}
+Lemma~\ref{lem:geometry} selects the correct instruction and successor.
+Every scan stays within a finite program interval, and every trit search
+reaches a nonempty target interval. The final two instruction fields supply
+the prescribed write and motion at $Z$. Only a simulated $S$ triggers a
+stopping transition.
+\end{proof}
+
+\clearpage
+\sectiontitle{3 \enspace OBSERVATION PROTOCOL}{Observation Protocol}\label{sec:common3}
+\label{sec:protocol}
+The protocol records finite geometric context. Let $e\in\{0,2\}$ identify the endpoint row occupied by $X$.
+Use $r,j\in\{0,1,2\}$ to index tape symbols and $t,a\in\{L,R,S\}$ to denote trits. A vertical search records the last
+observed trit. Each phase and parameter tuple determines an expert state.
+
+\begin{center}
+\footnotesize\renewcommand{\arraystretch}{1.13}
+\begin{tabularx}{\textwidth}{l c X}
+\toprule\rowcolor{Pale}Phase & Expert state & Allowed reading and continuation\\\midrule
+Dispatch$(e)$ & $0$ & Read $\sigma_r$; jump to selection of $r$.\\
+Selection jump$(e,r)$ & $1+r$ & Read $X$; step left to row index $j=e$.\\
+Select$(e,r,j)$ & $1+r$ & Read $\sigma_j$; if $j=r$, cross column $1$; otherwise change $j$ by $\operatorname{sgn}(r-j)$.\\
+Cross$(e,r)$ & $4$ & Read $X$ if $e=r$, and $\blank$ otherwise; enter first source trit.\\
+First source trit$(e)$ & $4$ & Read any trit; enter remaining source-code scan.\\
+Source scan$(e)$ & $4$ & Trit: repeat. Delimiter $0$: enter first successor trit.\\
+First successor trit$(e)$ & $5$ & Read a trit $t$; jump to $X$ for matching $t$.\\
+Successor scan$(e)$ & $5$ & Trit $t$: match $t$. Delimiter $0$: start rewind.\\
+Match jump$(e,t)$ & $g_t$ & Read $X$; step right and begin comparison.\\
+First comparison$(e,t)$ & $g_t$ & Read $a$. If $a=t$, resume with endpoint $e$; if $a<t$, search down; if $a>t$, search up.\\
+Search down$(t,a)$ & $g_t$ & Read $a$ or the immediate successor of $a$. Repeat until $t$; then resume with endpoint $0$.\\
+Search up$(t,a)$ & $g_t$ & Read $a$ or the immediate predecessor of $a$. Repeat until $t$; then resume with endpoint $2$.\\
+Resume$(e,t)$ & $g_t$ & Read $Y$; advance to successor scan with endpoint $e$.\\
+Rewind jump$(e)$ & $9$ & Read $X$; step left.\\
+Rewind$(e)$ & $9$ & Trit: continue left. Blank: move $X$ here and jump to $Y$.\\
+Rewind return$(e)$ & $9$ & Read $Y$; step right to the write field.\\
+Read write$(e)$ & $10$ & Read $\sigma_r$; remember this write symbol.\\
+Read motion$(e,r)$ & $11+r$ & Read $M\in\{L,R,S\}$; jump to $Z$.\\
+Apply$(e,r,M)$ & $h_{r,M}$ & Read $Z$; write $\sigma_r$ and move $M$. Dispatch$(e)$ if $M\ne S$; otherwise halt.\\
+Halt & $14$ & No outgoing action.\\
+\bottomrule
+\end{tabularx}
+\end{center}
+Here $g_L=6$, $g_R=7$, $g_S=8$, and
+\[
+h_{r,L}=1+2r,\qquad h_{r,R}=2+2r,\qquad h_{r,S}=11+r.
+\]
+The protocol starts at Dispatch$(0)$. Searches update the remembered trit
+after each change. Thus a downward search for $S$ that has seen $L$ must see
+$R$ before $S$. The protocol permits unbounded repetition while retaining finite annotations.
+
+\begin{lemma}[Protocol Coverage]\label{lem:coverage}
+Every expert execution on a correct encoding follows this protocol.
+\end{lemma}
+\begin{proof}
+Endpoint selection and the following column-$1$ reading follow from Lemma~\ref{lem:geometry}.
+Both state codes have positive width. Prefix-block monotonicity and
+Lemma~\ref{lem:middle} give the allowed vertical-search readings and endpoint
+updates. Rewind reaches the blank in column $1$, then $Y$, the write field,
+the motion field and $Z$. These exhaust the phases of one simulated step;
+induction gives coverage for every finite prefix of the execution.
+\end{proof}
+
+The protocol permits additional observation sequences, including unequal
+lengths for the two code scans. The certificate checks every permitted
+transition, so this overapproximation preserves the equivalence argument.
+
+\clearpage
+\sectiontitle{4 \enspace SIMULATION CERTIFICATE}{Simulation Certificate}\label{sec:common4}
+\subsection{Dispatch, Row Selection and Code Scanning}\label{sec:part4}
+For phase $i$, write $Q_i$ for the controller-state set specified in the
+following certificate subsections. The simulation relation pairs expert state $g_i$ with controller state
+$q\in Q_i$, with identical grids, heads, and rune records.
+
+\textbf{Dispatch.}
+For either endpoint $e$, phase Dispatch$(e)$ has $Q_i=\{0\}$.
+On reading $\blank,0,1$, state $0$ writes $Z$, jumps to $X$, and enters
+controller state $23,0,22$, respectively. These actions match expert state $0$.
+
+\textbf{All Six Row-Selection Cases.}
+The following lists the readings from arrival at $X$ through crossing
+column $1$. The controller-state list gives the state \emph{before each
+reading}. Each route ends in controller state $10$ at the first source-code
+trit. The table represents endpoint $e$ by the corresponding read symbol, $\blank$ or $1$.
+
+\begin{center}
+\small\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{c c l l}
+\toprule\rowcolor{Pale}Endpoint & Wanted & Readings in order & Controller states in order\\\midrule
+$\blank$ & $\blank$ & $X,\blank,X$ & $23,10,19$\\
+$\blank$ & $0$ & $X,\blank,0,\blank$ & $0,20,7,25$\\
+$\blank$ & $1$ & $X,\blank,0,1,\blank$ & $22,7,19,25,25$\\
+$1$ & $\blank$ & $X,1,0,\blank,\blank$ & $23,10,10,9,22$\\
+$1$ & $0$ & $X,1,0,\blank$ & $0,20,4,25$\\
+$1$ & $1$ & $X,1,X$ & $22,7,19$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Each route uses expert state $1+r$ during selection and state $4$ for
+the final column-$1$ reading. The $X$ step moves left; comparisons
+move up or down toward the wanted symbol; the match and crossing steps
+move right. Every step preserves the read symbol. Substitution in the actual table
+verifies each route, including successor state $10$.
+
+\textbf{Scan the Source-State Code.}
+The first trit uses controller state $10$; subsequent trits use states
+from $\{4,18\}$. All of the following writes preserve the read symbol and move right:
+\begin{center}
+\small\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{c cccc}
+\toprule\rowcolor{Pale}Controller state & Read $L$ & Read $R$ & Read $S$ & Read delimiter $0$\\\midrule
+$10$ & $18$ & $4$ & $4$ & excluded at first trit\\
+$4$ & $18$ & $4$ & $4$ & $25$\\
+$18$ & $18$ & $4$ & $18$ & $25$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Entries list successor states. Expert state $4$ remains $4$ on trits and
+enters $5$ on the delimiter. Thus $Q_i=\{10\}$ at the first source trit, $Q_i=\{4,18\}$ during the
+remaining source scan, and $Q_i=\{25\}$ during the successor scan, including
+the first successor trit.
+
+\textbf{Successor-Code Dispatch.}
+Controller state $25$ has the four relevant transitions
+\[
+\begin{array}{c|cccc}
+\text{read}&L&R&S&0\\\hline
+\text{successor}&7&26&15&9
+\end{array}
+\]
+and in every case writes $Y$ and jumps to $X$. The corresponding expert transitions enter states $6,7,8,9$. The delimiter case occurs only after at least one
+successor trit. The match jumps therefore use states $7,26,15$, and the rewind jump
+uses state $9$, independently of the endpoint.
+
+\newpage
+\subsection{Trit Matching, Rewind and Tape Updates}\label{sec:part5}
+\textbf{Match One Successor Trit.}
+The match-jump states $7,26,15$ preserve $X$ and move right, entering
+$19,17,16$ respectively. The following table gives all comparison cases.
+Each entry lists $(\text{successor},\text{written symbol},\text{motion})$.
+
+\begin{center}
+\small\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{l c ccc}
+\toprule\rowcolor{Pale}Context & State & Read $L$ & Read $R$ & Read $S$\\\midrule
+Target $L$ & $19$ & $\triple{18}{X}{Y}$ & $\triple{19}{R}{U}$ & $\triple{19}{S}{U}$\\
+Target $R$ & $17$ & $\triple{17}{L}{D}$ & $\triple{2}{X}{Y}$ & $\triple{17}{S}{U}$\\
+Target $S$: first comparison & $16$ & $\triple{3}{L}{D}$ & $\triple{5}{R}{D}$ & $\triple{3}{X}{Y}$\\
+Target $S$: previous trit $L$ & $3$ & $\triple{3}{L}{D}$ & $\triple{5}{R}{D}$ & excluded\\
+Target $S$: previous trit $R$ & $5$ & excluded & $\triple{5}{R}{D}$ & $\triple{3}{X}{Y}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The corresponding expert states have indices $6,7,8$. The exclusions follow from the
+protocol, especially Lemma~\ref{lem:middle}. After equality, states $18,2,3$
+respectively read and preserve $Y$, then move right to state $25$.
+These states represent Resume$(e,L)$, Resume$(e,R)$, and Resume$(e,S)$.
+An immediate match retains the endpoint; a downward search selects endpoint
+$0$, and an upward search selects endpoint $2$.
+
+\textbf{Rewind $X$ and Reach the Write Field.}
+Expert state $9$ corresponds to the following exact sequence:
+\begin{center}
+\small\renewcommand{\arraystretch}{1.22}
+\begin{tabular}{l c c l}
+\toprule\rowcolor{Pale}Phase & Controller state & Reading & Transition\\\midrule
+Rewind jump & $9$ & $X$ & $\triple{14}{X}{L}$\\
+Rewind through code & $14$ & $t\in\{L,R,S\}$ & $\triple{14}{t}{L}$\\
+Rewind reaches column $1$ & $14$ & $\blank$ & $\triple{19}{X}{Y}$\\
+Rewind return & $19$ & $Y$ & $\triple{8}{Y}{R}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The last step enters expert state $10$, so $Q_i=\{8\}$ in phase ReadWrite$(e)$.
+On reading $\blank,0,1$, state $8$ preserves the symbol, moves right and
+enters $21,9,8$ respectively; the expert transitions enter states $11,12,13$.
+
+\textbf{Motion Decoding and Tape Update.}
+For each row below, reading the selected motion writes $Y$, teleports to
+$Z$, and enters the listed controller state. That state then reads $Z$,
+writes the indicated symbol and performs exactly the selected move.
+\begin{center}
+\small\renewcommand{\arraystretch}{1.32}
+\begin{tabular}{c c ccc}
+\toprule\rowcolor{Pale}Write symbol & Motion-reading state & Apply $L$ & Apply $R$ & Apply $S$\\\midrule
+$\blank$ & $21$ & $7$ & $4$ & $14$\\
+$0$ & $9$ & $3$ & $26$ & $18$\\
+$1$ & $8$ & $11$ & $1$ & $15$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The $L$ and $R$ cases return to controller state $0$, matching expert state
+$0$. The $S$ cases enter controller halt state $27$, matching expert halt
+state $14$. These establish all Apply phases and the terminal pair.
+
+Together, the certificate subsections specify $Q_i$ for every reachable
+protocol phase and verify every permitted transition. Only source-code scanning requires multivalued sets: $\{4,18\}$ for each endpoint.
+All other phase--parameter combinations have a unique controller state.
+
+The certificate contains $91$ reachable parameterized phases and $93$ related
+phase--controller pairs, including the terminal pair. For every allowed protocol edge $i\xrightarrow{x}j$ and every controller state $q\in Q_i$, the preceding certificate gives
+\begin{equation}
+\delta_\EXPERT(g_i,x)=(g_j,w,M),\qquad
+\delta_\CTRL(q,x)=(q',w,M),\qquad q'\in Q_j. \tag{2}
+\end{equation}
+The $162$ local checks cover $81$ distinct nonterminal entries of the controller table.
+A transition reaches a halt state exactly on an edge to the terminal phase.
+
+\clearpage
+\sectiontitle{5 \enspace EQUIVALENCE PROOF}{Equivalence Proof}\label{sec:common5}
+\label{sec:equivalence}
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Initially both configurations have the same grid, head, and rune records,
+with control states $0$ related by Dispatch$(0)$. Suppose the relation holds
+before a controller step. Lemma~\ref{lem:coverage} supplies an allowed read symbol
+$x$. Equal grids and heads give the same read symbol to both controllers.
+Equation~(2) gives equal writes and motions and preserves the relation
+between successor states. The next grids and heads therefore agree.
+Rune installation, restoration, and teleportation act deterministically,
+so the rune records also agree.
+
+Induction establishes equality of every finite execution prefix. The terminal
+condition permits a halt exactly on an edge to the terminal phase.
+Consequently, both controllers halt on the same step or both execute
+infinitely many steps with equal finite prefixes. Corollary~\ref{cor:simulation}
+identifies the expert execution with the encoded TM computation.
+\end{proof}
+
+\bigskip
+\sectiontitle{6 \enspace VERIFICATION AND ARTIFACTS}{Verification and Artifacts}\label{sec:common6}
+\textbf{Execution Checks.}
+The accompanying checker recomputes the full finite certificate and checks
+the CSV against the JSON controller export and the expert against
+\code{universal\_tp}. Independent executions additionally cover all $729$
+one-state transition tables on all $15$ words of lengths $0$--$3$
+($10{,}935$ pairs), $128$ random cases and $42$ directed state-boundary cases.
+The checks compare $1{,}129{,}521$ controller transitions and $46{,}633$ simulated
+TM steps, including programs with $2{,}188$ states and eight-trit encodings.
+The checks compare grids, heads, hidden rune data and a direct TM simulation.
+The suite contains $6{,}753$ halting cases and $4{,}352$ bounded-prefix cases.
+Bounded prefixes establish no eventual-halting or nonhalting conclusion. The universal claim
+rests on the invariant and induction, not those finite executions.
+
+\textbf{Verification.}
+Run \code{python3 verify\_equivalence.py {-}{-}quick} from this proof directory.
+Omit \code{{-}{-}quick} to rerun the execution checks. The adjacent files include the LaTeX source, parameterized protocol,
+checker, reference-source snapshots, and JSON verification report.
+
+\textbf{Artifact Identity.}
+The title page gives the repository-relative case directory. This proof directory
+contains the controller and expert exports, reference code, protocol, checker,
+and saved verification report. The verification script stores or reads SHA-256 checksums for these artifacts. A checksum identifies the exact bytes
+of a file; the checker compares the stored and computed values to detect changes.
+These checks bind the certificate to the supplied exports. The invariants,
+protocol coverage, and local transition identity establish equivalence.
+\end{document}

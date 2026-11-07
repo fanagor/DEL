@@ -1,0 +1,8 @@
+{
+  "expert_transition_table.csv": "79be1484c0e5e0ada9b4f72f0260a28ed2137f39284ff5b83d84c5063527eb34",
+  "minimized_partial.json": "10a9d2f6b887f470c41596c7a79ac1a4fc1d7329051fe3b495ac9badf92be4bd",
+  "minimized_transition_table.csv": "8da64d7e4f319102d01bacaaa7d6031aad075c3d95d87cc6a808505a53daf483",
+  "minimized_transition_table.pdf": "0eba62b77c50411220955b9f9550747fca27570c1144ad2cc1a55a3828800128",
+  "proof_reference_grid.py": "9953e4bdd588a735d38728aa9b2514d43e5c4e8789cb2cfc57e74fabff151d81",
+  "verify_equivalence.py": "1687241dac3e85ea56c8ab377ce590ebece778328f4a3ea738a451ee0b17e36a"
+}

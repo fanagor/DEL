@@ -1,0 +1,111 @@
+groups:
+  DFST_add2:
+  - runs/DFST/add2/warmup_100000_steps_1000000
+  - runs/DFST/add2/warmup_100000_steps_250000
+  - runs/DFST/add2/warmup_100000_steps_500000
+  - runs/DFST/add2/warmup_25000_steps_1000000
+  - runs/DFST/add2/warmup_25000_steps_250000
+  - runs/DFST/add2/warmup_25000_steps_500000
+  - runs/DFST/add2/warmup_50000_steps_1000000
+  - runs/DFST/add2/warmup_50000_steps_250000
+  - runs/DFST/add2/warmup_50000_steps_500000
+  DFST_mult2:
+  - runs/DFST/mult2/warmup_100000_steps_1000000
+  - runs/DFST/mult2/warmup_100000_steps_250000
+  - runs/DFST/mult2/warmup_100000_steps_500000
+  - runs/DFST/mult2/warmup_25000_steps_1000000
+  - runs/DFST/mult2/warmup_25000_steps_250000
+  - runs/DFST/mult2/warmup_25000_steps_500000
+  - runs/DFST/mult2/warmup_50000_steps_1000000
+  - runs/DFST/mult2/warmup_50000_steps_250000
+  - runs/DFST/mult2/warmup_50000_steps_500000
+  DFST_add10:
+  - runs/DFST/add10/warmup_0_steps_1000000
+  - runs/DFST/add10/warmup_0_steps_2000000
+  - runs/DFST/add10/warmup_0_steps_4000000
+  - runs/DFST/add10/warmup_100000_steps_1000000
+  - runs/DFST/add10/warmup_100000_steps_2000000
+  - runs/DFST/add10/warmup_100000_steps_4000000
+  - runs/DFST/add10/warmup_50000_steps_1000000
+  - runs/DFST/add10/warmup_50000_steps_2000000
+  - runs/DFST/add10/warmup_50000_steps_4000000
+  DFST_mult10:
+  - runs/DFST/mult10/warmup_0_steps_1000000
+  - runs/DFST/mult10/warmup_0_steps_2000000
+  - runs/DFST/mult10/warmup_0_steps_4000000
+  - runs/DFST/mult10/warmup_100000_steps_1000000
+  - runs/DFST/mult10/warmup_100000_steps_2000000
+  - runs/DFST/mult10/warmup_100000_steps_4000000
+  - runs/DFST/mult10/warmup_50000_steps_1000000
+  - runs/DFST/mult10/warmup_50000_steps_2000000
+  - runs/DFST/mult10/warmup_50000_steps_4000000
+  DFST_universal:
+  - runs/DFST/universal/data_150_steps_250000
+  - runs/DFST/universal/data_150_steps_500000
+  - runs/DFST/universal/data_225_steps_250000
+  - runs/DFST/universal/data_225_steps_500000
+  - runs/DFST/universal/data_75_steps_250000
+  - runs/DFST/universal/data_75_steps_500000
+  DFST_Softmax_add2:
+  - runs/DFST_Softmax/add2/hidden_11_data_25
+  - runs/DFST_Softmax/add2/hidden_11_data_50
+  - runs/DFST_Softmax/add2/hidden_11_data_75
+  - runs/DFST_Softmax/add2/hidden_22_data_25
+  - runs/DFST_Softmax/add2/hidden_22_data_50
+  - runs/DFST_Softmax/add2/hidden_22_data_75
+  - runs/DFST_Softmax/add2/hidden_33_data_25
+  - runs/DFST_Softmax/add2/hidden_33_data_50
+  - runs/DFST_Softmax/add2/hidden_33_data_75
+  DFST_Softmax_mult2:
+  - runs/DFST_Softmax/mult2/hidden_32_data_100
+  - runs/DFST_Softmax/mult2/hidden_32_data_200
+  - runs/DFST_Softmax/mult2/hidden_32_data_300
+  - runs/DFST_Softmax/mult2/hidden_64_data_100
+  - runs/DFST_Softmax/mult2/hidden_64_data_200
+  - runs/DFST_Softmax/mult2/hidden_64_data_300
+  - runs/DFST_Softmax/mult2/hidden_96_data_100
+  - runs/DFST_Softmax/mult2/hidden_96_data_200
+  - runs/DFST_Softmax/mult2/hidden_96_data_300
+  DFST_Softmax_universal:
+  - runs/DFST_Softmax/universal/hidden_15_data_150
+  - runs/DFST_Softmax/universal/hidden_15_data_225
+  - runs/DFST_Softmax/universal/hidden_15_data_75
+  - runs/DFST_Softmax/universal/hidden_30_data_150
+  - runs/DFST_Softmax/universal/hidden_30_data_225
+  - runs/DFST_Softmax/universal/hidden_30_data_75
+  - runs/DFST_Softmax/universal/hidden_45_data_150
+  - runs/DFST_Softmax/universal/hidden_45_data_225
+  - runs/DFST_Softmax/universal/hidden_45_data_75
+baseline_models:
+- RNN
+- GRU
+analysis_cases:
+- analyses/metric_extraction/DFST/add2/warmup_50000_steps_250000
+- analyses/metric_extraction/DFST/mult2/warmup_25000_steps_500000
+- analyses/metric_extraction/DFST/add10/warmup_50000_steps_4000000
+- analyses/metric_extraction/DFST/mult10/warmup_0_steps_4000000
+- analyses/metric_extraction/DFST/universal/data_75_steps_500000
+- analyses/annealing/DFST_Softmax/add2/hidden_22_data_75
+- analyses/annealing/DFST_Softmax/mult2/hidden_64_data_100
+- analyses/annealing/DFST_Softmax/universal/hidden_30_data_150
+front_page:
+  add2: runs/DFST/add2/warmup_50000_steps_500000
+  mult2: runs/DFST/mult2/warmup_25000_steps_500000
+  add10: runs/DFST/add10/warmup_50000_steps_4000000
+  mult10: runs/DFST/mult10/warmup_0_steps_4000000
+  universal: runs/DFST/universal/data_75_steps_500000
+training_dynamics:
+  add2_1M:
+    task: add2
+    steps: 1000000
+    runs:
+      DFST: analyses/training_dynamics/DFST/add2
+      RNN: analyses/training_dynamics/RNN/add2
+      GRU: analyses/training_dynamics/GRU/add2
+  mult2_1M:
+    task: mult2
+    steps: 1000000
+    runs:
+      DFST: analyses/training_dynamics/DFST/mult2
+      RNN: analyses/training_dynamics/RNN/mult2
+      GRU: analyses/training_dynamics/GRU/mult2

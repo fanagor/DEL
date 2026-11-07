@@ -1,0 +1,16 @@
+device: cuda:0
+lambda_end: 100000.0
+lambda_start: 1.0e-05
+learning_rate: 0.001
+log_every: 1000
+optimizer: fresh_adam
+penalty: effective_column_gini_plus_h0
+rng: restored from source checkpoint
+source_sha256: b73f63b121255f7cb4084a4f90c562d644773a317ca0fdfb0d2fff86b07fe46e
+source_step: 100000
+steps: 5000
+torch_version: 2.14.1+cu130
+method: annealing
+source_run: runs/DFST_Softmax/add2/hidden_22_data_75
+source_checkpoint: final_model_checkpoint.pt
+scope: extracted_discrete_controller

@@ -1,0 +1,902 @@
+[
+  {
+    "environment": "teleporting",
+    "input": "00111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -15,
+    "task": "shift_left"
+  },
+  {
+    "environment": "teleporting",
+    "input": "10001",
+    "lengths": [
+      5
+    ],
+    "tape_row": -21,
+    "task": "shift_right"
+  },
+  {
+    "environment": "teleporting",
+    "input": "01000",
+    "lengths": [
+      5
+    ],
+    "tape_row": -9,
+    "task": "parity"
+  },
+  {
+    "environment": "teleporting",
+    "input": "01110",
+    "lengths": [
+      5
+    ],
+    "tape_row": -15,
+    "task": "shift_left"
+  },
+  {
+    "environment": "teleporting",
+    "input": "01100",
+    "lengths": [
+      5
+    ],
+    "tape_row": -15,
+    "task": "shift_left"
+  },
+  {
+    "environment": "teleporting",
+    "input": "11001",
+    "lengths": [
+      5
+    ],
+    "tape_row": -15,
+    "task": "shift_left"
+  },
+  {
+    "environment": "teleporting",
+    "input": "11101",
+    "lengths": [
+      5
+    ],
+    "tape_row": -30,
+    "task": "copy"
+  },
+  {
+    "environment": "teleporting",
+    "input": "01010",
+    "lengths": [
+      5
+    ],
+    "tape_row": -21,
+    "task": "shift_right"
+  },
+  {
+    "environment": "teleporting",
+    "input": "11111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -48,
+    "task": "reverse"
+  },
+  {
+    "environment": "teleporting",
+    "input": "10100",
+    "lengths": [
+      5
+    ],
+    "tape_row": -15,
+    "task": "shift_left"
+  },
+  {
+    "environment": "teleporting",
+    "input": "10000",
+    "lengths": [
+      5
+    ],
+    "tape_row": -9,
+    "task": "cum_sum"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00000",
+    "lengths": [
+      5
+    ],
+    "tape_row": -15,
+    "task": "bit_delete"
+  },
+  {
+    "environment": "teleporting",
+    "input": "10101",
+    "lengths": [
+      5
+    ],
+    "tape_row": -9,
+    "task": "parity"
+  },
+  {
+    "environment": "teleporting",
+    "input": "10001",
+    "lengths": [
+      5
+    ],
+    "tape_row": -9,
+    "task": "cum_sum"
+  },
+  {
+    "environment": "teleporting",
+    "input": "10000",
+    "lengths": [
+      5
+    ],
+    "tape_row": -15,
+    "task": "bit_delete"
+  },
+  {
+    "environment": "teleporting",
+    "input": "11000",
+    "lengths": [
+      5
+    ],
+    "tape_row": -15,
+    "task": "shift_left"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00000",
+    "lengths": [
+      5
+    ],
+    "tape_row": -30,
+    "task": "copy"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00011",
+    "lengths": [
+      5
+    ],
+    "tape_row": -9,
+    "task": "cum_sum"
+  },
+  {
+    "environment": "teleporting",
+    "input": "01111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -9,
+    "task": "cum_sum"
+  },
+  {
+    "environment": "teleporting",
+    "input": "10111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -48,
+    "task": "reverse"
+  },
+  {
+    "environment": "teleporting",
+    "input": "11100",
+    "lengths": [
+      5
+    ],
+    "tape_row": -21,
+    "task": "shift_right"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00110",
+    "lengths": [
+      5
+    ],
+    "tape_row": -6,
+    "task": "flip"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00110",
+    "lengths": [
+      5
+    ],
+    "tape_row": -48,
+    "task": "reverse"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00100",
+    "lengths": [
+      5
+    ],
+    "tape_row": -9,
+    "task": "parity"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00001",
+    "lengths": [
+      5
+    ],
+    "tape_row": -9,
+    "task": "cum_sum"
+  },
+  {
+    "environment": "teleporting",
+    "input": "11111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -48,
+    "task": "reverse"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00100",
+    "lengths": [
+      5
+    ],
+    "tape_row": -6,
+    "task": "flip"
+  },
+  {
+    "environment": "teleporting",
+    "input": "10010",
+    "lengths": [
+      5
+    ],
+    "tape_row": -30,
+    "task": "copy"
+  },
+  {
+    "environment": "teleporting",
+    "input": "11000",
+    "lengths": [
+      5
+    ],
+    "tape_row": -6,
+    "task": "flip"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -63,
+    "task": "scaling_B_m5"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00011",
+    "lengths": [
+      5
+    ],
+    "tape_row": -48,
+    "task": "reverse"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00101",
+    "lengths": [
+      5
+    ],
+    "tape_row": -6,
+    "task": "flip"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -9,
+    "task": "cum_sum"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00010",
+    "lengths": [
+      5
+    ],
+    "tape_row": -21,
+    "task": "scaling_A_m5"
+  },
+  {
+    "environment": "teleporting",
+    "input": "01101",
+    "lengths": [
+      5
+    ],
+    "tape_row": -6,
+    "task": "flip"
+  },
+  {
+    "environment": "teleporting",
+    "input": "11001",
+    "lengths": [
+      5
+    ],
+    "tape_row": -30,
+    "task": "copy"
+  },
+  {
+    "environment": "teleporting",
+    "input": "01101",
+    "lengths": [
+      5
+    ],
+    "tape_row": -9,
+    "task": "cum_sum"
+  },
+  {
+    "environment": "teleporting",
+    "input": "10000",
+    "lengths": [
+      5
+    ],
+    "tape_row": -15,
+    "task": "bit_delete"
+  },
+  {
+    "environment": "teleporting",
+    "input": "10111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -15,
+    "task": "shift_left"
+  },
+  {
+    "environment": "teleporting",
+    "input": "11100",
+    "lengths": [
+      5
+    ],
+    "tape_row": -21,
+    "task": "scaling_A_m5"
+  },
+  {
+    "environment": "teleporting",
+    "input": "11110",
+    "lengths": [
+      5
+    ],
+    "tape_row": -6,
+    "task": "flip"
+  },
+  {
+    "environment": "teleporting",
+    "input": "01001",
+    "lengths": [
+      5
+    ],
+    "tape_row": -48,
+    "task": "reverse"
+  },
+  {
+    "environment": "teleporting",
+    "input": "01000",
+    "lengths": [
+      5
+    ],
+    "tape_row": -21,
+    "task": "scaling_A_m5"
+  },
+  {
+    "environment": "teleporting",
+    "input": "01110",
+    "lengths": [
+      5
+    ],
+    "tape_row": -9,
+    "task": "cum_sum"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -30,
+    "task": "copy"
+  },
+  {
+    "environment": "teleporting",
+    "input": "11001",
+    "lengths": [
+      5
+    ],
+    "tape_row": -9,
+    "task": "cum_sum"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -63,
+    "task": "scaling_B_m5"
+  },
+  {
+    "environment": "teleporting",
+    "input": "11111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -63,
+    "task": "scaling_B_m5"
+  },
+  {
+    "environment": "teleporting",
+    "input": "11000",
+    "lengths": [
+      5
+    ],
+    "tape_row": -21,
+    "task": "scaling_A_m5"
+  },
+  {
+    "environment": "teleporting",
+    "input": "11111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -21,
+    "task": "shift_right"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -30,
+    "task": "copy"
+  },
+  {
+    "environment": "teleporting",
+    "input": "01111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -9,
+    "task": "cum_sum"
+  },
+  {
+    "environment": "teleporting",
+    "input": "11011",
+    "lengths": [
+      5
+    ],
+    "tape_row": -21,
+    "task": "scaling_A_m5"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00010",
+    "lengths": [
+      5
+    ],
+    "tape_row": -15,
+    "task": "bit_delete"
+  },
+  {
+    "environment": "teleporting",
+    "input": "11011",
+    "lengths": [
+      5
+    ],
+    "tape_row": -9,
+    "task": "cum_sum"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -9,
+    "task": "parity"
+  },
+  {
+    "environment": "teleporting",
+    "input": "10100",
+    "lengths": [
+      5
+    ],
+    "tape_row": -30,
+    "task": "copy"
+  },
+  {
+    "environment": "teleporting",
+    "input": "01010",
+    "lengths": [
+      5
+    ],
+    "tape_row": -15,
+    "task": "shift_left"
+  },
+  {
+    "environment": "teleporting",
+    "input": "10000",
+    "lengths": [
+      5
+    ],
+    "tape_row": -30,
+    "task": "copy"
+  },
+  {
+    "environment": "teleporting",
+    "input": "11111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -15,
+    "task": "shift_left"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00000",
+    "lengths": [
+      5
+    ],
+    "tape_row": -21,
+    "task": "scaling_A_m5"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00110",
+    "lengths": [
+      5
+    ],
+    "tape_row": -15,
+    "task": "bit_delete"
+  },
+  {
+    "environment": "teleporting",
+    "input": "10011",
+    "lengths": [
+      5
+    ],
+    "tape_row": -9,
+    "task": "cum_sum"
+  },
+  {
+    "environment": "teleporting",
+    "input": "11001",
+    "lengths": [
+      5
+    ],
+    "tape_row": -30,
+    "task": "copy"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00010",
+    "lengths": [
+      5
+    ],
+    "tape_row": -9,
+    "task": "cum_sum"
+  },
+  {
+    "environment": "teleporting",
+    "input": "11010",
+    "lengths": [
+      5
+    ],
+    "tape_row": -15,
+    "task": "shift_left"
+  },
+  {
+    "environment": "teleporting",
+    "input": "10100",
+    "lengths": [
+      5
+    ],
+    "tape_row": -9,
+    "task": "parity"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00010",
+    "lengths": [
+      5
+    ],
+    "tape_row": -9,
+    "task": "parity"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00110",
+    "lengths": [
+      5
+    ],
+    "tape_row": -21,
+    "task": "shift_right"
+  },
+  {
+    "environment": "teleporting",
+    "input": "11011",
+    "lengths": [
+      5
+    ],
+    "tape_row": -15,
+    "task": "shift_left"
+  },
+  {
+    "environment": "teleporting",
+    "input": "10111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -30,
+    "task": "copy"
+  },
+  {
+    "environment": "teleporting",
+    "input": "11011",
+    "lengths": [
+      5
+    ],
+    "tape_row": -48,
+    "task": "reverse"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -15,
+    "task": "shift_left"
+  },
+  {
+    "environment": "teleporting",
+    "input": "11111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -21,
+    "task": "shift_right"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00001",
+    "lengths": [
+      5
+    ],
+    "tape_row": -63,
+    "task": "scaling_B_m5"
+  },
+  {
+    "environment": "teleporting",
+    "input": "10101",
+    "lengths": [
+      5
+    ],
+    "tape_row": -21,
+    "task": "scaling_A_m5"
+  },
+  {
+    "environment": "teleporting",
+    "input": "10110",
+    "lengths": [
+      5
+    ],
+    "tape_row": -9,
+    "task": "parity"
+  },
+  {
+    "environment": "teleporting",
+    "input": "10001",
+    "lengths": [
+      5
+    ],
+    "tape_row": -15,
+    "task": "bit_delete"
+  },
+  {
+    "environment": "teleporting",
+    "input": "10100",
+    "lengths": [
+      5
+    ],
+    "tape_row": -63,
+    "task": "scaling_B_m5"
+  },
+  {
+    "environment": "teleporting",
+    "input": "01001",
+    "lengths": [
+      5
+    ],
+    "tape_row": -6,
+    "task": "flip"
+  },
+  {
+    "environment": "teleporting",
+    "input": "01111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -15,
+    "task": "shift_left"
+  },
+  {
+    "environment": "teleporting",
+    "input": "01111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -15,
+    "task": "bit_delete"
+  },
+  {
+    "environment": "teleporting",
+    "input": "01111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -63,
+    "task": "scaling_B_m5"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00000",
+    "lengths": [
+      5
+    ],
+    "tape_row": -15,
+    "task": "shift_left"
+  },
+  {
+    "environment": "teleporting",
+    "input": "01100",
+    "lengths": [
+      5
+    ],
+    "tape_row": -15,
+    "task": "shift_left"
+  },
+  {
+    "environment": "teleporting",
+    "input": "01011",
+    "lengths": [
+      5
+    ],
+    "tape_row": -15,
+    "task": "shift_left"
+  },
+  {
+    "environment": "teleporting",
+    "input": "01011",
+    "lengths": [
+      5
+    ],
+    "tape_row": -9,
+    "task": "parity"
+  },
+  {
+    "environment": "teleporting",
+    "input": "01111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -21,
+    "task": "shift_right"
+  },
+  {
+    "environment": "teleporting",
+    "input": "11001",
+    "lengths": [
+      5
+    ],
+    "tape_row": -6,
+    "task": "flip"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00000",
+    "lengths": [
+      5
+    ],
+    "tape_row": -9,
+    "task": "cum_sum"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -21,
+    "task": "scaling_A_m5"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00001",
+    "lengths": [
+      5
+    ],
+    "tape_row": -6,
+    "task": "flip"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00010",
+    "lengths": [
+      5
+    ],
+    "tape_row": -21,
+    "task": "shift_right"
+  },
+  {
+    "environment": "teleporting",
+    "input": "01111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -6,
+    "task": "flip"
+  },
+  {
+    "environment": "teleporting",
+    "input": "01111",
+    "lengths": [
+      5
+    ],
+    "tape_row": -21,
+    "task": "shift_right"
+  },
+  {
+    "environment": "teleporting",
+    "input": "10101",
+    "lengths": [
+      5
+    ],
+    "tape_row": -15,
+    "task": "bit_delete"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00001",
+    "lengths": [
+      5
+    ],
+    "tape_row": -21,
+    "task": "shift_right"
+  },
+  {
+    "environment": "teleporting",
+    "input": "00001",
+    "lengths": [
+      5
+    ],
+    "tape_row": -9,
+    "task": "parity"
+  },
+  {
+    "environment": "teleporting",
+    "input": "01110",
+    "lengths": [
+      5
+    ],
+    "tape_row": -48,
+    "task": "reverse"
+  },
+  {
+    "environment": "teleporting",
+    "input": "11101",
+    "lengths": [
+      5
+    ],
+    "tape_row": -48,
+    "task": "reverse"
+  }
+]

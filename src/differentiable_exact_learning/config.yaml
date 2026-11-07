@@ -1,0 +1,78 @@
+# Canonical configuration. Recipes and CLI dotted overrides merge into this schema.
+data:
+  environment: grid              # grid | tm | teleporting
+  variant: default               # default | new (grid only; ignored for tm and teleporting)
+  task: addition                 # arithmetic: addition | multiplication
+  radix: 2                       # arithmetic bases 2..10
+  max_length: 3                  # operand digits, or TP input length
+  source: static                 # static | online, for every environment
+  batch_lengths: mixed           # fixed length bucket per batch | mixed per example
+  size: 25                       # total static examples
+  seed: 42                       # isolated generation/sampling RNG
+  teaching_set: false            # include variant-paired mandatory core (static only)
+  cache_dir: .cache/data
+  max_steps: null                # null -> run until halt; positive integer -> transition limit
+  train_tasks: [scaling_A_m5, scaling_B_m5, shift_left, shift_right, parity]
+  eval_tasks: [parity, flip, cum_sum, shift_left, shift_right, bit_delete, reverse, copy, scaling_A_m500, scaling_B_m500]
+model:
+  name: DFST                     # DFST | DFST_Softmax | RNN | GRU
+  hidden_size: null              # null -> expert state count for DFST variants, 64 otherwise
+  num_layers: 1                  # RNN/GRU only
+  embed_dim: null                # null -> frozen one-hot; integer -> learned
+  scan: parallel                 # DFST training: parallel | sequential
+  reg_lambda: 0.0                # DFST_Softmax peaking penalty only
+  init:
+    transition: identity         # DFST A: identity | zero | random
+    symbol: zero                 # DFST B: zero | random
+    motion: zero                 # DFST C: zero | random
+    recurrent: orthogonal        # recurrent cores: default | orthogonal | identity | zero
+    head: default                # recurrent output heads: default | zero
+    state: null                  # null -> DFST ones, recurrent zeros
+    learnable_state: null        # null -> true for DFST, false for recurrent
+    gate_bias: 0.0               # GRU update-gate bias
+initialization:
+  checkpoint: null               # trusted DEL .pt file; null -> ordinary initialization
+  restore_optimizer: false       # keep moments/counters, use new optimizer hyperparameters
+training:
+  steps: 1000000
+  batch_size: 32
+  loss: mse                      # mse | cross_entropy
+  optimizer: adam                # adam | adamw
+  lr: 0.01                       # peak LR
+  final_lr: 0.0000001            # floor at both ends
+  warmup_steps: 0                # remaining updates form exponential cooldown
+  constant_steps: 0              # updates held at the peak LR between warmup and cooldown
+  weight_decay: 0.0
+  inverse_freq_alpha: 0.0        # per-PTO observable (x, s, m) weighting n^(-alpha)
+  grad_clip: 1.0
+  log_every: 100
+  checkpoint_every: 10000
+  arithmetic_curriculum:
+    enabled: false               # arithmetic only, never used for teleporting
+    start_length: 1
+    accuracy_threshold: 1.0      # fraction of correct joint symbol/movement predictions
+evaluation:
+  scan: parallel                 # DFST inference: sequential | parallel (independent of model.scan)
+  every: 0                       # 0 -> final evaluation only
+  final: true
+  max_length: 5000               # operand digits, or TP input length
+  samples: 10                    # random examples per exact test length
+  batch_size: 10                 # maximum concurrent expert streams
+  chunk_size: 8192               # maximum transitions per stream in each inference chunk
+  seed: 42                       # deterministic per task and candidate length
+  hard_cases: all                # arithmetic repdigits: all | diagonal | none
+  search: binary                 # binary (cap first) | exhaustive (stop at first failure)
+  snapshot:
+    enabled: true
+    m: 100                       # largest sampled input/operand length
+    d: 5                         # sample one example at d, 2d, ..., floor(m/d)*d
+run:
+  name: null
+  output_dir: outputs
+  seed: 42
+  model_seed: 42
+  device: auto                   # auto | cpu | cuda | cuda:N | mps
+  wandb:
+    enabled: false
+    project: DEL
+    entity: null

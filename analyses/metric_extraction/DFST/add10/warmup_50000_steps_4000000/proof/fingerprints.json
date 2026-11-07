@@ -1,0 +1,10 @@
+{
+  "equivalence_protocol.py": "aedbd2994a42d38c653ac7d4a4098aeadb785a47566ba78112c587e4fd66b3c6",
+  "expert_transition_table.csv": "f73573bbaefd7da4ec36be329b23085d54f3497d209e5b2adb5d55980a071c62",
+  "minimized_partial.json": "912d22358a602d745bbee598733a7ee5c3f6f31842affac1eb32603ef9fccbac",
+  "minimized_transition_table.csv": "485b504843c4b8cec049a838f77da0b9f37c3904c500d5335a1504714d3a88a6",
+  "minimized_transition_table.pdf": "91fa030962a95b12a5a1029d540e39eb1d60a51c2d0b3d788ec3a76e6463a964",
+  "proof_reference_experts.py": "9219bf534eadb05252f9ec3aab0a87c94a5398b0909e6ba15fbefaa837c0aa5f",
+  "proof_reference_grid.py": "9953e4bdd588a735d38728aa9b2514d43e5c4e8789cb2cfc57e74fabff151d81",
+  "verify_equivalence.py": "68f109882780f4637801a1d4def57274ed8b427a495a267af15b6b9ae016e6b2"
+}

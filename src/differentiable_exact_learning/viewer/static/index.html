@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Tape & grid · DEL — Differentiable Exact Learning</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/viewer.mjs"></script>
+</head>
+<body>
+<main>
+  <header>
+    <div><p class="eyebrow">DIFFERENTIABLE LEARNING</p><h1>Tape & grid<span class="accent">.</span></h1></div>
+    <div class="controller"><span class="indicator"></span><span id="controller-label"></span></div>
+  </header>
+  <section class="input-row" aria-label="Execution input">
+    <label class="input-label">Input <input id="input" spellcheck="false" autocomplete="off" aria-describedby="input-note"></label>
+    <label id="task-label" hidden>Program <select id="task" aria-label="Program"></select></label>
+  </section>
+  <div class="input-note"><span id="input-note">Edit the input to preview the initial grid.</span><span id="mode"></span></div>
+  <div id="error" role="alert" hidden></div>
+  <section class="stage" aria-label="Controller animation">
+    <div class="stage-top"><span id="region">GRID</span><span id="coordinates">x 0 · y 0</span></div>
+    <canvas id="grid" role="img" aria-label="Grid and controller head. Execution details appear below."></canvas>
+    <div id="jump" class="jump" aria-live="off" hidden></div>
+    <div class="stage-bottom"><span id="status" role="status">Preparing preview…</span><span id="counter">Step 0</span></div>
+  </section>
+  <div class="transport">
+    <div class="buttons">
+      <button id="play" class="primary" disabled>Start</button>
+      <button id="step" disabled>Step <span aria-hidden="true">→</span></button>
+      <button id="reset">Reset</button>
+    </div>
+    <label class="speed">Speed <input id="speed" type="range" min="0" max="7" value="2" aria-label="Playback speed"><output id="speed-value">4 steps/s</output></label>
+    <div class="window-size"><span>Window</span><label><input id="width" type="number" min="3" max="101" value="21" aria-label="Visible columns"> columns</label><span>×</span><label><input id="height" type="number" min="3" max="101" value="9" aria-label="Visible rows"> rows</label></div>
+  </div>
+  <section id="bookmarks" hidden aria-label="Teleportation bookmarks">
+    <div class="bookmark-heading"><span>TELEPORTATION BOOKMARKS</span><span>Pause and select a rune to look around.</span></div>
+    <div class="runes">
+      <button class="rune rune-x" id="rune-X" disabled><span class="rune-symbol">X</span><span class="rune-detail"><strong>Not placed</strong><small>Program position</small></span><canvas width="150" height="72" aria-hidden="true"></canvas></button>
+      <button class="rune rune-y" id="rune-Y" disabled><span class="rune-symbol">Y</span><span class="rune-detail"><strong>Not placed</strong><small>Instruction bookmark</small></span><canvas width="150" height="72" aria-hidden="true"></canvas></button>
+      <button class="rune rune-z" id="rune-Z" disabled><span class="rune-symbol">Z</span><span class="rune-detail"><strong>Not placed</strong><small>Tape position</small></span><canvas width="150" height="72" aria-hidden="true"></canvas></button>
+    </div>
+  </section>
+  <footer><span id="action">Read · write · move</span><span>Space to play / pause <span class="separator">·</span> → to step</span></footer>
+</main>
+<script id="bootstrap" type="application/json">__BOOTSTRAP__</script>
+</body>
+</html>

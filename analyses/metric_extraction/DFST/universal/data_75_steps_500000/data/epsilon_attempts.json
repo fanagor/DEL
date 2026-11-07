@@ -1,0 +1,10 @@
+[
+  {
+    "epsilon": 1.0,
+    "error": "Fixed epsilon 1.0 rejected: [sig incon]      comp=4  x=3  signatures={(3, 1), (7, 4)}. Lower epsilon and restart the sweep."
+  },
+  {
+    "epsilon": 0.5,
+    "status": "accepted"
+  }
+]

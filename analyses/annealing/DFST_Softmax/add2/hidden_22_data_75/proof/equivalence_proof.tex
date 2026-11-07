@@ -1,0 +1,387 @@
+% Standalone proof. Shared notation and prose conventions: analyses/README.md.
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsthm}
+\usepackage{newtxtext,newtxmath}
+\usepackage[a4paper,margin=21mm,headheight=15pt]{geometry}
+\usepackage{microtype,booktabs,array,tabularx,longtable}
+\usepackage[table]{xcolor}
+\usepackage{tikz,fancyhdr,enumitem,seqsplit}
+\definecolor{Teal}{HTML}{176B70}
+\definecolor{Ink}{HTML}{203443}
+\definecolor{Pale}{HTML}{EDF5F5}
+\definecolor{Line}{HTML}{C7D8DB}
+\definecolor{Muted}{HTML}{536974}
+\definecolor{Warm}{HTML}{F8F4EC}
+\usepackage[colorlinks=true,linkcolor=Teal,urlcolor=Teal]{hyperref}
+\color{Ink}
+\newcommand{\blank}{\lambda}
+\newcommand{\digits}{\{0,1\}}
+\newcommand{\ph}[1]{\mathsf{#1}}
+\newcommand{\EXPERT}{\mathcal E}
+\newcommand{\CTRL}{\mathcal C}
+\newcommand{\PTO}{\operatorname{PTO}}
+\newcommand{\triple}[3]{(#1,#2,\mathsf{#3})}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\hash}[1]{{\scriptsize\ttfamily\seqsplit{#1}}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\setlist[itemize]{nosep,leftmargin=1.2em}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\color{Muted}Binary Addition}
+\fancyhead[R]{\small\sffamily\color{Muted}Annealing}
+\fancyfoot[L]{\scriptsize\sffamily\color{Muted}Exact PTO Equivalence}
+\fancyfoot[R]{\small\thepage}
+\renewcommand{\headrulewidth}{.35pt}
+\renewcommand{\footrulewidth}{0pt}
+\newcommand{\sectiontitle}[2]{\refstepcounter{section}\vspace*{2pt}{\LARGE\bfseries\color{Teal}\thesection\quad #2}\par\vspace{7pt}}
+\date{}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\begin{document}
+{\Huge\bfseries Exact PTO Equivalence\\[3pt]Binary Addition}\par
+\vspace{10pt}
+{\Large Annealed Controller}\par
+{\small\color{Muted}\path{analyses/annealing/DFST_Softmax/add2/hidden_22_data_75/}}\par
+\vspace{7pt}
+
+\vspace{4pt}
+\sectiontitle{1 \enspace STATEMENT AND SCOPE}{Statement and Scope}\label{sec:common1}
+\textbf{Controllers.}
+The exported table \path{minimized_transition_table.pdf} defines controller
+$\CTRL$, with initial state $0$ and halt state $16$.
+The function \code{add\_grid(2)} defines expert $\EXPERT$, with initial
+state $0$ and halt state $10$. The adjacent expert export matches
+this function entry for entry. All tables retain the exported state numbers.
+
+\textbf{Input Domain.}
+Let $D=\digits$. Row $0$ initially contains the contiguous word $a+b$,
+starting at column $0$, with $a\in D^m$, $b\in D^n$, and $m,n\ge1$.
+All remaining cells contain blanks. The head starts at $(0,0)$.
+Write $A=\operatorname{val}_{2}(a)$ and $B=\operatorname{val}_{2}(b)$.
+The domain permits arbitrary operand lengths, unequal lengths, and leading zeros.
+
+\textbf{Execution Convention.}
+The grid uses $\mathbb Z^2$, with coordinates increasing rightward and
+downward. The symbol $\blank$ denotes a blank. A transition
+$(q',w,M)$ writes $w$, performs motion $M$, and enters state $q'$.
+Motions $L,R,D,U$ move one cell. Motion $S$ writes and stops without moving.
+
+\textbf{Policy-Trajectory Observations.}
+For input $a+b$, define the policy-trajectory observation (PTO) by
+\[
+\PTO(a+b)=\bigl((r_t,w_t,M_t)\bigr)_{t=0}^{T-1},
+\]
+where $r_t$, $w_t$, and $M_t$ denote the read symbol, written symbol,
+and motion at controller step $t$. A finite execution contributes the final
+$S$ action exactly once, without halt-loop padding.
+
+\begin{theorem}[Exact PTO Equivalence]\label{thm:main}
+For every input in the stated domain,
+$\PTO_{\CTRL}(a+b)=\PTO_{\EXPERT}(a+b)$.
+Both executions terminate on the same step. The complete grids and head
+positions agree at every step, including the final configuration.
+\end{theorem}
+
+The theorem concerns autonomous executions of the exported discrete controller
+on the stated input domain.
+\clearpage
+\sectiontitle{2 \enspace EXPERT BEHAVIOR}{Expert Behavior}\label{sec:common2}
+\subsection{Accumulator and Marker Invariant}\label{sec:part1}
+Write $B=\sum_{j=0}^{n-1}b_j2^j$, with $b_0$ the rightmost digit.
+The expert scans to the separator at column $m$, steps left and down,
+writes a working $+$ below column $m-1$, and enters state $8$ above the marker.
+
+\begin{lemma}[Round Invariant]\label{lem:invariant}
+After processing $k$ right-operand digits, $0\le k\le n$, the expert enters
+state $8$ at $(p_k,0)$, where $p_k=m-1-k$. At this point:
+\begin{itemize}
+\item Row $1$ contains exactly one nonblank symbol: a $+$ at column $p_k$.
+\item Row $0$ contains a contiguous accumulator on $[\ell_k,m-1]$, with value
+$C_k=A+\sum_{j<k}b_j2^j$ and left edge $\ell_k\le p_k+1$.
+Column $m-1$ carries the units digit.
+\item The separator remains at column $m$. The unprocessed prefix of $b$
+occupies columns $m+1,\ldots,m+n-k$. All remaining cells contain blanks.
+\end{itemize}
+\end{lemma}
+\begin{proof}
+Initialization gives $k=0$, $\ell_0=0$, $C_0=A$, and $p_0=m-1$.
+State $8$ preserves the digit at $p_k$, or writes $0$ on a blank.
+A blank at $p_k$ forces $\ell_k=p_k+1$, so zero extension preserves contiguity.
+
+For $k<n$, the right scan reaches the blank after the unprocessed prefix,
+steps left to digit $b_k$ at $r_k=m+n-k$, erases $b_k$, and descends.
+The expert transports $b_k$ left along row $1$ to the marker. The distance satisfies
+\[
+r_k-p_k=n+1\ge2. \tag{1}
+\]
+Consequently, the first two transport steps read blanks. At the marker, the
+expert ascends and adds $b_k$ to the accumulator digit $e$ at column $p_k$.
+If $e+b_k<2$, the expert writes $e+b_k$ and descends. Otherwise, the expert
+writes $e+b_k-2$, moves left, and propagates one carry. Each digit $1$
+changes to $0$; the first smaller digit increases by one, or a blank changes
+to $1$. The update adds exactly $b_k2^k$ and preserves contiguity.
+
+The expert returns along row $1$, erases the marker, steps left, writes the
+next marker at $p_{k+1}=p_k-1$, and ascends into state $8$.
+The earlier zero extension gives $\ell_{k+1}\le p_k=p_{k+1}+1$.
+The accumulator now has value $C_{k+1}$, establishing the next round.
+\end{proof}
+
+\begin{lemma}[Termination and Final Configuration]\label{lem:termination}
+The expert terminates with only the padded base-$2$ representation of $A+B$
+on row $0$, ending at column $m-1$. The final head stops at $(m-n-1,0)$.
+Writing $\ell_2(s)$ for the binary digit count, with $\ell_2(0)=1$,
+the output width equals $L=\max\{m,n+1,\ell_2(A+B)\}$.
+\end{lemma}
+\begin{proof}
+Each round consumes one of the $n$ right-operand digits. Every scan crosses
+a finite interval, and every carry reaches a digit below $1$ or a blank.
+After round $n$, state $8$ ensures a digit at $p_n$. The next right scan
+returns to the separator. State $3$ erases the separator and descends.
+State $9$ walks left, erases the final marker, ascends, preserves the
+accumulator digit, and stops. The invariant gives $C_n=A+B$, and cleanup
+removes all work symbols.
+The original $m$ columns persist, and marker extension reaches $p_n$,
+ensuring at least $n+1$ digits. Every additional carry extension contributes
+a digit required by the current numerical value. Partial sums never decrease,
+so the final width equals $L$.
+\end{proof}
+
+\clearpage
+\sectiontitle{3 \enspace OBSERVATION PROTOCOL}{Observation Protocol}\label{sec:common3}
+\label{sec:protocol}
+The following phases refine the expert states by geometric context.
+The protocol covers every valid execution and may also admit additional
+observation sequences. Write $d\in\digits$. An edge $x:j$ reads $x$ and
+advances to phase $j$; $d:j$ permits either digit. Expert state $g_i$
+supplies the write and motion from Section~\ref{sec:tables}.
+A dash denotes a terminal phase with no outgoing transition.
+
+\begin{center}
+\small\renewcommand{\arraystretch}{1.21}
+\begin{tabular}{r l c l}
+\toprule
+\rowcolor{Pale}$i$ & Phase meaning & $g_i$ & Allowed reading $:$ next phase\\
+\midrule
+0 & First input digit & 0 & $d:1$ \\
+1 & Seek the separator & 0 & $d:1\quad +:2$ \\
+2 & Initial descent & 1 & $d:3$ \\
+3 & Place the marker & 1 & $\blank:4$ \\
+4 & Ensure an accumulator digit & 8 & $d:6\quad \blank:5$ \\
+5 & Digit after zero extension & 2 & $d:6$ \\
+6 & Scan toward separator & 2 & $d:6\quad +:7$ \\
+7 & First cell after separator & 2 & $d:8\quad \blank:22$ \\
+8 & Scan remaining right operand & 2 & $d:8\quad \blank:9$ \\
+9 & Read rightmost factor digit & 3 & $0:10\quad 1:14$ \\
+10 & Transport zero: first blank & 4 & $\blank:11$ \\
+11 & Transport zero: second blank & 4 & $\blank:12$ \\
+12 & Transport zero: walk left & 4 & $\blank:12\quad +:13$ \\
+13 & Add zero above marker & 4 & $d:21$ \\
+14 & Transport one: first blank & 5 & $\blank:15$ \\
+15 & Transport one: second blank & 5 & $\blank:16$ \\
+16 & Transport one: walk left & 5 & $\blank:16\quad +:17$ \\
+17 & Add one above marker & 5 & $0:21\quad 1:18$ \\
+18 & Propagate a carry & 6 & $1:18\quad 0:19\quad \blank:19$ \\
+19 & First return cell after carry & 7 & $\blank:20$ \\
+20 & Return to the marker & 7 & $\blank:20\quad +:3$ \\
+21 & At marker, without carry & 7 & $+:3$ \\
+22 & Erase the input separator & 3 & $+:23$ \\
+23 & First cleanup cell & 9 & $\blank:24$ \\
+24 & Find and erase final marker & 9 & $\blank:24\quad +:25$ \\
+25 & Preserve result and stop & 9 & $d:26$ \\
+26 & Halted & 10 & $\text{--}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{lemma}[Protocol Coverage]\label{lem:protocol}
+Every execution of $\EXPERT$ from a valid input follows this protocol, starting
+at phase $0$ and ending at phase $26$.
+\end{lemma}
+\begin{proof}
+The nonempty first operand establishes phases $0$--$3$.
+Lemma~\ref{lem:invariant} places a digit immediately after a zero extension
+in phase $4$, establishing phase $5$. The right scan meets the separator before any blank.
+To the separator's right, a first blank means the next left step reads the separator
+(phase $22$); after any digit, that step reads a digit (phase $9$).
+Equation~(1) guarantees two initial blank readings while transporting either
+bit. The cell above the marker contains a digit. A carry ends strictly left
+of the marker, so the first return cell contains a blank. A noncarry addition returns directly to
+the marker. Erasing and shifting the marker reaches a blank. Finally,
+cleanup starts below the separator on a blank, reaches the marker and then
+a digit. These facts justify every branch of the table. Induction over the
+steps and rounds proves coverage; Lemma~\ref{lem:termination} supplies the final phase.
+\end{proof}
+
+\clearpage
+\sectiontitle{4 \enspace SIMULATION CERTIFICATE}{Simulation Certificate}\label{sec:common4}
+\subsection{Phase Relation and Local Checks}\label{sec:part3}
+For phase $i$, write $Q_i$ for the controller-state set in the following table.
+The relation pairs an expert configuration in phase $i$ with a controller
+configuration having the \emph{same grid and head} and a state in $Q_i$.
+
+\begin{center}
+\small\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{r l c l}
+\toprule
+\rowcolor{Pale}Phase $i$ & Meaning & Expert state $g_i$ & Controller states $Q_i$\\
+\midrule
+0 & First input digit & 0 & $\{0\}$ \\
+1 & Seek the separator & 0 & $\{0\}$ \\
+2 & Initial descent & 1 & $\{7\}$ \\
+3 & Place the marker & 1 & $\{3,9\}$ \\
+4 & Ensure an accumulator digit & 8 & $\{6\}$ \\
+5 & Digit after zero extension & 2 & $\{6\}$ \\
+6 & Scan toward separator & 2 & $\{4\}$ \\
+7 & First cell after separator & 2 & $\{8\}$ \\
+8 & Scan remaining right operand & 2 & $\{4\}$ \\
+9 & Read rightmost factor digit & 3 & $\{13\}$ \\
+10 & Transport zero: first blank & 4 & $\{2\}$ \\
+11 & Transport zero: second blank & 4 & $\{2\}$ \\
+12 & Transport zero: walk left & 4 & $\{2\}$ \\
+13 & Add zero above marker & 4 & $\{7\}$ \\
+14 & Transport one: first blank & 5 & $\{4\}$ \\
+15 & Transport one: second blank & 5 & $\{13\}$ \\
+16 & Transport one: walk left & 5 & $\{15\}$ \\
+17 & Add one above marker & 5 & $\{1\}$ \\
+18 & Propagate a carry & 6 & $\{1\}$ \\
+19 & First return cell after carry & 7 & $\{5\}$ \\
+20 & Return to the marker & 7 & $\{5\}$ \\
+21 & At marker, without carry & 7 & $\{3,5,9\}$ \\
+22 & Erase the input separator & 3 & $\{12\}$ \\
+23 & First cleanup cell & 9 & $\{11\}$ \\
+24 & Find and erase final marker & 9 & $\{14\}$ \\
+25 & Preserve result and stop & 9 & $\{10\}$ \\
+26 & Halted & 10 & $\{16\}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Local Transition Identity.} For every listed $q\in Q_i$ and every allowed
+edge $i\xrightarrow{x}j$ from the protocol, the actual tables satisfy
+\begin{equation}
+\delta_\EXPERT(g_i,x)=(g_j,w,M),\qquad
+\delta_\CTRL(q,x)=(q',w,M),\qquad q'\in Q_j. \tag{2}
+\end{equation}
+Every required controller entry exists. A transition reaches the halt
+state exactly when $j=26$, with motion $S$.
+The certificate contains \textbf{30 phase--state pairs} (including the terminal pair)
+and \textbf{52 local checks}. The checks cover 37 distinct nonterminal
+controller entries. Section~\ref{sec:tables} provides the tables for direct
+inspection; the accompanying script checks every instance of~(2).
+
+\newpage
+\subsection{Transition Tables}\label{sec:tables}
+Each entry lists $(\text{next state},\text{written symbol},\text{motion})$.
+The symbol $\blank$ means blank; a dash means an undefined transition.
+The tables reproduce the adjacent exports with the original state numbers.
+
+\textbf{Expert: \code{add\_grid(2)}.}\quad Initial state $0$; halt $10$.
+\begin{center}
+\fontsize{9.4}{11.2}\selectfont\renewcommand{\arraystretch}{1.06}
+\setlength{\tabcolsep}{10pt}
+\begin{tabular}{rcccc}
+\toprule
+\rowcolor{Pale}State & $\blank$ & $+$ & $0$ & $1$\\
+\midrule
+0 & $\triple{10}{\blank}{S}$ & $\triple{1}{+}{L}$ & $\triple{0}{0}{R}$ & $\triple{0}{1}{R}$ \\
+1 & $\triple{8}{+}{U}$ & $\triple{10}{+}{S}$ & $\triple{1}{0}{D}$ & $\triple{1}{1}{D}$ \\
+2 & $\triple{3}{\blank}{L}$ & $\triple{2}{+}{R}$ & $\triple{2}{0}{R}$ & $\triple{2}{1}{R}$ \\
+3 & $\triple{10}{\blank}{S}$ & $\triple{9}{\blank}{D}$ & $\triple{4}{\blank}{D}$ & $\triple{5}{\blank}{D}$ \\
+4 & $\triple{4}{\blank}{L}$ & $\triple{4}{+}{U}$ & $\triple{7}{0}{D}$ & $\triple{7}{1}{D}$ \\
+5 & $\triple{5}{\blank}{L}$ & $\triple{5}{+}{U}$ & $\triple{7}{1}{D}$ & $\triple{6}{0}{L}$ \\
+6 & $\triple{7}{1}{D}$ & $\triple{10}{+}{S}$ & $\triple{7}{1}{D}$ & $\triple{6}{0}{L}$ \\
+7 & $\triple{7}{\blank}{R}$ & $\triple{1}{\blank}{L}$ & $\triple{10}{0}{S}$ & $\triple{10}{1}{S}$ \\
+8 & $\triple{2}{0}{R}$ & $\triple{10}{+}{S}$ & $\triple{2}{0}{R}$ & $\triple{2}{1}{R}$ \\
+9 & $\triple{9}{\blank}{L}$ & $\triple{9}{\blank}{U}$ & $\triple{10}{0}{S}$ & $\triple{10}{1}{S}$ \\
+10 & $\triple{10}{\blank}{S}$ & $\triple{10}{+}{S}$ & $\triple{10}{0}{S}$ & $\triple{10}{1}{S}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{5pt}
+\textbf{Annealed Controller.}\quad Initial state $0$; halt $16$.
+\begin{center}
+\fontsize{9.4}{11.2}\selectfont\renewcommand{\arraystretch}{1.06}
+\setlength{\tabcolsep}{10pt}
+\begin{tabular}{rcccc}
+\toprule
+\rowcolor{Pale}State & $\blank$ & $+$ & $0$ & $1$\\
+\midrule
+0 & $\triple{13}{\blank}{L}$ & $\triple{7}{+}{L}$ & $\triple{0}{0}{R}$ & $\triple{0}{1}{R}$ \\
+1 & $\triple{5}{1}{D}$ & $\triple{3}{\blank}{L}$ & $\triple{5}{1}{D}$ & $\triple{1}{0}{L}$ \\
+2 & $\triple{2}{\blank}{L}$ & $\triple{7}{+}{U}$ & $\triple{5}{\blank}{D}$ & $\triple{4}{\blank}{D}$ \\
+3 & $\triple{6}{+}{U}$ & $\triple{3}{\blank}{L}$ & $\triple{5}{1}{D}$ & $\triple{1}{0}{L}$ \\
+4 & $\triple{13}{\blank}{L}$ & $\triple{8}{+}{R}$ & $\triple{4}{0}{R}$ & $\triple{4}{1}{R}$ \\
+5 & $\triple{5}{\blank}{R}$ & $\triple{9}{\blank}{L}$ & $\triple{4}{0}{R}$ & $\triple{4}{1}{R}$ \\
+6 & $\triple{6}{0}{R}$ & $\triple{7}{+}{L}$ & $\triple{4}{0}{R}$ & $\triple{4}{1}{R}$ \\
+7 & $\triple{6}{+}{U}$ & $\triple{3}{\blank}{L}$ & $\triple{9}{0}{D}$ & $\triple{3}{1}{D}$ \\
+8 & $\triple{12}{\blank}{L}$ & $\triple{8}{+}{R}$ & $\triple{4}{0}{R}$ & $\triple{4}{1}{R}$ \\
+9 & $\triple{6}{+}{U}$ & $\triple{9}{\blank}{L}$ & $\triple{4}{0}{R}$ & $\triple{8}{1}{R}$ \\
+10 & $\triple{14}{+}{U}$ & $\triple{10}{\blank}{D}$ & $\triple{16}{0}{S}$ & $\triple{16}{1}{S}$ \\
+11 & $\triple{14}{\blank}{L}$ & $\triple{10}{\blank}{D}$ & $\triple{16}{0}{S}$ & $\triple{16}{1}{S}$ \\
+12 & $\triple{15}{\blank}{L}$ & $\triple{11}{\blank}{D}$ & $\triple{4}{\blank}{D}$ & $\triple{4}{\blank}{D}$ \\
+13 & $\triple{15}{\blank}{L}$ & $\triple{11}{\blank}{D}$ & $\triple{2}{\blank}{D}$ & $\triple{4}{\blank}{D}$ \\
+14 & $\triple{14}{\blank}{L}$ & $\triple{10}{\blank}{U}$ & $\triple{4}{0}{R}$ & $\triple{4}{1}{R}$ \\
+15 & $\triple{15}{\blank}{L}$ & $\triple{1}{+}{U}$ & $\triple{4}{0}{R}$ & $\triple{4}{1}{R}$ \\
+16 & $\triple{16}{\blank}{S}$ & $\triple{16}{+}{S}$ & $\triple{16}{0}{S}$ & $\triple{16}{1}{S}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\clearpage
+\sectiontitle{5 \enspace EQUIVALENCE PROOF}{Equivalence Proof}\label{sec:common5}
+\label{sec:part4}\label{sec:equivalence}
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Initially both configurations have the same grid and head,
+with control states $0$ related by phase $0$. Suppose the relation holds
+before a controller step. Lemma~\ref{lem:protocol} supplies an allowed read symbol
+$x$. Equal grids and heads give the same read symbol to both controllers.
+Equation~(2) gives equal writes and motions and preserves the relation
+between successor states. The next grids and heads therefore agree.
+
+Induction establishes equality of every finite execution prefix. The terminal
+condition permits a halt exactly on an edge to the terminal phase.
+Lemma~\ref{lem:termination} establishes termination.
+Both controllers therefore halt together with equal complete PTOs and final
+configurations.
+\end{proof}
+
+\textbf{Phase-Dependent State Roles.}
+The annealed machine uses state $4$ both while scanning right on row $0$
+and immediately after erasing a $1$ and descending to row $1$.
+In the latter situation, equation~(1) forces two blank readings and the
+state sequence $4\to13\to15$. State $15$ then walks to the marker.
+State $13$ also selects a right-operand digit, but only in phase $9$.
+The phase-sensitive relation separates these uses. Similarly, controller state
+$6$ writes at most one padding zero because the next cell contains a digit.
+The geometric invariant excludes the remaining entries on valid inputs.
+
+\bigskip
+\sectiontitle{6 \enspace VERIFICATION AND ARTIFACTS}{Verification and Artifacts}\label{sec:common6}
+\textbf{Verification.}
+Run \code{python3 verify\_equivalence.py {-}{-}quick} from this proof directory to verify
+the source fingerprints, equality of the CSV and JSON controller exports,
+equality of the exported expert with \code{add\_grid(2)}, and every local
+certificate obligation. Omitting \code{{-}{-}quick} also compares two independent
+grid executions on 15,876 exhaustive operand pairs (all lengths
+$1$--$6$), 44 directed cases up to $1024$ digits, and 128
+fixed-seed random cases. All 4,766,713 compared transitions, final grids and
+head positions agree. These finite tests supplement the universal proof;
+Lemmas~\ref{lem:invariant}--\ref{lem:protocol} and equation~(2)
+establish the length-independent claim.
+
+\textbf{Artifact Identity.}
+The title page gives the repository-relative case directory. This proof directory
+contains the controller and expert exports, reference code, protocol, checker,
+and saved verification report. The verification script stores or reads SHA-256 checksums for these artifacts. A checksum identifies the exact bytes
+of a file; the checker compares the stored and computed values to detect changes.
+These checks bind the certificate to the supplied exports. The invariants,
+protocol coverage, and local transition identity establish equivalence.
+\end{document}

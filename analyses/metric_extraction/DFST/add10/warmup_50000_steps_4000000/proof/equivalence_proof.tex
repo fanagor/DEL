@@ -1,0 +1,381 @@
+% Standalone proof. Shared notation and prose conventions: analyses/README.md.
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsthm}
+\usepackage{newtxtext,newtxmath}
+\usepackage[a4paper,margin=21mm,headheight=15pt]{geometry}
+\usepackage{microtype,booktabs,array,tabularx,longtable}
+\usepackage[table]{xcolor}
+\usepackage{tikz,fancyhdr,enumitem,seqsplit}
+\definecolor{Teal}{HTML}{176B70}
+\definecolor{Ink}{HTML}{203443}
+\definecolor{Pale}{HTML}{EDF5F5}
+\definecolor{Line}{HTML}{C7D8DB}
+\definecolor{Muted}{HTML}{536974}
+\definecolor{Warm}{HTML}{F8F4EC}
+\usepackage[colorlinks=true,linkcolor=Teal,urlcolor=Teal]{hyperref}
+\color{Ink}
+\newcommand{\blank}{\lambda}
+\newcommand{\digits}{\{0,1,\ldots,9\}}
+\newcommand{\ph}[1]{\mathsf{#1}}
+\newcommand{\EXPERT}{\mathcal E}
+\newcommand{\CTRL}{\mathcal C}
+\newcommand{\PTO}{\operatorname{PTO}}
+\newcommand{\triple}[3]{(#1,#2,\mathsf{#3})}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\hash}[1]{{\scriptsize\ttfamily\seqsplit{#1}}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\setlist[itemize]{nosep,leftmargin=1.2em}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\color{Muted}Decimal Addition}
+\fancyhead[R]{\small\sffamily\color{Muted}Metric Extraction}
+\fancyfoot[L]{\scriptsize\sffamily\color{Muted}Exact PTO Equivalence}
+\fancyfoot[R]{\small\thepage}
+\renewcommand{\headrulewidth}{.35pt}
+\renewcommand{\footrulewidth}{0pt}
+\newcommand{\sectiontitle}[2]{\refstepcounter{section}\vspace*{2pt}{\LARGE\bfseries\color{Teal}\thesection\quad #2}\par\vspace{7pt}}
+\date{}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\begin{document}
+{\Huge\bfseries Exact PTO Equivalence\\[3pt]Decimal Addition}\par
+\vspace{10pt}
+{\Large Metric-Extracted Controller}\par
+{\small\color{Muted}\path{analyses/metric_extraction/DFST/add10/warmup_50000_steps_4000000/}}\par
+\vspace{7pt}
+
+\vspace{4pt}
+\sectiontitle{1 \enspace STATEMENT AND SCOPE}{Statement and Scope}\label{sec:common1}
+\textbf{Controllers.}
+The exported table \path{minimized_transition_table.pdf} defines controller
+$\CTRL$, with initial state $0$ and halt state $51$.
+The function \code{add\_grid(10)} defines expert $\EXPERT$, with initial
+state $0$ and halt state $18$. The adjacent expert export matches
+this function entry for entry. All tables retain the exported state numbers.
+
+\textbf{Input Domain.}
+Let $D=\digits$. Row $0$ initially contains the contiguous word $a+b$,
+starting at column $0$, with $a\in D^m$, $b\in D^n$, and $m,n\ge1$.
+All remaining cells contain blanks. The head starts at $(0,0)$.
+Write $A=\operatorname{val}_{10}(a)$ and $B=\operatorname{val}_{10}(b)$.
+The domain permits arbitrary operand lengths, unequal lengths, and leading zeros.
+
+\textbf{Execution Convention.}
+The grid uses $\mathbb Z^2$, with coordinates increasing rightward and
+downward. The symbol $\blank$ denotes a blank. A transition
+$(q',w,M)$ writes $w$, performs motion $M$, and enters state $q'$.
+Motions $L,R,D,U$ move one cell. Motion $S$ writes and stops without moving.
+
+\textbf{Policy-Trajectory Observations.}
+For input $a+b$, define the policy-trajectory observation (PTO) by
+\[
+\PTO(a+b)=\bigl((r_t,w_t,M_t)\bigr)_{t=0}^{T-1},
+\]
+where $r_t$, $w_t$, and $M_t$ denote the read symbol, written symbol,
+and motion at controller step $t$. A finite execution contributes the final
+$S$ action exactly once, without halt-loop padding.
+
+\begin{theorem}[Exact PTO Equivalence]\label{thm:main}
+For every input in the stated domain,
+$\PTO_{\CTRL}(a+b)=\PTO_{\EXPERT}(a+b)$.
+Both executions terminate on the same step. The complete grids and head
+positions agree at every step, including the final configuration.
+\end{theorem}
+
+The theorem concerns autonomous executions of the exported discrete controller
+on the stated input domain.
+\clearpage
+\sectiontitle{2 \enspace EXPERT BEHAVIOR}{Expert Behavior}\label{sec:common2}
+\subsection{Accumulator and Marker Invariant}\label{sec:part1}
+Write $B=\sum_{j=0}^{n-1}b_j10^j$, with $b_0$ the rightmost digit.
+The expert scans to the separator at column $m$, steps left and down,
+writes a working $+$ below column $m-1$, and enters state $16$ above the marker.
+
+\begin{lemma}[Round Invariant]\label{lem:round}
+After processing $k$ right-operand digits, $0\le k\le n$, the expert enters
+state $16$ at $(p_k,0)$, where $p_k=m-1-k$. At this point:
+\begin{itemize}
+\item Row $1$ contains exactly one nonblank symbol: a $+$ at column $p_k$.
+\item Row $0$ contains a contiguous accumulator on $[\ell_k,m-1]$, with value
+$C_k=A+\sum_{j<k}b_j10^j$ and left edge $\ell_k\le p_k+1$.
+Column $m-1$ carries the units digit.
+\item The separator remains at column $m$. The unprocessed prefix of $b$
+occupies columns $m+1,\ldots,m+n-k$. All remaining cells contain blanks.
+\end{itemize}
+\end{lemma}
+\begin{proof}
+Initialization gives $k=0$, $\ell_0=0$, $C_0=A$, and $p_0=m-1$.
+State $16$ preserves the digit at $p_k$, or writes $0$ on a blank.
+A blank at $p_k$ forces $\ell_k=p_k+1$, so zero extension preserves contiguity.
+
+For $k<n$, the right scan reaches the blank after the unprocessed prefix,
+steps left to digit $b_k$ at $r_k=m+n-k$, erases $b_k$, and descends.
+The expert transports $b_k$ left along row $1$ to the marker. The distance satisfies
+\[
+r_k-p_k=n+1\ge2. \tag{1}
+\]
+Consequently, the first two transport steps read blanks. At the marker, the
+expert ascends and adds $b_k$ to the accumulator digit $e$ at column $p_k$.
+If $e+b_k<10$, the expert writes $e+b_k$ and descends. Otherwise, the expert
+writes $e+b_k-10$, moves left, and propagates one carry. Each digit $9$
+changes to $0$; the first smaller digit increases by one, or a blank changes
+to $1$. The update adds exactly $b_k10^k$ and preserves contiguity.
+
+The expert returns along row $1$, erases the marker, steps left, writes the
+next marker at $p_{k+1}=p_k-1$, and ascends into state $16$.
+The earlier zero extension gives $\ell_{k+1}\le p_k=p_{k+1}+1$.
+The accumulator now has value $C_{k+1}$, establishing the next round.
+\end{proof}
+
+\begin{lemma}[Termination and Final Configuration]\label{lem:finish}
+The expert terminates with only the padded base-$10$ representation of $A+B$
+on row $0$, ending at column $m-1$. The final head stops at $(m-n-1,0)$.
+
+Writing $\ell_{10}(s)$ for the decimal digit count, with $\ell_{10}(0)=1$,
+the output width equals $L=\max\{m,n+1,\ell_{10}(A+B)\}$.
+\end{lemma}
+\begin{proof}
+Each round consumes one of the $n$ right-operand digits. Every scan crosses
+a finite interval, and every carry reaches a digit below $9$ or a blank.
+After round $n$, state $16$ ensures a digit at $p_n$. The next right scan
+returns to the separator. State $3$ erases the separator and descends.
+State $17$ walks left, erases the final marker, ascends, preserves the
+accumulator digit, and stops. The invariant gives $C_n=A+B$, and cleanup
+removes all work symbols.
+
+The original $m$ columns persist, and marker extension reaches $p_n$,
+ensuring at least $n+1$ digits. Every additional carry extension contributes
+a digit required by the current numerical value. Since partial sums never
+decrease, the final width equals $L$.
+\end{proof}
+
+\clearpage
+\sectiontitle{3 \enspace OBSERVATION PROTOCOL}{Observation Protocol}\label{sec:common3}
+The observation protocol refines expert states by geometric context. Each phase records the permitted read symbols and successor phases. Section~\ref{sec:common4} gives the complete protocol together with the controller-state relation; the shared tables avoid repeating the same phase definitions.
+
+\begin{lemma}[Protocol Coverage]\label{lem:coverage}
+Every expert execution on a valid decimal addition grid follows the $59$
+phases in Section~\ref{sec:common4}, starting at phase $0$ and ending at phase $58$.
+\end{lemma}
+\begin{proof}
+Initialization satisfies the first phases because both operands contain a digit.
+Lemma~\ref{lem:round} gives the contiguous accumulator, the ensured digit,
+the single working marker and the remaining right-operand prefix in every
+round. The explanations in Sections~\ref{sec:part2} and~\ref{sec:part3} establish all first-cell,
+boundary, transport and return readings. The carry rule processes exactly
+the digits permitted in phase $50$. Induction over the transitions of each
+round preserves these conditions. Lemma~\ref{lem:finish} establishes finite
+cleanup and the final phase.
+\end{proof}
+
+\clearpage
+\sectiontitle{4 \enspace SIMULATION CERTIFICATE}{Simulation Certificate}\label{sec:common4}
+\subsection{Scanning, Carrying, and Cleanup}\label{sec:part2}
+A proof phase records geometric context. Phase $i$ pairs expert state
+$g_i$ with controller state $q\in Q_i$, with identical grids and heads. An entry $x:(j,w,M)$ means read $x$, write $w$, move $M$, and
+advance to phase $j$. The index $j$ denotes a phase. Each $Q_i$ lists the related controller states.
+
+Here $e\in D$ and $h\in\{0,\ldots,8\}$. A digit denotes the corresponding symbol when read or written. Phases $10$--$49$ comprise ten digit-transport families in the next certificate subsection, with $F_d=10+4d$.
+
+\begin{center}
+\fontsize{9.1}{11}\selectfont\renewcommand{\arraystretch}{1.3}
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{r p{4.8cm} c c X}
+\toprule\rowcolor{Pale}$i$ & Phase & $g_i$ & $Q_i$ & Read $:$ (next phase, write, move)\\\midrule
+0 & First left-operand digit & 0 & $\{0\}$ & $e:\triple{1}{e}{R}$\\
+1 & Find the input separator & 0 & $\{0\}$ & $e:\triple{1}{e}{R}\quad +:\triple{2}{+}{L}$\\
+2 & Descend below units digit & 1 & $\{1\}$ & $e:\triple{3}{e}{D}$\\
+3 & Place the working marker & 1 & $\{2\}$ & $\blank:\triple{4}{+}{U}$\\
+4 & Ensure a digit above marker & 16 & $\{3\}$ & $e:\triple{6}{e}{R}\quad\blank:\triple{5}{0}{R}$\\
+5 & Adjacent existing digit & 2 & $\{4\}$ & $e:\triple{6}{e}{R}$\\
+6 & Scan accumulator to separator & 2 & $\{4\}$ & $e:\triple{6}{e}{R}\quad +:\triple{7}{+}{R}$\\
+7 & Inspect remaining right operand & 2 & $\{5\}$ & $e:\triple{8}{e}{R}\quad\blank:\triple{54}{\blank}{L}$\\
+8 & Scan remaining right operand & 2 & $\{5\}$ & $e:\triple{8}{e}{R}\quad\blank:\triple{9}{\blank}{L}$\\
+9 & Read rightmost factor digit & 3 & $\{6\}$ & $d:\triple{F_d}{\blank}{D}\quad(d\in D)$\\
+\midrule
+50 & Propagate decimal carry & 14 & $\{11\}$ & $9:\triple{50}{0}{L}\quad h:\triple{51}{h+1}{D}$\newline $\blank:\triple{51}{1}{D}$\\
+51 & First return cell after carry & 15 & $\{15\}$ & $\blank:\triple{52}{\blank}{R}$\\
+52 & Return to working marker & 15 & $\{15\}$ & $\blank:\triple{52}{\blank}{R}\quad +:\triple{3}{\blank}{L}$\\
+53 & Erase and shift marker & 15 & $\{11,15\}$ & $+:\triple{3}{\blank}{L}$\\
+54 & Erase input separator & 3 & $\{6\}$ & $+:\triple{55}{\blank}{D}$\\
+55 & Begin cleanup below separator & 17 & $\{24\}$ & $\blank:\triple{56}{\blank}{L}$\\
+56 & Erase final working marker & 17 & $\{25\}$ & $\blank:\triple{56}{\blank}{L}\quad +:\triple{57}{\blank}{U}$\\
+57 & Preserve final digit and stop & 17 & $\{26\}$ & $e:\triple{58}{e}{S}$\\
+58 & Halted & 18 & $\{51\}$ & --\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Why These Read Symbols Cover Every Valid Run.}
+Both operands contain at least one digit. Initialization therefore reads a digit before
+the separator, descends below a digit and places the marker on a blank.
+Lemma~\ref{lem:round} places an existing digit immediately after each zero extension. The scan crosses the contiguous accumulator to the separator.
+Immediately to the separator's right, a blank means the next left step
+reads that separator; after any digit, the next left step instead reads a digit.
+
+A carry moves strictly left of the marker, so the first return cell on
+row $1$ contains a blank. A noncarry addition descends directly onto the marker.
+Erasing and shifting the marker reaches a blank. Cleanup
+starts below the separator on a blank, walks to the marker, then ascends
+to a digit. These facts establish the table's restrictions.
+
+\newpage
+\subsection{Digit-Transport Phases}\label{sec:part3}
+For each $d\in D$, four phases carry the selected digit to the accumulator:
+\[
+F_d=10+4d,\qquad H_d=F_d+1,\qquad W_d=F_d+2,\qquad A_d=F_d+3.
+\]
+All four phases use expert state $4+d$, paired with singleton controller
+sets containing $f_d,h_d,w_d,a_d$, respectively. The protocol follows:
+
+\begin{center}
+\small\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{lll}
+\toprule\rowcolor{Pale}Phase & Meaning & Read $:$ (next phase, write, move)\\\midrule
+$F_d$ & First transport blank & $\blank:\triple{H_d}{\blank}{L}$\\
+$H_d$ & Second transport blank & $\blank:\triple{W_d}{\blank}{L}$\\
+$W_d$ & Walk left to the marker & $\blank:\triple{W_d}{\blank}{L}\quad +:\triple{A_d}{+}{U}$\\
+$A_d$ & Add at the marked column & $e:\triple{53}{d+e}{D}$ if $d+e<10$\\
+ & & $e:\triple{50}{d+e-10}{L}$ if $d+e\ge10$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{The Actual Controller-State Numbers.}
+Each row retains the state numbers from the exported controller table. This table expands the entire $40$-phase family.
+
+\begin{center}
+\small\renewcommand{\arraystretch}{1.3}\setlength{\tabcolsep}{12pt}
+\begin{tabular}{rrrrrr}
+\toprule\rowcolor{Pale}$d$ & Expert $4+d$ & $f_d$ & $h_d$ & $w_d$ & $a_d$\\\midrule
+0 & 4 & 27 & 28 & 29 & 30 \\
+1 & 5 & 12 & 13 & 14 & 11 \\
+2 & 6 & 39 & 40 & 41 & 42 \\
+3 & 7 & 31 & 32 & 33 & 34 \\
+4 & 8 & 43 & 44 & 45 & 46 \\
+5 & 9 & 47 & 48 & 49 & 50 \\
+6 & 10 & 7 & 8 & 9 & 10 \\
+7 & 11 & 20 & 21 & 22 & 23 \\
+8 & 12 & 16 & 17 & 18 & 19 \\
+9 & 13 & 35 & 36 & 37 & 38 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Transport Coverage.}
+Equation~(1) gives $r_k-p_k=n+1\ge2$. The first two transport cells therefore contain blanks. After two left
+steps, the head reaches either the marker or a blank to the marker's right. The walk reaches the
+marker and ascends to a digit ensured at the start of the round.
+The two branches implement decimal addition with at most one carry:
+\[
+d+e=s+10c,\qquad s\in D,\quad c\in\{0,1\}.
+\]
+This accounts for every pair $(d,e)$, including $0$, $9$ and all carry cases.
+
+\textbf{Multiple Roles of Controller State $11$.}
+State $11$ performs addition of $1$ when reading a digit, propagates carries when
+entered to the left of an overflowing column, and erases the marker when
+reading $+$. With $d=1$ and no carry, the controller enters state $15$; every other noncarry branch enters state $11$. Both belong to
+$Q_{53}=\{11,15\}$ and have the same required action on $+$.
+Every overflow enters state $11\in Q_{50}$.
+The phase relation distinguishes these geometric contexts and therefore
+does not require a one-to-one correspondence between controller states.
+
+\textbf{Local Transition Identity.}
+For every phase $i$, controller state $q\in Q_i$ and listed branch
+$x:(j,w,M)$, direct comparison with the exported tables gives
+\begin{equation}
+\delta_\EXPERT(g_i,x)=(g_j,w,M),\qquad
+\delta_\CTRL(q,x)=(q',w,M),\quad q'\in Q_j. \tag{2}
+\end{equation}
+Every required entry exists. A transition reaches a halt state exactly
+when $j=58$, with $M=S$. The certificate contains $60$ phase--state pairs,
+including the terminal pair, and $266$ local checks of (2). The checks cover
+all $223$ defined nonterminal controller entries. The remaining $12$ entries
+contain halt loops, excluded from PTOs.
+
+\clearpage
+\sectiontitle{5 \enspace EQUIVALENCE PROOF}{Equivalence Proof}\label{sec:common5}
+\label{sec:equivalence}
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Initially both configurations have the same grid and head,
+with control states $0$ related by phase $0$. Suppose the relation holds
+before a controller step. Lemma~\ref{lem:coverage} supplies an allowed read symbol
+$x$. Equal grids and heads give the same read symbol to both controllers.
+Equation~(2) gives equal writes and motions and preserves the relation
+between successor states. The next grids and heads therefore agree.
+
+Induction establishes equality of every finite execution prefix. The terminal
+condition permits a halt exactly on an edge to the terminal phase.
+Lemma~\ref{lem:finish} establishes termination.
+Both controllers therefore halt together with equal complete PTOs and final
+configurations.
+\end{proof}
+
+Protocol coverage and the local transition identity exclude every undefined entry on the stated input domain.
+\begin{center}
+\small\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{llll}
+\toprule\rowcolor{Pale}Input & Final digit string & Occupied columns & Final head\\\midrule
+$0+0$ & $00$ & $[-1,0]$ & $(-1,0)$\\
+$9+9$ & $18$ & $[-1,0]$ & $(-1,0)$\\
+$999+1$ & $1000$ & $[-1,2]$ & $(1,0)$\\
+$0+999$ & $0999$ & $[-3,0]$ & $(-3,0)$\\
+$001+09$ & $010$ & $[0,2]$ & $(0,0)$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\clearpage
+\sectiontitle{6 \enspace VERIFICATION AND ARTIFACTS}{Verification and Artifacts}\label{sec:common6}
+The universal claim follows from the geometric invariant, protocol coverage
+and induction. The following checks bind the finite certificate to the exact
+adjacent files and independently exercise the controller.
+
+\textbf{Finite Certificate.}
+Run
+\begin{center}\code{python3 verify\_equivalence.py {-}{-}quick}\end{center}
+from this proof directory. This uses only the Python standard library and checks:
+\begin{itemize}
+\item SHA-256 fingerprints of the controller exports, the expert-source
+snapshots and the finite protocol;
+\item exact agreement between the minimized CSV and JSON controllers;
+\item exact agreement between the exported expert and \code{add\_grid(10)};
+\item all $266$ local obligations for the $60$ related phase--state pairs,
+including start, halt and successor closure;
+\item coverage of all $223$ defined nonterminal controller entries.
+\end{itemize}
+The file \path{equivalence_verification.json} records the phase relation
+and every checked transition.
+
+\textbf{Independent Complete Executions.}
+Omitting \code{{-}{-}quick} also runs two separate grid memories and compares
+every read symbol, write, move and head position. The checker compares the complete final grids against the exact padded decimal sum and final-head formula.
+The validation set contains all $12{,}100$ pairs of operand strings of
+lengths $1$--$2$, plus $44$ directed cases and $256$ fixed-seed random cases.
+Directed cases include long all-$9$ carry chains, zeros, unequal lengths,
+leading zeros and operands of length $1024$.
+
+All $3{,}577{,}109$ compared PTO steps agree. The execution checks exercise every defined nonterminal controller entry. The finite tests supplement the length-independent proof.
+
+\textbf{Printed-Table Verification.}
+Printed-table verification compares all $624$ cells of the two-page PDF
+against the CSV: $235$ defined entries and $389$ undefined cells.
+The optional command
+\begin{center}\code{python3 verify\_equivalence.py {-}{-}quick {-}{-}check-pdf}\end{center}
+repeats this printed-table check with \code{pypdf} installed.
+
+\textbf{Artifact Identity.}
+The title page gives the repository-relative case directory. This proof directory
+contains the controller and expert exports, reference code, protocol, checker,
+and saved verification report. The verification script stores or reads SHA-256 checksums for these artifacts. A checksum identifies the exact bytes
+of a file; the checker compares the stored and computed values to detect changes.
+These checks bind the certificate to the supplied exports. The invariants,
+protocol coverage, and local transition identity establish equivalence.
+\end{document}

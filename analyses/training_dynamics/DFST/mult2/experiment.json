@@ -1,0 +1,33 @@
+{
+  "evaluation": {
+    "batch_size": 10,
+    "chunk_size": 8192,
+    "every": 100000,
+    "final": true,
+    "hard_cases": "all",
+    "max_length": 1000,
+    "samples": 10,
+    "scan": "parallel",
+    "search": "binary",
+    "seed": 42,
+    "snapshot": {
+      "d": 5,
+      "enabled": true,
+      "m": 100
+    }
+  },
+  "evaluation_every": 100000,
+  "evaluation_steps": [
+    100000,
+    200000,
+    300000,
+    400000,
+    500000,
+    600000,
+    700000,
+    800000,
+    900000,
+    1000000
+  ],
+  "metrics_sha256": "47e3deb465c414976b22ba65ca961ec2b02db7e6ec175b596cdf68f62bf13bd2"
+}

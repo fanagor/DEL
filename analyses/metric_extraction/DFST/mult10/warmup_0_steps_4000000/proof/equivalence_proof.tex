@@ -1,0 +1,600 @@
+% Standalone proof. Shared notation and prose conventions: analyses/README.md.
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsthm}
+\usepackage{newtxtext,newtxmath}
+\usepackage[a4paper,margin=21mm,headheight=15pt]{geometry}
+\usepackage{microtype,booktabs,array,tabularx,longtable}
+\usepackage[table]{xcolor}
+\usepackage{tikz,fancyhdr,enumitem,seqsplit}
+\definecolor{Teal}{HTML}{176B70}
+\definecolor{Ink}{HTML}{203443}
+\definecolor{Pale}{HTML}{EDF5F5}
+\definecolor{Line}{HTML}{C7D8DB}
+\definecolor{Muted}{HTML}{536974}
+\definecolor{Warm}{HTML}{F8F4EC}
+\usepackage[colorlinks=true,linkcolor=Teal,urlcolor=Teal]{hyperref}
+\color{Ink}
+\newcommand{\blank}{\lambda}
+\newcommand{\digits}{\{0,1,\ldots,9\}}
+\newcommand{\ph}[1]{\mathsf{#1}}
+\newcommand{\EXPERT}{\mathcal E}
+\newcommand{\CTRL}{\mathcal C}
+\newcommand{\PTO}{\operatorname{PTO}}
+\newcommand{\triple}[3]{(#1,#2,\mathsf{#3})}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\hash}[1]{{\scriptsize\ttfamily\seqsplit{#1}}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\setlist[itemize]{nosep,leftmargin=1.2em}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\color{Muted}Decimal Multiplication}
+\fancyhead[R]{\small\sffamily\color{Muted}Metric Extraction}
+\fancyfoot[L]{\scriptsize\sffamily\color{Muted}Exact PTO Equivalence}
+\fancyfoot[R]{\small\thepage}
+\renewcommand{\headrulewidth}{.35pt}
+\renewcommand{\footrulewidth}{0pt}
+\newcommand{\sectiontitle}[2]{\refstepcounter{section}\vspace*{2pt}{\LARGE\bfseries\color{Teal}\thesection\quad #2}\par\vspace{7pt}}
+
+\date{}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\begin{document}
+{\Huge\bfseries Exact PTO Equivalence\\[3pt]Decimal Multiplication}\par
+\vspace{10pt}
+{\Large Metric-Extracted Controller}\par
+{\small\color{Muted}\path{analyses/metric_extraction/DFST/mult10/warmup_0_steps_4000000/}}\par
+\vspace{7pt}
+
+\vspace{4pt}
+\sectiontitle{1 \enspace STATEMENT AND SCOPE}{Statement and Scope}\label{sec:common1}
+\textbf{Controllers.}
+The export \path{minimized_partial.json} defines controller $\CTRL$, with
+$182$ states, initial state $0$, and halt state $181$.
+The function \code{mult\_grid(10)} defines expert $\EXPERT$, with
+$108$ states, initial state $0$, and halt state $107$.
+The adjacent expert export matches this function entry for entry.
+All state numbers below follow the original exports.
+
+\textbf{Input Domain.}
+Let $D=\digits$. Row $0$ initially contains the contiguous word $a\,x\,b$,
+starting at column $0$, where $a\in D^m$, $b\in D^n$, and $m,n\ge1$.
+All remaining grid cells contain blanks. The head starts at $(0,0)$.
+Write $A=\operatorname{val}_{10}(a)$ and $B=\operatorname{val}_{10}(b)$.
+The domain permits arbitrary finite operand lengths, unequal lengths,
+leading zeros, and zero-valued operands.
+
+\textbf{Execution Convention.}
+The grid uses $\mathbb Z^2$, with coordinates increasing rightward and
+downward. The symbol $\blank$ denotes a blank. A transition $(q',w,M)$
+writes $w$, performs motion $M$, and enters state $q'$.
+Motions $L,R,D,U$ move one cell; motion $S$ writes and stops without moving.
+An undefined transition would prevent continuation.
+
+\textbf{Policy-Trajectory Observations.}
+Define the PTO on input $a\,x\,b$ by
+\[
+\PTO(a\,x\,b)=\bigl((r_t,w_t,M_t)\bigr)_{t=0}^{T-1},
+\]
+where $r_t,w_t,M_t$ denote the read symbol, written symbol, and motion
+at step $t$. Count the final stopping action exactly once, without halt-loop padding.
+
+\begin{theorem}[Exact PTO Equivalence]\label{thm:main}
+For every input in the stated domain,
+\[
+\PTO_{\CTRL}(a\,x\,b)=\PTO_{\EXPERT}(a\,x\,b).
+\]
+Both executions terminate on the same step. The complete grids and head
+positions agree at every step. No undefined controller entry occurs.
+The final grid contains only the $(m+n)$-digit decimal representation of
+$AB$, with leading-zero padding, on row $n-1$ in columns $-n,\ldots,m-1$.
+The final head stops at $(-n-1,n-1)$.
+\end{theorem}
+
+The theorem concerns the exported discrete controller. The proof combines
+geometric and arithmetic invariants with a finite simulation certificate;
+no bound on $m$ or $n$ enters the argument.
+\clearpage
+\sectiontitle{2 \enspace EXPERT BEHAVIOR}{Expert Behavior}\label{sec:common2}
+\subsection{Copying and Partial Products}
+Write $b=b_{n-1}\cdots b_0$, so $B=\sum_{i=0}^{n-1}b_i10^i$.
+Assign global weight $10^{m-1-z}$ to column $z$.
+Column $m-1$ carries the units digit of the final product.
+
+\begin{lemma}[Copy Staircase]\label{lem:copy}
+Before product formation, the expert constructs exactly $n$ occupied rows.
+For $0\le i<n$, row $i$ contains
+\[
+a\,x\,b_{n-1}\cdots b_i
+\quad\text{starting in column }-i. \tag{1}
+\]
+All remaining cells contain blanks.
+\end{lemma}
+\begin{proof}
+Row $0$ contains the input. On row $i$, the expert scans to the right blank,
+steps left over $b_i$, and inspects the preceding cell. A digit at this
+position implies at least two remaining factor digits. The expert copies
+every symbol except $b_i$ one row down and one column left, from right to left.
+Each destination contains a blank before writing; the source row remains unchanged.
+
+The first descent reaches a blank. Subsequent descents reach the copied
+right neighbor: a digit, except when copying the last digit of $a$, where
+the lower cell contains the copied $x$. The descent from the source $x$
+reaches a digit. After copying the first digit of $a$, the expert reads the
+left blank and descends onto the first digit of the new row.
+The new row satisfies (1), with one fewer factor digit.
+
+When one factor digit remains, the second left step reaches $x$ and starts
+product formation. Thus $n-1$ copies produce exactly the stated staircase.
+\end{proof}
+
+\begin{lemma}[Aligned Partial Products]\label{lem:products}
+After product formation, row $i$ contains the $(m+1)$-digit representation
+of $A b_i$ on columns $-i-1,\ldots,m-i-1$.
+The leading digit belongs to $\{0,\ldots,8\}$.
+In global column weights, this row represents $A b_i10^i$.
+All remaining cells contain blanks.
+\end{lemma}
+\begin{proof}
+The expert processes rows from $n-1$ upwards. On row $i$, the expert erases
+the selected factor $f=b_i$, the remaining factor prefix, and $x$, then
+walks left across $a$. For $f=0$, each digit becomes $0$, followed by one
+padding $0$ on the left blank. For $1\le f\le9$, the control state stores
+carry $c$, initially $0$, and applies
+\[
+fd+c=w+10c',\qquad
+w=(fd+c)\bmod10,\quad c'=\lfloor(fd+c)/10\rfloor. \tag{2}
+\]
+The bound $0\le c<f$ persists because $fd+c\le9f+f-1=10f-1$.
+The usual suffix invariant for (2) gives the product digits; the left blank
+receives the final carry. Thus the leading digit never exceeds $f-1\le8$.
+
+The right scan ends at column $m-i$ and moves up. For $i>0$, the upper cell
+contains the last digit of $a$, followed by $x$ and the remaining factor prefix.
+The expert scans this prefix, selects the last digit, and repeats.
+Every higher row contains at least two factor digits, so at least one further
+digit follows the selected factor during leftward erasure.
+For $i=0$, the upper cell contains a blank, starting summation on row $0$.
+\end{proof}
+
+Every scan crosses a finite word. Copying shortens the factor prefix;
+product formation visits each occupied row once. Both passes terminate.
+
+\newpage
+\subsection{Accumulation and Carry Confinement}
+\begin{lemma}[Fixed-Width Accumulator]\label{lem:sum}
+After merging through row $k$, $0\le k<n$, all rows above $k$ contain blanks.
+Row $k$ contains a contiguous $(m+k+1)$-digit accumulator on columns
+$-k-1,\ldots,m-1$, with value
+\[
+S_k=A\sum_{i=0}^{k}b_i10^i.
+\]
+Rows below $k$ retain the partial products from Lemma~\ref{lem:products}.
+At inspection of the next row, expert state $88$ has head $(-k-2,k+1)$.
+\end{lemma}
+\begin{proof}
+For $k=0$, the expert scans left across the product on row $0$, reaches
+column $-2$, and descends to inspect row $1$.
+If row $k+1$ exists, inspection reads the fresh leading digit in
+$\{0,\ldots,8\}$. The expert scans the lower product to the right blank at
+$m-k-1$ and moves up. The upper cell contains an accumulator digit, since
+\[
+-k-1\le m-k-1\le m-1.
+\]
+The expert scans to the upper right blank and steps left to column $m-1$.
+The lower product ends at $m-k-2$, so the first lower cell contains a blank.
+
+For upper digit $u$, lower digit $v$ (a blank contributes zero), and incoming
+carry $c\in\{0,1\}$, the update applies
+\[
+u+v+c=w+10c',\qquad
+w\in D,\quad c'\in\{0,1\}. \tag{3}
+\]
+The expert erases $u$, writes $w$ below, returns to the erased upper cell,
+and moves left. The processed lower suffix contains the correct sum suffix;
+the unprocessed cells retain the old digits; $c'$ records the contribution
+to the next column. Equation~(3) preserves this invariant.
+
+The lower word extends one column farther left than the upper word.
+After the upper word ends, carry zero preserves this lower leading digit.
+Carry one increments the leading digit and clears, since the digit never
+exceeds $8$. The expert reaches column $-k-3$ on row $k+1$ and descends.
+Row $k$ contains only blanks; row $k+1$ represents
+$S_k+A b_{k+1}10^{k+1}=S_{k+1}$ on the claimed support.
+\end{proof}
+
+\begin{lemma}[Boundary Restrictions]\label{lem:boundary}
+A carry-one update beneath an upper digit reads an original lower digit.
+A blank lower update guarantees another upper digit on the next left step.
+A carry beyond the upper word reads a lower digit in $\{0,\ldots,8\}$ and clears.
+\end{lemma}
+\begin{proof}
+The blank gap lies strictly to the right of the original lower word.
+The first update has carry zero, and $u+0\le9$, so no carry originates
+inside this gap. Carry one can first arise only inside the lower digit block;
+further leftward updates stay inside that block until the leading digit.
+
+A blank lower cell has column $z\ge m-k-1$. The next upper column satisfies
+$z-1\ge m-k-2\ge-k-1$, using $m\ge1$, and therefore still contains a digit.
+Finally, the lower leading digit lies one column left of the upper word.
+Lemma~\ref{lem:products} bounds this untouched digit by $8$; adding $1$ clears
+any final carry without extending the fixed-width support.
+\end{proof}
+
+Each merge consumes finitely many upper digits and at most one extra carry
+column. After $n-1$ merges, state $88$ reads the blank below the final row,
+moves up to state $106$, and emits $S$ into halt state $107$.
+Lemma~\ref{lem:sum} gives the final product, padding, and head position.
+
+\clearpage
+\sectiontitle{3 \enspace OBSERVATION PROTOCOL}{Observation Protocol}\label{sec:common3}
+Section~\ref{sec:common4} gives $207$ phases. Phase $i$ pairs expert state $g_i$ with
+controller state $q\in Q_i$, on an identical grid and head.
+An edge $i\xrightarrow{x}j$ permits read symbol $x$ and advances to phase $j$.
+The protocol begins at phase $0$ and ends at phase $206$.
+All phase sets contain one controller state except
+$Q_{201}=\{26,106\}$.
+
+\begin{lemma}[Protocol Coverage]\label{lem:coverage}
+Every expert execution in the stated domain follows the protocol in Section~\ref{sec:common4}
+from phase $0$ to phase $206$.
+\end{lemma}
+\begin{proof}
+The following geometric and arithmetic conditions justify every read restriction.
+
+\textbf{Copying.}
+The initial scan and every restart encounter a nonempty left operand,
+then $x$, then a nonempty right operand before the right blank.
+The second left step reads a factor digit or $x$.
+Lemma~\ref{lem:copy} distinguishes the first descent (blank), ordinary descents
+(digits), and the descent directly above the copied operator ($x$).
+Every destination contains a blank. After the first copied symbol, the next
+source symbol contains a digit or $x$; no left blank can occur yet.
+After copying $x$, the next source symbol contains the last digit of $a$.
+The ordinary copy loop eventually reaches the left blank and restarts.
+
+\textbf{Products.}
+The bottom row contains one factor digit; erasing that digit immediately
+exposes $x$. Every higher row contains at least two factor digits;
+erasing the selected factor therefore exposes another digit before $x$.
+After erasing $x$, the first product update reads a digit because $m\ge1$.
+Later updates read digits followed by the left blank.
+Equation~(2) determines the next carry phase and preserves the carry bound.
+The completed product scan reads digits followed by a blank.
+Lemma~\ref{lem:products} places the head on an upper digit followed by $x$
+and a nonempty factor prefix, or on a blank above row $0$.
+
+\textbf{Alignment and Summation.}
+Summation starts on the right blank of row $0$. The initial left scan crosses
+a nonempty product. Inspection below reads a fresh leading digit from
+$\{0,\ldots,8\}$ or a blank below the last row.
+After a leading digit, at least one lower digit remains because $m\ge1$.
+Lemma~\ref{lem:sum} places the first upper alignment step on a digit;
+further alignment steps read digits until the right blank.
+The first upper units digit has carry zero and a blank lower cell.
+
+After every lower update, the upper return cell contains the erased blank.
+A blank lower update leads to a nonblank upper read by
+Lemma~\ref{lem:boundary}. An update inside the lower digit block leads to
+an upper digit or the left blank. Carry-one digit updates remain inside
+the lower digit block. At the end of the upper word, carry zero preserves
+the untouched lower leading digit, while carry one increments that digit
+and clears. Both paths reach the blank immediately left of the merged word.
+The final stop reads a blank.
+
+These conditions give exactly the permitted branches used by the expert.
+Induction over individual moves, copied rows, and merged rows establishes
+coverage. The finite-pass arguments in Lemmas~\ref{lem:copy}--\ref{lem:sum}
+give termination at phase $206$.
+\end{proof}
+
+The protocol may permit additional observation sequences. Checking every
+permitted branch therefore suffices for all valid grid executions.
+
+\clearpage
+\sectiontitle{4 \enspace SIMULATION CERTIFICATE}{Simulation Certificate}\label{sec:common4}
+\textbf{Finite Local Certificate.}
+For every protocol edge $i\xrightarrow{x}j$ and every $q\in Q_i$,
+direct comparison with the two exports gives
+\begin{equation}
+\delta_\EXPERT(g_i,x)=(g_j,w,M),\qquad
+\delta_\CTRL(q,x)=(q',w,M),\qquad q'\in Q_j. \tag{4}
+\end{equation}
+Every required entry exists. A transition reaches halt exactly when
+$j=206$, with motion $S$. The companion checker verifies all $1{,}509$
+obligations across $208$ phase--state pairs. These obligations cover all
+$1{,}259$ defined nonterminal controller entries. The remaining $12$ defined
+entries contain halt loops, which never contribute to a PTO.
+
+\subsection{Phases and Controller-State Relation}
+The table gives the phase index $i$, expert state $g_i$, controller set $Q_i$,
+and permitted reads with successor phase indices.
+For a digit vector $[j_0,\ldots,j_9]$, read $d$ advances to $j_d$.
+The notation $D:j$ sends every decimal digit to phase $j$;
+$0{:}8:j$ permits only digits $0,\ldots,8$.
+Unlisted reads never occur in the corresponding phase of a valid input.
+
+The expert transition supplies the write and motion for each edge;
+Equation~(4) checks both exports against that action. The copying moves
+follow Lemma~\ref{lem:copy}; product updates follow (2); addition updates
+follow (3). Phase labels describe positions before the next action.
+\begingroup
+\fontsize{8.7}{10.5}\selectfont
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.17}
+\begin{longtable}{r p{4.0cm} r l p{8.1cm}}
+\toprule\rowcolor{Pale}
+$i$ & Phase & $g_i$ & $Q_i$ & Read $:$ next phase\\\midrule
+\endfirsthead
+\multicolumn{5}{l}{\small\sffamily\color{Muted}Simulation Certificate (Continued)}\\[5pt]
+\toprule\rowcolor{Pale}
+$i$ & Phase & $g_i$ & $Q_i$ & Read $:$ next phase\\\midrule
+\endhead
+\midrule\multicolumn{5}{r}{\scriptsize Continued on the next page}\\
+\endfoot
+\bottomrule
+\endlastfoot
+0 & First left-operand digit & 0 & $\{0\}$ & $D:1$ \\
+1 & Scan left operand & 0 & $\{0\}$ & $D:1\quad x:2$ \\
+2 & First factor digit & 0 & $\{1\}$ & $D:3$ \\
+3 & Scan right operand & 0 & $\{1\}$ & $D:3\quad \blank:4$ \\
+4 & Skip last factor digit & 1 & $\{2\}$ & $D:5$ \\
+5 & Copy or start products & 2 & $\{3\}$ & $D:[6,8,10,12,14,16,18,20,22,24]$\newline$x:62$ \\
+6 & First descent, digit 0 & 3 & $\{172\}$ & $\blank:7$ \\
+7 & First copied write, digit 0 & 14 & $\{173\}$ & $\blank:26$ \\
+8 & First descent, digit 1 & 4 & $\{123\}$ & $\blank:9$ \\
+9 & First copied write, digit 1 & 15 & $\{124\}$ & $\blank:26$ \\
+10 & First descent, digit 2 & 5 & $\{64\}$ & $\blank:11$ \\
+11 & First copied write, digit 2 & 16 & $\{65\}$ & $\blank:26$ \\
+12 & First descent, digit 3 & 6 & $\{4\}$ & $\blank:13$ \\
+13 & First copied write, digit 3 & 17 & $\{5\}$ & $\blank:26$ \\
+14 & First descent, digit 4 & 7 & $\{87\}$ & $\blank:15$ \\
+15 & First copied write, digit 4 & 18 & $\{88\}$ & $\blank:26$ \\
+16 & First descent, digit 5 & 8 & $\{39\}$ & $\blank:17$ \\
+17 & First copied write, digit 5 & 19 & $\{40\}$ & $\blank:26$ \\
+18 & First descent, digit 6 & 9 & $\{163\}$ & $\blank:19$ \\
+19 & First copied write, digit 6 & 20 & $\{164\}$ & $\blank:26$ \\
+20 & First descent, digit 7 & 10 & $\{51\}$ & $\blank:21$ \\
+21 & First copied write, digit 7 & 21 & $\{52\}$ & $\blank:26$ \\
+22 & First descent, digit 8 & 11 & $\{128\}$ & $\blank:23$ \\
+23 & First copied write, digit 8 & 22 & $\{129\}$ & $\blank:26$ \\
+24 & First descent, digit 9 & 12 & $\{79\}$ & $\blank:25$ \\
+25 & First copied write, digit 9 & 23 & $\{80\}$ & $\blank:26$ \\
+26 & Source after first copy & 25 & $\{6\}$ & $D:[27,29,31,33,35,37,39,41,43,45]$\newline$x:48$ \\
+27 & Ordinary descent, digit 0 & 3 & $\{178\}$ & $D:28$ \\
+28 & Ordinary copied write, digit 0 & 14 & $\{159\}$ & $\blank:47$ \\
+29 & Ordinary descent, digit 1 & 4 & $\{134\}$ & $D:30$ \\
+30 & Ordinary copied write, digit 1 & 15 & $\{135\}$ & $\blank:47$ \\
+31 & Ordinary descent, digit 2 & 5 & $\{68\}$ & $D:32$ \\
+32 & Ordinary copied write, digit 2 & 16 & $\{67\}$ & $\blank:47$ \\
+33 & Ordinary descent, digit 3 & 6 & $\{125\}$ & $D:34$ \\
+34 & Ordinary copied write, digit 3 & 17 & $\{11\}$ & $\blank:47$ \\
+35 & Ordinary descent, digit 4 & 7 & $\{166\}$ & $D:36$ \\
+36 & Ordinary copied write, digit 4 & 18 & $\{90\}$ & $\blank:47$ \\
+37 & Ordinary descent, digit 5 & 8 & $\{165\}$ & $D:38$ \\
+38 & Ordinary copied write, digit 5 & 19 & $\{131\}$ & $\blank:47$ \\
+39 & Ordinary descent, digit 6 & 9 & $\{55\}$ & $D:40$ \\
+40 & Ordinary copied write, digit 6 & 20 & $\{42\}$ & $\blank:47$ \\
+41 & Ordinary descent, digit 7 & 10 & $\{170\}$ & $D:42$ \\
+42 & Ordinary copied write, digit 7 & 21 & $\{148\}$ & $\blank:47$ \\
+43 & Ordinary descent, digit 8 & 11 & $\{150\}$ & $D:44$ \\
+44 & Ordinary copied write, digit 8 & 22 & $\{116\}$ & $\blank:47$ \\
+45 & Ordinary descent, digit 9 & 12 & $\{167\}$ & $D:46$ \\
+46 & Ordinary copied write, digit 9 & 23 & $\{54\}$ & $\blank:47$ \\
+47 & Continue source copy & 25 & $\{12\}$ & $D:[27,29,31,33,35,37,39,41,43,45]$\newline$x:48\quad \blank:61$ \\
+48 & Descend below operator & 13 & $\{7\}$ & $D:49$ \\
+49 & Write copied operator & 24 & $\{8\}$ & $\blank:50$ \\
+50 & Copy last digit of $a$ & 25 & $\{9\}$ & $D:[51,52,53,54,55,56,57,58,59,60]$ \\
+51 & Descend above $x$, digit 0 & 3 & $\{158\}$ & $x:28$ \\
+52 & Descend above $x$, digit 1 & 4 & $\{145\}$ & $x:30$ \\
+53 & Descend above $x$, digit 2 & 5 & $\{66\}$ & $x:32$ \\
+54 & Descend above $x$, digit 3 & 6 & $\{10\}$ & $x:34$ \\
+55 & Descend above $x$, digit 4 & 7 & $\{89\}$ & $x:36$ \\
+56 & Descend above $x$, digit 5 & 8 & $\{130\}$ & $x:38$ \\
+57 & Descend above $x$, digit 6 & 9 & $\{41\}$ & $x:40$ \\
+58 & Descend above $x$, digit 7 & 10 & $\{147\}$ & $x:42$ \\
+59 & Descend above $x$, digit 8 & 11 & $\{115\}$ & $x:44$ \\
+60 & Descend above $x$, digit 9 & 12 & $\{53\}$ & $x:46$ \\
+61 & Restart on copied row & 0 & $\{13\}$ & $D:1$ \\
+62 & Bottom-row factor & 26 & $\{14\}$ & $D:[63,66,69,73,78,84,91,99,108,118]$ \\
+63 & Erase $x$, bottom factor 0 & 27 & $\{111\}$ & $x:64$ \\
+64 & First product digit, factor 0 & 37 & $\{62\}$ & $D:65$ \\
+65 & Continue product by zero & 37 & $\{62\}$ & $D:65\quad \blank:129$ \\
+66 & Erase $x$, bottom factor 1 & 28 & $\{78\}$ & $x:67$ \\
+67 & First product digit, factor 1 & 38 & $\{24\}$ & $D:68$ \\
+68 & Product by 1, carry 0 & 38 & $\{24\}$ & $D:68\quad \blank:129$ \\
+69 & Erase $x$, bottom factor 2 & 29 & $\{69\}$ & $x:70$ \\
+70 & First product digit, factor 2 & 39 & $\{70\}$ & $D:[71,71,71,71,71,72,72,72,72,72]$ \\
+71 & Product by 2, carry 0 & 39 & $\{70\}$ & $D:[71,71,71,71,71,72,72,72,72,72]$\newline$\blank:129$ \\
+72 & Product by 2, carry 1 & 40 & $\{143\}$ & $D:[71,71,71,71,71,72,72,72,72,72]$\newline$\blank:129$ \\
+73 & Erase $x$, bottom factor 3 & 30 & $\{15\}$ & $x:74$ \\
+74 & First product digit, factor 3 & 41 & $\{16\}$ & $D:[75,75,75,75,76,76,76,77,77,77]$ \\
+75 & Product by 3, carry 0 & 41 & $\{16\}$ & $D:[75,75,75,75,76,76,76,77,77,77]$\newline$\blank:129$ \\
+76 & Product by 3, carry 1 & 42 & $\{48\}$ & $D:[75,75,75,76,76,76,76,77,77,77]$\newline$\blank:129$ \\
+77 & Product by 3, carry 2 & 43 & $\{155\}$ & $D:[75,75,75,76,76,76,77,77,77,77]$\newline$\blank:129$ \\
+78 & Erase $x$, bottom factor 4 & 31 & $\{75\}$ & $x:79$ \\
+79 & First product digit, factor 4 & 44 & $\{76\}$ & $D:[80,80,80,81,81,82,82,82,83,83]$ \\
+80 & Product by 4, carry 0 & 44 & $\{76\}$ & $D:[80,80,80,81,81,82,82,82,83,83]$\newline$\blank:129$ \\
+81 & Product by 4, carry 1 & 45 & $\{91\}$ & $D:[80,80,80,81,81,82,82,82,83,83]$\newline$\blank:129$ \\
+82 & Product by 4, carry 2 & 46 & $\{77\}$ & $D:[80,80,81,81,81,82,82,83,83,83]$\newline$\blank:129$ \\
+83 & Product by 4, carry 3 & 47 & $\{117\}$ & $D:[80,80,81,81,81,82,82,83,83,83]$\newline$\blank:129$ \\
+84 & Erase $x$, bottom factor 5 & 32 & $\{43\}$ & $x:85$ \\
+85 & First product digit, factor 5 & 48 & $\{44\}$ & $D:[86,86,87,87,88,88,89,89,90,90]$ \\
+86 & Product by 5, carry 0 & 48 & $\{44\}$ & $D:[86,86,87,87,88,88,89,89,90,90]$\newline$\blank:129$ \\
+87 & Product by 5, carry 1 & 49 & $\{153\}$ & $D:[86,86,87,87,88,88,89,89,90,90]$\newline$\blank:129$ \\
+88 & Product by 5, carry 2 & 50 & $\{144\}$ & $D:[86,86,87,87,88,88,89,89,90,90]$\newline$\blank:129$ \\
+89 & Product by 5, carry 3 & 51 & $\{45\}$ & $D:[86,86,87,87,88,88,89,89,90,90]$\newline$\blank:129$ \\
+90 & Product by 5, carry 4 & 52 & $\{95\}$ & $D:[86,86,87,87,88,88,89,89,90,90]$\newline$\blank:129$ \\
+91 & Erase $x$, bottom factor 6 & 33 & $\{107\}$ & $x:92$ \\
+92 & First product digit, factor 6 & 53 & $\{108\}$ & $D:[93,93,94,94,95,96,96,97,97,98]$ \\
+93 & Product by 6, carry 0 & 53 & $\{108\}$ & $D:[93,93,94,94,95,96,96,97,97,98]$\newline$\blank:129$ \\
+94 & Product by 6, carry 1 & 54 & $\{171\}$ & $D:[93,93,94,94,95,96,96,97,97,98]$\newline$\blank:129$ \\
+95 & Product by 6, carry 2 & 55 & $\{110\}$ & $D:[93,93,94,95,95,96,96,97,98,98]$\newline$\blank:129$ \\
+96 & Product by 6, carry 3 & 56 & $\{174\}$ & $D:[93,93,94,95,95,96,96,97,98,98]$\newline$\blank:129$ \\
+97 & Product by 6, carry 4 & 57 & $\{142\}$ & $D:[93,94,94,95,95,96,97,97,98,98]$\newline$\blank:129$ \\
+98 & Product by 6, carry 5 & 58 & $\{109\}$ & $D:[93,94,94,95,95,96,97,97,98,98]$\newline$\blank:129$ \\
+99 & Erase $x$, bottom factor 7 & 34 & $\{56\}$ & $x:100$ \\
+100 & First product digit, factor 7 & 59 & $\{57\}$ & $D:[101,101,102,103,103,104,105,105,106,107]$ \\
+101 & Product by 7, carry 0 & 59 & $\{57\}$ & $D:[101,101,102,103,103,104,105,105,106,107]$\newline$\blank:129$ \\
+102 & Product by 7, carry 1 & 60 & $\{168\}$ & $D:[101,101,102,103,103,104,105,106,106,107]$\newline$\blank:129$ \\
+103 & Product by 7, carry 2 & 61 & $\{127\}$ & $D:[101,101,102,103,104,104,105,106,106,107]$\newline$\blank:129$ \\
+104 & Product by 7, carry 3 & 62 & $\{179\}$ & $D:[101,102,102,103,104,104,105,106,106,107]$\newline$\blank:129$ \\
+105 & Product by 7, carry 4 & 63 & $\{59\}$ & $D:[101,102,102,103,104,104,105,106,107,107]$\newline$\blank:129$ \\
+106 & Product by 7, carry 5 & 64 & $\{169\}$ & $D:[101,102,102,103,104,105,105,106,107,107]$\newline$\blank:129$ \\
+107 & Product by 7, carry 6 & 65 & $\{58\}$ & $D:[101,102,103,103,104,105,105,106,107,107]$\newline$\blank:129$ \\
+108 & Erase $x$, bottom factor 8 & 35 & $\{112\}$ & $x:109$ \\
+109 & First product digit, factor 8 & 66 & $\{113\}$ & $D:[110,110,111,112,113,114,114,115,116,117]$ \\
+110 & Product by 8, carry 0 & 66 & $\{113\}$ & $D:[110,110,111,112,113,114,114,115,116,117]$\newline$\blank:129$ \\
+111 & Product by 8, carry 1 & 67 & $\{137\}$ & $D:[110,110,111,112,113,114,114,115,116,117]$\newline$\blank:129$ \\
+112 & Product by 8, carry 2 & 68 & $\{121\}$ & $D:[110,111,111,112,113,114,115,115,116,117]$\newline$\blank:129$ \\
+113 & Product by 8, carry 3 & 69 & $\{114\}$ & $D:[110,111,111,112,113,114,115,115,116,117]$\newline$\blank:129$ \\
+114 & Product by 8, carry 4 & 70 & $\{132\}$ & $D:[110,111,112,112,113,114,115,116,116,117]$\newline$\blank:129$ \\
+115 & Product by 8, carry 5 & 71 & $\{149\}$ & $D:[110,111,112,112,113,114,115,116,116,117]$\newline$\blank:129$ \\
+116 & Product by 8, carry 6 & 72 & $\{120\}$ & $D:[110,111,112,113,113,114,115,116,117,117]$\newline$\blank:129$ \\
+117 & Product by 8, carry 7 & 73 & $\{136\}$ & $D:[110,111,112,113,113,114,115,116,117,117]$\newline$\blank:129$ \\
+118 & Erase $x$, bottom factor 9 & 36 & $\{81\}$ & $x:119$ \\
+119 & First product digit, factor 9 & 74 & $\{82\}$ & $D:[120,120,121,122,123,124,125,126,127,128]$ \\
+120 & Product by 9, carry 0 & 74 & $\{82\}$ & $D:[120,120,121,122,123,124,125,126,127,128]$\newline$\blank:129$ \\
+121 & Product by 9, carry 1 & 75 & $\{151\}$ & $D:[120,121,121,122,123,124,125,126,127,128]$\newline$\blank:129$ \\
+122 & Product by 9, carry 2 & 76 & $\{177\}$ & $D:[120,121,122,122,123,124,125,126,127,128]$\newline$\blank:129$ \\
+123 & Product by 9, carry 3 & 77 & $\{154\}$ & $D:[120,121,122,123,123,124,125,126,127,128]$\newline$\blank:129$ \\
+124 & Product by 9, carry 4 & 78 & $\{176\}$ & $D:[120,121,122,123,124,124,125,126,127,128]$\newline$\blank:129$ \\
+125 & Product by 9, carry 5 & 79 & $\{83\}$ & $D:[120,121,122,123,124,125,125,126,127,128]$\newline$\blank:129$ \\
+126 & Product by 9, carry 6 & 80 & $\{156\}$ & $D:[120,121,122,123,124,125,126,126,127,128]$\newline$\blank:129$ \\
+127 & Product by 9, carry 7 & 81 & $\{152\}$ & $D:[120,121,122,123,124,125,126,127,127,128]$\newline$\blank:129$ \\
+128 & Product by 9, carry 8 & 82 & $\{98\}$ & $D:[120,121,122,123,124,125,126,127,128,128]$\newline$\blank:129$ \\
+129 & Scan completed product & 83 & $\{17\}$ & $D:129\quad \blank:130$ \\
+130 & Inspect row above & 84 & $\{18\}$ & $D:131\quad \blank:155$ \\
+131 & Cross upper operator & 85 & $\{19\}$ & $x:132$ \\
+132 & First upper factor digit & 85 & $\{20\}$ & $D:133$ \\
+133 & Scan upper factor prefix & 85 & $\{20\}$ & $D:133\quad \blank:134$ \\
+134 & Select upper factor & 26 & $\{21\}$ & $D:[135,137,139,141,143,145,147,149,151,153]$ \\
+135 & First prefix erasure, factor 0 & 27 & $\{60\}$ & $D:136$ \\
+136 & Later prefix erasure, factor 0 & 27 & $\{61\}$ & $D:136\quad x:64$ \\
+137 & First prefix erasure, factor 1 & 28 & $\{22\}$ & $D:138$ \\
+138 & Later prefix erasure, factor 1 & 28 & $\{23\}$ & $D:138\quad x:67$ \\
+139 & First prefix erasure, factor 2 & 29 & $\{71\}$ & $D:140$ \\
+140 & Later prefix erasure, factor 2 & 29 & $\{72\}$ & $D:140\quad x:70$ \\
+141 & First prefix erasure, factor 3 & 30 & $\{46\}$ & $D:142$ \\
+142 & Later prefix erasure, factor 3 & 30 & $\{47\}$ & $D:142\quad x:74$ \\
+143 & First prefix erasure, factor 4 & 31 & $\{92\}$ & $D:144$ \\
+144 & Later prefix erasure, factor 4 & 31 & $\{93\}$ & $D:144\quad x:79$ \\
+145 & First prefix erasure, factor 5 & 32 & $\{84\}$ & $D:146$ \\
+146 & Later prefix erasure, factor 5 & 32 & $\{85\}$ & $D:146\quad x:85$ \\
+147 & First prefix erasure, factor 6 & 33 & $\{140\}$ & $D:148$ \\
+148 & Later prefix erasure, factor 6 & 33 & $\{141\}$ & $D:148\quad x:92$ \\
+149 & First prefix erasure, factor 7 & 34 & $\{160\}$ & $D:150$ \\
+150 & Later prefix erasure, factor 7 & 34 & $\{161\}$ & $D:150\quad x:100$ \\
+151 & First prefix erasure, factor 8 & 35 & $\{118\}$ & $D:152$ \\
+152 & Later prefix erasure, factor 8 & 35 & $\{119\}$ & $D:152\quad x:109$ \\
+153 & First prefix erasure, factor 9 & 36 & $\{96\}$ & $D:154$ \\
+154 & Later prefix erasure, factor 9 & 36 & $\{97\}$ & $D:154\quad x:119$ \\
+155 & Start summation & 86 & $\{25\}$ & $\blank:156$ \\
+156 & First initial left digit & 87 & $\{26\}$ & $D:157$ \\
+157 & Continue initial left scan & 87 & $\{26\}$ & $D:157\quad \blank:158$ \\
+158 & Inspect fresh lower row & 88 & $\{27\}$ & $0{:}8:159\quad \blank:205$ \\
+159 & First digit after leading cell & 89 & $\{28\}$ & $D:160$ \\
+160 & Scan lower product & 89 & $\{28\}$ & $D:160\quad \blank:161$ \\
+161 & First upper alignment digit & 104 & $\{29\}$ & $D:162$ \\
+162 & Continue upper alignment & 104 & $\{30\}$ & $D:162\quad \blank:163$ \\
+163 & Read upper units digit & 90 & $\{31\}$ & $D:[164,165,166,167,168,169,170,171,172,173]$ \\
+164 & First lower update, value 0 & 92 & $\{63\}$ & $\blank:174$ \\
+165 & First lower update, value 1 & 93 & $\{99\}$ & $\blank:174$ \\
+166 & First lower update, value 2 & 94 & $\{138\}$ & $\blank:174$ \\
+167 & First lower update, value 3 & 95 & $\{32\}$ & $\blank:174$ \\
+168 & First lower update, value 4 & 96 & $\{73\}$ & $\blank:174$ \\
+169 & First lower update, value 5 & 97 & $\{133\}$ & $\blank:174$ \\
+170 & First lower update, value 6 & 98 & $\{94\}$ & $\blank:174$ \\
+171 & First lower update, value 7 & 99 & $\{162\}$ & $\blank:174$ \\
+172 & First lower update, value 8 & 100 & $\{49\}$ & $\blank:174$ \\
+173 & First lower update, value 9 & 101 & $\{146\}$ & $\blank:174$ \\
+174 & Return after lower blank & 91 & $\{33\}$ & $\blank:175$ \\
+175 & Read next upper digit & 90 & $\{34\}$ & $D:[178,179,180,181,182,183,184,185,186,187]$ \\
+176 & Return with carry zero & 91 & $\{36\}$ & $\blank:177$ \\
+177 & Read upper, carry zero & 90 & $\{37\}$ & $D:[178,179,180,181,182,183,184,185,186,187]$\newline$\blank:200$ \\
+178 & Add 0 below & 92 & $\{35\}$ & $D:176\quad \blank:174$ \\
+179 & Add 1 below & 93 & $\{50\}$ & $D:[176,176,176,176,176,176,176,176,176,188]$\newline$\blank:174$ \\
+180 & Add 2 below & 94 & $\{122\}$ & $D:[176,176,176,176,176,176,176,176,188,188]$\newline$\blank:174$ \\
+181 & Add 3 below & 95 & $\{86\}$ & $D:[176,176,176,176,176,176,176,188,188,188]$\newline$\blank:174$ \\
+182 & Add 4 below & 96 & $\{74\}$ & $D:[176,176,176,176,176,176,188,188,188,188]$\newline$\blank:174$ \\
+183 & Add 5 below & 97 & $\{139\}$ & $D:[176,176,176,176,176,188,188,188,188,188]$\newline$\blank:174$ \\
+184 & Add 6 below & 98 & $\{157\}$ & $D:[176,176,176,176,188,188,188,188,188,188]$\newline$\blank:174$ \\
+185 & Add 7 below & 99 & $\{175\}$ & $D:[176,176,176,188,188,188,188,188,188,188]$\newline$\blank:174$ \\
+186 & Add 8 below & 100 & $\{100\}$ & $D:[176,176,188,188,188,188,188,188,188,188]$\newline$\blank:174$ \\
+187 & Add 9 below & 101 & $\{126\}$ & $D:[176,188,188,188,188,188,188,188,188,188]$\newline$\blank:174$ \\
+188 & Return with carry one & 103 & $\{101\}$ & $\blank:189$ \\
+189 & Read upper, carry one & 102 & $\{102\}$ & $D:[190,191,192,193,194,195,196,197,198,199]$\newline$\blank:202$ \\
+190 & Add 1 inside lower block & 93 & $\{50\}$ & $D:[176,176,176,176,176,176,176,176,176,188]$ \\
+191 & Add 2 inside lower block & 94 & $\{122\}$ & $D:[176,176,176,176,176,176,176,176,188,188]$ \\
+192 & Add 3 inside lower block & 95 & $\{86\}$ & $D:[176,176,176,176,176,176,176,188,188,188]$ \\
+193 & Add 4 inside lower block & 96 & $\{74\}$ & $D:[176,176,176,176,176,176,188,188,188,188]$ \\
+194 & Add 5 inside lower block & 97 & $\{139\}$ & $D:[176,176,176,176,176,188,188,188,188,188]$ \\
+195 & Add 6 inside lower block & 98 & $\{157\}$ & $D:[176,176,176,176,188,188,188,188,188,188]$ \\
+196 & Add 7 inside lower block & 99 & $\{175\}$ & $D:[176,176,176,188,188,188,188,188,188,188]$ \\
+197 & Add 8 inside lower block & 100 & $\{100\}$ & $D:[176,176,188,188,188,188,188,188,188,188]$ \\
+198 & Add 9 inside lower block & 101 & $\{126\}$ & $D:[176,188,188,188,188,188,188,188,188,188]$ \\
+199 & Add 10 inside lower block & 105 & $\{180\}$ & $D:188$ \\
+200 & Preserve leading digit & 87 & $\{26\}$ & $0{:}8:201$ \\
+201 & Blank left of merged row & 87 & $\{26,106\}$ & $\blank:158$ \\
+202 & Increment leading digit & 93 & $\{103\}$ & $0{:}8:203$ \\
+203 & Return after final carry & 91 & $\{104\}$ & $\blank:204$ \\
+204 & Step down left of sum & 90 & $\{105\}$ & $\blank:201$ \\
+205 & Emit final stop & 106 & $\{38\}$ & $\blank:206$ \\
+206 & Halted & 107 & $\{181\}$ & $\text{--}$ \\
+\end{longtable}
+\endgroup
+
+\bigskip
+\sectiontitle{5 \enspace EQUIVALENCE PROOF}{Equivalence Proof}\label{sec:common5}
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Initially both executions have the same grid and head; phase $0$ relates
+the two initial control states. Suppose the relation holds before a step.
+Lemma~\ref{lem:coverage} supplies a permitted read symbol $x$.
+Equal grids and heads give the same read symbol to both controllers.
+Equation~(4) gives the same write and motion and relates the successor
+states through phase $j$. The next grids and heads therefore agree.
+
+Induction establishes equality of every finite execution prefix.
+The halt condition permits termination exactly on entry to phase $206$.
+The expert terminates by the finite copy, product, and merge arguments;
+the extracted controller therefore terminates on the same step.
+The complete PTOs and final configurations agree.
+Lemma~\ref{lem:sum} supplies the final padded product and head position.
+\end{proof}
+
+\textbf{Undefined Cells.}
+The partial controller leaves $182\cdot12-1{,}271=913$ entries undefined.
+None occurs on a valid multiplication: protocol coverage and (4) supply
+a defined entry at every possible execution step.
+For example, controller state $0$ scans the left operand and never reads
+a blank, whereas state $1$ scans the right operand and handles the right
+blank. Both states correspond to expert state $0$; merging these semantic
+roles during inspection would incorrectly demand a blank entry at controller
+state $0$. The phase relation retains the necessary context.
+
+\bigskip
+\sectiontitle{6 \enspace VERIFICATION AND ARTIFACTS}{Verification and Artifacts}\label{sec:common6}
+\textbf{Verification.}
+Run \code{python3 verify\_equivalence.py {-}{-}quick} from this directory.
+The checker verifies fingerprints, CSV/JSON equality, equality of the expert
+export with \code{mult\_grid(10)}, and every obligation in (4).
+The checked phase relation matches every row of the certificate.
+Omitting \code{{-}{-}quick} additionally replays all $2{,}000$ extraction inputs
+and the $100$ saved pairs of $100$-digit operands on separate autonomous grids.
+The $180{,}510$ extraction actions and $15{,}114{,}148$ long-input actions
+agree exactly; final grids, heads, and padded arithmetic products also agree.
+The invariants and induction establish the unbounded claim.
+
+\textbf{Artifact Identity.}
+The title page gives the repository-relative case directory. This proof directory
+contains the controller and expert exports, reference code, protocol, checker,
+and saved verification report. The verification script stores or reads SHA-256 checksums for these artifacts. A checksum identifies the exact bytes
+of a file; the checker compares the stored and computed values to detect changes.
+These checks bind the certificate to the supplied exports. The invariants,
+protocol coverage, and local transition identity establish equivalence.
+\end{document}

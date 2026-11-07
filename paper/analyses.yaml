@@ -1,0 +1,181 @@
+analyses:
+- method: metric_extraction
+  title: 'Binary addition: metric extraction'
+  path: analyses/metric_extraction/DFST/add2/warmup_50000_steps_250000
+  source_run: runs/DFST/add2/warmup_50000_steps_250000
+  case_index: 0
+  proof_scope: Pairs of nonempty binary operands of arbitrary finite lengths, including
+    unequal lengths, leading zeros and zero-valued operands
+  proof_report: proof/equivalence_verification.json
+  proof: proof/equivalence_proof.pdf
+  proof_checker: proof/verify_equivalence.py
+  machine: machines/extracted.json
+  transition_table: machines/extracted.pdf
+- method: metric_extraction
+  title: 'Binary multiplication: metric extraction'
+  path: analyses/metric_extraction/DFST/mult2/warmup_25000_steps_500000
+  source_run: runs/DFST/mult2/warmup_25000_steps_500000
+  case_index: 1
+  proof_scope: Pairs of nonempty binary operands of arbitrary finite lengths, including
+    unequal lengths, leading zeros and zero-valued operands
+  proof_report: proof/equivalence_verification.json
+  proof: proof/equivalence_proof.pdf
+  proof_checker: proof/verify_equivalence.py
+  machine: machines/extracted.json
+  transition_table: machines/extracted.pdf
+- method: metric_extraction
+  title: 'Decimal addition: metric extraction'
+  path: analyses/metric_extraction/DFST/add10/warmup_50000_steps_4000000
+  source_run: runs/DFST/add10/warmup_50000_steps_4000000
+  case_index: 2
+  proof_scope: Pairs of nonempty decimal operands of arbitrary finite lengths, including
+    unequal lengths, leading zeros and zero-valued operands
+  proof_report: proof/equivalence_verification.json
+  proof: proof/equivalence_proof.pdf
+  proof_checker: proof/verify_equivalence.py
+  machine: machines/extracted.json
+  transition_table: machines/extracted.pdf
+- method: metric_extraction
+  case_index: 3
+  title: 'Decimal multiplication: metric extraction'
+  path: analyses/metric_extraction/DFST/mult10/warmup_0_steps_4000000
+  source_run: runs/DFST/mult10/warmup_0_steps_4000000
+  proof_scope: Pairs of nonempty decimal operands of arbitrary finite lengths, including
+    unequal lengths, leading zeros and zero-valued operands
+  proof_report: proof/verification_report.json
+  proof: proof/equivalence_proof.pdf
+  proof_checker: proof/verify_equivalence.py
+  machine: machines/extracted.json
+  transition_table: machines/extracted.pdf
+- method: metric_extraction
+  case_index: 4
+  title: 'Universal Teleporting Agent: metric extraction'
+  path: analyses/metric_extraction/DFST/universal/data_75_steps_500000
+  source_run: runs/DFST/universal/data_75_steps_500000
+  proof_scope: Correctly encoded binary Turing machines with nonempty binary inputs
+  proof_report: proof/equivalence_verification.json
+  proof: proof/equivalence_proof.pdf
+  proof_checker: proof/verify_equivalence.py
+  machine: machines/extracted.json
+  transition_table: machines/extracted.pdf
+- method: annealing
+  title: 'Binary addition: annealing'
+  path: analyses/annealing/DFST_Softmax/add2/hidden_22_data_75
+  source_run: runs/DFST_Softmax/add2/hidden_22_data_75
+  case_index: 0
+  proof_scope: Pairs of nonempty binary operands of arbitrary finite lengths, including
+    unequal lengths, leading zeros and zero-valued operands
+  proof_report: proof/equivalence_verification.json
+  proof: proof/equivalence_proof.pdf
+  proof_checker: proof/verify_equivalence.py
+  machine: machines/extracted.json
+  transition_table: machines/extracted.pdf
+- method: annealing
+  title: 'Binary multiplication: annealing'
+  path: analyses/annealing/DFST_Softmax/mult2/hidden_64_data_100
+  source_run: runs/DFST_Softmax/mult2/hidden_64_data_100
+  case_index: 1
+  proof_scope: Pairs of nonempty binary operands of arbitrary finite lengths, including
+    unequal lengths, leading zeros and zero-valued operands
+  proof_report: proof/equivalence_verification.json
+  proof: proof/equivalence_proof.pdf
+  proof_checker: proof/verify_equivalence.py
+  machine: machines/extracted.json
+  transition_table: machines/extracted.pdf
+- method: annealing
+  title: 'Universal Teleporting Agent: annealing'
+  path: analyses/annealing/DFST_Softmax/universal/hidden_30_data_150
+  source_run: runs/DFST_Softmax/universal/hidden_30_data_150
+  case_index: 2
+  proof_scope: Correctly encoded binary Turing machines with arbitrary finite binary
+    inputs, including empty input
+  proof_report: proof/equivalence_verification.json
+  proof: proof/equivalence_proof.pdf
+  proof_checker: proof/verify_equivalence.py
+  machine: machines/extracted.json
+  transition_table: machines/extracted.pdf
+training_dynamics:
+- title: 'add2: DFST training dynamics'
+  path: analyses/training_dynamics/DFST/add2
+  model: DFST
+  task: add2
+  training_steps: 1000000
+  configuration: config.yaml
+  loss_history: metrics.jsonl
+  evaluation_settings: experiment.json
+  evaluations: evaluations/step_*.json
+  metrics:
+  - ulg
+  - rlg
+  evaluation_every: 100000
+  notebook: notebooks/training_dynamics.ipynb
+- title: 'add2: RNN training dynamics'
+  path: analyses/training_dynamics/RNN/add2
+  model: RNN
+  task: add2
+  training_steps: 1000000
+  configuration: config.yaml
+  loss_history: metrics.jsonl
+  evaluation_settings: experiment.json
+  evaluations: evaluations/step_*.json
+  metrics:
+  - ulg
+  - rlg
+  evaluation_every: 100000
+  notebook: notebooks/training_dynamics.ipynb
+- title: 'add2: GRU training dynamics'
+  path: analyses/training_dynamics/GRU/add2
+  model: GRU
+  task: add2
+  training_steps: 1000000
+  configuration: config.yaml
+  loss_history: metrics.jsonl
+  evaluation_settings: experiment.json
+  evaluations: evaluations/step_*.json
+  metrics:
+  - ulg
+  - rlg
+  evaluation_every: 100000
+  notebook: notebooks/training_dynamics.ipynb
+- title: 'mult2: DFST training dynamics'
+  path: analyses/training_dynamics/DFST/mult2
+  model: DFST
+  task: mult2
+  training_steps: 1000000
+  configuration: config.yaml
+  loss_history: metrics.jsonl
+  evaluation_settings: experiment.json
+  evaluations: evaluations/step_*.json
+  metrics:
+  - ulg
+  - rlg
+  evaluation_every: 100000
+  notebook: notebooks/training_dynamics.ipynb
+- title: 'mult2: RNN training dynamics'
+  path: analyses/training_dynamics/RNN/mult2
+  model: RNN
+  task: mult2
+  training_steps: 1000000
+  configuration: config.yaml
+  loss_history: metrics.jsonl
+  evaluation_settings: experiment.json
+  evaluations: evaluations/step_*.json
+  metrics:
+  - ulg
+  - rlg
+  evaluation_every: 100000
+  notebook: notebooks/training_dynamics.ipynb
+- title: 'mult2: GRU training dynamics'
+  path: analyses/training_dynamics/GRU/mult2
+  model: GRU
+  task: mult2
+  training_steps: 1000000
+  configuration: config.yaml
+  loss_history: metrics.jsonl
+  evaluation_settings: experiment.json
+  evaluations: evaluations/step_*.json
+  metrics:
+  - ulg
+  - rlg
+  evaluation_every: 100000
+  notebook: notebooks/training_dynamics.ipynb

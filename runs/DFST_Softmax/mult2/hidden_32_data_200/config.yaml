@@ -1,0 +1,92 @@
+data:
+  environment: grid
+  variant: default
+  task: multiplication
+  radix: 2
+  max_length: 5
+  source: static
+  batch_lengths: mixed
+  size: 200
+  seed: 42
+  teaching_set: false
+  cache_dir: .cache/data
+  max_steps: null
+  train_tasks:
+  - scaling_A_m5
+  - scaling_B_m5
+  - shift_left
+  - shift_right
+  - parity
+  eval_tasks:
+  - parity
+  - flip
+  - cum_sum
+  - shift_left
+  - shift_right
+  - bit_delete
+  - reverse
+  - copy
+  - scaling_A_m500
+  - scaling_B_m500
+model:
+  name: DFST_Softmax
+  hidden_size: 32
+  num_layers: 1
+  embed_dim: null
+  scan: parallel
+  reg_lambda: 0.0
+  init:
+    transition: identity
+    symbol: zero
+    motion: zero
+    recurrent: orthogonal
+    head: default
+    state: ones
+    learnable_state: true
+    gate_bias: 0.0
+initialization:
+  checkpoint: null
+  restore_optimizer: false
+training:
+  constant_steps: 0
+  steps: 100000
+  batch_size: 32
+  loss: mse
+  optimizer: adam
+  lr: 0.1
+  final_lr: 0.1
+  warmup_steps: 0
+  weight_decay: 0.0
+  inverse_freq_alpha: 0.0
+  grad_clip: 1.0
+  log_every: 100
+  checkpoint_every: 50000
+  arithmetic_curriculum:
+    enabled: false
+    start_length: 1
+    accuracy_threshold: 1.0
+evaluation:
+  scan: parallel
+  every: 50000
+  final: true
+  max_length: 1000
+  samples: 10
+  batch_size: 10
+  chunk_size: 8192
+  seed: 42
+  hard_cases: all
+  search: binary
+  snapshot:
+    enabled: true
+    m: 100
+    d: 5
+run:
+  name: null
+  output_dir: outputs
+  seed: 42
+  model_seed: 42
+  device: cuda
+  wandb:
+    enabled: false
+    project: DEL
+    entity: null

@@ -1,0 +1,163 @@
+{
+  "states": 1,
+  "input": "",
+  "initial_head": [
+    1,
+    -3
+  ],
+  "program": [
+    {
+      "state": 0,
+      "read": "",
+      "next_state": 0,
+      "write": "",
+      "motion": "S"
+    },
+    {
+      "state": 0,
+      "read": "0",
+      "next_state": 0,
+      "write": "0",
+      "motion": "S"
+    },
+    {
+      "state": 0,
+      "read": "1",
+      "next_state": 0,
+      "write": "1",
+      "motion": "S"
+    }
+  ],
+  "encoded_rows": [
+    [
+      "",
+      "X",
+      "L",
+      "0",
+      "L",
+      "0",
+      "",
+      "S"
+    ],
+    [
+      "0",
+      "",
+      "L",
+      "0",
+      "L",
+      "0",
+      "0",
+      "S"
+    ],
+    [
+      "1",
+      "",
+      "L",
+      "0",
+      "L",
+      "0",
+      "1",
+      "S"
+    ],
+    [
+      ""
+    ]
+  ],
+  "first_read": "",
+  "extracted_initial_state": 0,
+  "extracted_first_transition": null,
+  "expert_first_transition": [
+    1,
+    "Z",
+    "X"
+  ],
+  "expert_pto": [
+    [
+      "",
+      "Z",
+      "X"
+    ],
+    [
+      "X",
+      "X",
+      "L"
+    ],
+    [
+      "",
+      "",
+      "R"
+    ],
+    [
+      "X",
+      "X",
+      "R"
+    ],
+    [
+      "L",
+      "L",
+      "R"
+    ],
+    [
+      "0",
+      "0",
+      "R"
+    ],
+    [
+      "L",
+      "Y",
+      "X"
+    ],
+    [
+      "X",
+      "X",
+      "R"
+    ],
+    [
+      "L",
+      "X",
+      "Y"
+    ],
+    [
+      "Y",
+      "Y",
+      "R"
+    ],
+    [
+      "0",
+      "Y",
+      "X"
+    ],
+    [
+      "X",
+      "X",
+      "L"
+    ],
+    [
+      "",
+      "X",
+      "Y"
+    ],
+    [
+      "Y",
+      "Y",
+      "R"
+    ],
+    [
+      "",
+      "",
+      "R"
+    ],
+    [
+      "S",
+      "Y",
+      "Z"
+    ],
+    [
+      "Z",
+      "",
+      "S"
+    ]
+  ],
+  "expert_halts_after_controller_steps": 17,
+  "failure": "The original partial controller has no transition for state 0 and blank."
+}

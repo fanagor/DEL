@@ -1,0 +1,27 @@
+epsilon: 1
+max_length: 5
+max_steps: 100000
+samples: 100
+source_sha256: f43d08ab4a48723e3f3aecd18f82f8376032851a45e9999ee05e655fb59b02a9
+source_step: 500000
+universal_tasks:
+- parity
+- flip
+- cum_sum
+- bit_delete
+- shift_left
+- shift_right
+- reverse
+- copy
+- scaling_A_m5
+- scaling_B_m5
+method: metric_extraction
+source_run: runs/DFST/universal/data_75_steps_500000
+source_checkpoint: final_model_checkpoint.pt
+scope: extracted_discrete_controller
+random_samples: 100
+base_samples: 100
+teaching_set: false
+teaching_samples: 0
+sampling_recipe: null
+inputs: data/inputs.json

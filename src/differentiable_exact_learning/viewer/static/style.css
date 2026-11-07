@@ -1,0 +1,535 @@
+:root {
+  color-scheme: dark;
+  --bg: #10151d;
+  --surface: #151d27;
+  --line: #293443;
+  --text: #dce4ed;
+  --muted: #96a6b9;
+  --head: #edd19b;
+  --x: #7dd3bc;
+  --y: #b9a4ed;
+  --z: #f0a396;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 14px
+}
+
+* {
+  box-sizing: border-box
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text)
+}
+
+main {
+  max-width: 1200px;
+  margin: auto;
+  padding: 24px 40px 22px
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 20px
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  margin: 0 0 9px
+}
+
+h1 {
+  font-size: 32px;
+  letter-spacing: -1.3px;
+  font-weight: 500;
+  line-height: 1;
+  margin: 0
+}
+
+.accent {
+  color: var(--head)
+}
+
+.controller {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--muted);
+  font-size: 12px
+}
+
+.indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--x)
+}
+
+label {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  color: var(--muted);
+  font-size: 12px
+}
+
+input,
+select,
+button {
+  font: inherit;
+  color: var(--text)
+}
+
+input,
+select {
+  background: #141c26;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 10px 12px;
+  outline-offset: 3px
+}
+
+input:focus-visible,
+select:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--head);
+  outline-offset: 3px
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: 20px
+}
+
+.input-label {
+  flex: 1
+}
+
+#input {
+  flex: 1;
+  min-width: 0;
+  font: 18px ui-monospace, SFMono-Regular, Consolas, monospace;
+  letter-spacing: 1.5px;
+  height: 48px
+}
+
+.input-note {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 11px;
+  color: var(--muted);
+  margin: 10px 0 18px
+}
+
+#mode {
+  white-space: nowrap
+}
+
+#error {
+  color: #f5afa5;
+  font-size: 13px;
+  margin: 0 0 14px;
+  line-height: 1.5
+}
+
+.stage {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden
+}
+
+.stage-top,
+.stage-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font: 11px ui-monospace, SFMono-Regular, Consolas, monospace;
+  color: var(--muted);
+  padding: 15px 20px
+}
+
+.stage-top {
+  letter-spacing: 1px
+}
+
+.stage-bottom {
+  border-top: 1px solid #25303e
+}
+
+#grid {
+  display: block;
+  width: 100%;
+  height: clamp(210px, 32vh, 500px)
+}
+
+#counter,
+#coordinates {
+  font-variant-numeric: tabular-nums
+}
+
+#status {
+  color: var(--head)
+}
+
+.jump {
+  position: absolute;
+  left: 50%;
+  top: 22px;
+  transform: translateX(-50%);
+  background: #202b39;
+  border: 1px solid #3e4d60;
+  border-radius: 30px;
+  padding: 8px 14px;
+  font: 12px ui-monospace, SFMono-Regular, Consolas, monospace;
+  white-space: nowrap;
+  pointer-events: none;
+  color: var(--text)
+}
+
+.transport {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 19px 0
+}
+
+.buttons {
+  display: flex;
+  gap: 8px
+}
+
+button {
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 10px 15px;
+  font-size: 12px;
+  min-height: 38px;
+  transition: background .15s
+}
+
+button:hover:not(:disabled) {
+  background: #243040
+}
+
+button:disabled {
+  opacity: .4;
+  cursor: default
+}
+
+.primary {
+  background: var(--head);
+  color: #20242a;
+  border-color: var(--head);
+  min-width: 86px;
+  font-weight: 600
+}
+
+.primary:hover:not(:disabled) {
+  background: #f6dfb6
+}
+
+.speed {
+  flex: 1;
+  min-width: 205px;
+  gap: 12px
+}
+
+input[type=range] {
+  padding: 0;
+  accent-color: var(--head);
+  min-width: 70px;
+  width: 100px;
+  height: 24px;
+  border: 0
+}
+
+.speed output {
+  font: 11px ui-monospace, SFMono-Regular, Consolas, monospace;
+  min-width: 81px;
+  color: var(--text)
+}
+
+.window-size {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--muted)
+}
+
+.window-size label {
+  gap: 4px;
+  font-size: 0
+}
+
+.window-size input {
+  width: 58px;
+  padding: 7px;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums
+}
+
+.bookmark-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 1px;
+  margin: 7px 0 12px
+}
+
+.bookmark-heading span:last-child {
+  letter-spacing: 0;
+  font-size: 11px
+}
+
+.runes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px
+}
+
+.rune {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  min-width: 0;
+  padding: 12px;
+  background: #141b25
+}
+
+.rune:disabled {
+  opacity: .6
+}
+
+.rune-symbol {
+  font: 22px ui-monospace, SFMono-Regular, Consolas, monospace
+}
+
+.rune-x .rune-symbol {
+  color: var(--x)
+}
+
+.rune-y .rune-symbol {
+  color: var(--y)
+}
+
+.rune-z .rune-symbol {
+  color: var(--z)
+}
+
+.rune-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 0
+}
+
+.rune-detail strong {
+  font: 11px ui-monospace, SFMono-Regular, Consolas, monospace;
+  color: var(--text);
+  white-space: nowrap
+}
+
+.rune-detail small {
+  font-size: 10px;
+  color: var(--muted)
+}
+
+.rune canvas {
+  width: 100px;
+  height: 48px;
+  max-width: 36%;
+  flex-shrink: 0
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 17px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6
+}
+
+#action {
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  color: #b8c6d7
+}
+
+.separator {
+  padding: 0 7px
+}
+
+[hidden] {
+  display: none !important
+}
+
+@media(max-width:800px) {
+  main {
+    padding: 24px
+  }
+
+  .transport {
+    gap: 16px
+  }
+
+  .window-size {
+    margin-left: auto
+  }
+
+  .rune canvas {
+    display: none
+  }
+
+  .rune-detail small {
+    font-size: 10px
+  }
+
+  footer {
+    flex-wrap: wrap;
+    gap: 7px
+  }
+
+  #grid {
+    height: 370px
+  }
+}
+
+@media(max-width:520px) {
+  main {
+    padding: 20px 14px
+  }
+
+  header {
+    align-items: flex-start;
+    gap: 15px
+  }
+
+  .controller {
+    max-width: 155px;
+    font-size: 11px;
+    line-height: 1.5
+  }
+
+  h1 {
+    font-size: 28px
+  }
+
+  .input-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px
+  }
+
+  .input-label {
+    width: 100%
+  }
+
+  #task-label {
+    justify-content: space-between
+  }
+
+  #task {
+    flex: 1;
+    min-width: 0
+  }
+
+  .input-note {
+    flex-direction: column;
+    gap: 5px
+  }
+
+  .stage-top,
+  .stage-bottom {
+    padding: 13px 12px
+  }
+
+  #grid {
+    height: 310px
+  }
+
+  .buttons {
+    width: 100%
+  }
+
+  .buttons button {
+    flex: 1;
+    min-height: 44px
+  }
+
+  .speed {
+    min-width: 0;
+    width: 100%;
+    flex: auto
+  }
+
+  .speed input {
+    flex: 1
+  }
+
+  .window-size {
+    margin: 0
+  }
+
+  .bookmark-heading {
+    line-height: 1.5
+  }
+
+  .bookmark-heading span:last-child {
+    max-width: 130px;
+    text-align: right
+  }
+
+  .runes {
+    gap: 6px
+  }
+
+  .rune {
+    gap: 7px;
+    padding: 10px 7px
+  }
+
+  .rune-symbol {
+    font-size: 17px
+  }
+
+  .rune-detail strong {
+    font-size: 10px
+  }
+
+  .rune-detail small {
+    font-size: 9px
+  }
+
+  .jump {
+    max-width: 90%;
+    font-size: 10px;
+    white-space: normal;
+    text-align: center
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  * {
+    transition: none !important
+  }
+}

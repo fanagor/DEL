@@ -1,0 +1,21 @@
+{
+  "controller_sha256": "89d1d3c25e6d45298a048046093bfc0bca212d50890bbc82ceb436397ac83ccf",
+  "phases": 207,
+  "related_phase_state_pairs": 208,
+  "local_obligations": 1509,
+  "checked_nonterminal_entries": 1259,
+  "defined_entries": 1271,
+  "unreachable_undefined_entries": 913,
+  "all_finite_checks_pass": true,
+  "extraction": {
+    "exact_matches": 2000,
+    "steps": 180510,
+    "final_products_checked": true
+  },
+  "hundred_digit": {
+    "exact_matches": 100,
+    "steps": 15114148,
+    "final_products_checked": true
+  },
+  "seconds": 12.611
+}

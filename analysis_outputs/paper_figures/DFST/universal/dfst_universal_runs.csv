@@ -1,0 +1,7 @@
+run,dataset_size,hidden_dimensions,training_steps
+runs/DFST/universal/data_150_steps_250000,150,15,250000
+runs/DFST/universal/data_150_steps_500000,150,15,500000
+runs/DFST/universal/data_225_steps_250000,225,15,250000
+runs/DFST/universal/data_225_steps_500000,225,15,500000
+runs/DFST/universal/data_75_steps_250000,75,15,250000
+runs/DFST/universal/data_75_steps_500000,75,15,500000

@@ -1,0 +1,10 @@
+run,dataset_size,hidden_dimensions,training_steps
+runs/DFST_Softmax/universal/hidden_15_data_150,150,15,100000
+runs/DFST_Softmax/universal/hidden_15_data_225,225,15,100000
+runs/DFST_Softmax/universal/hidden_15_data_75,75,15,100000
+runs/DFST_Softmax/universal/hidden_30_data_150,150,30,100000
+runs/DFST_Softmax/universal/hidden_30_data_225,225,30,100000
+runs/DFST_Softmax/universal/hidden_30_data_75,75,30,100000
+runs/DFST_Softmax/universal/hidden_45_data_150,150,45,100000
+runs/DFST_Softmax/universal/hidden_45_data_225,225,45,100000
+runs/DFST_Softmax/universal/hidden_45_data_75,75,45,100000

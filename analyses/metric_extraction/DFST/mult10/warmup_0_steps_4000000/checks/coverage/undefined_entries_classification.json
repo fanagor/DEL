@@ -1,0 +1,5487 @@
+{
+  "undefined_entries": 913,
+  "excluded_by_expert_protocol": 419,
+  "excluded_by_extracted_state_context": 494,
+  "defined_nonterminal_entries": 1259,
+  "all_defined_nonterminal_entries_checked": true,
+  "undefined": [
+    {
+      "state": 0,
+      "read": "",
+      "expert_state": 0,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 1,
+      "read": "x",
+      "expert_state": 0,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 2,
+      "read": "",
+      "expert_state": 1,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 2,
+      "read": "x",
+      "expert_state": 1,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 3,
+      "read": "",
+      "expert_state": 2,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 4,
+      "read": "0",
+      "expert_state": 6,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 4,
+      "read": "1",
+      "expert_state": 6,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 4,
+      "read": "2",
+      "expert_state": 6,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 4,
+      "read": "3",
+      "expert_state": 6,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 4,
+      "read": "4",
+      "expert_state": 6,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 4,
+      "read": "5",
+      "expert_state": 6,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 4,
+      "read": "6",
+      "expert_state": 6,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 4,
+      "read": "7",
+      "expert_state": 6,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 4,
+      "read": "8",
+      "expert_state": 6,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 4,
+      "read": "9",
+      "expert_state": 6,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 4,
+      "read": "x",
+      "expert_state": 6,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 5,
+      "read": "0",
+      "expert_state": 17,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 5,
+      "read": "1",
+      "expert_state": 17,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 5,
+      "read": "2",
+      "expert_state": 17,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 5,
+      "read": "3",
+      "expert_state": 17,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 5,
+      "read": "4",
+      "expert_state": 17,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 5,
+      "read": "5",
+      "expert_state": 17,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 5,
+      "read": "6",
+      "expert_state": 17,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 5,
+      "read": "7",
+      "expert_state": 17,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 5,
+      "read": "8",
+      "expert_state": 17,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 5,
+      "read": "9",
+      "expert_state": 17,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 5,
+      "read": "x",
+      "expert_state": 17,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 6,
+      "read": "",
+      "expert_state": 25,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 7,
+      "read": "",
+      "expert_state": 13,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 7,
+      "read": "x",
+      "expert_state": 13,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 8,
+      "read": "0",
+      "expert_state": 24,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 8,
+      "read": "1",
+      "expert_state": 24,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 8,
+      "read": "2",
+      "expert_state": 24,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 8,
+      "read": "3",
+      "expert_state": 24,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 8,
+      "read": "4",
+      "expert_state": 24,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 8,
+      "read": "5",
+      "expert_state": 24,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 8,
+      "read": "6",
+      "expert_state": 24,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 8,
+      "read": "7",
+      "expert_state": 24,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 8,
+      "read": "8",
+      "expert_state": 24,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 8,
+      "read": "9",
+      "expert_state": 24,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 8,
+      "read": "x",
+      "expert_state": 24,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 9,
+      "read": "",
+      "expert_state": 25,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 9,
+      "read": "x",
+      "expert_state": 25,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 10,
+      "read": "",
+      "expert_state": 6,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 10,
+      "read": "0",
+      "expert_state": 6,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 10,
+      "read": "1",
+      "expert_state": 6,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 10,
+      "read": "2",
+      "expert_state": 6,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 10,
+      "read": "3",
+      "expert_state": 6,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 10,
+      "read": "4",
+      "expert_state": 6,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 10,
+      "read": "5",
+      "expert_state": 6,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 10,
+      "read": "6",
+      "expert_state": 6,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 10,
+      "read": "7",
+      "expert_state": 6,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 10,
+      "read": "8",
+      "expert_state": 6,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 10,
+      "read": "9",
+      "expert_state": 6,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 11,
+      "read": "0",
+      "expert_state": 17,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 11,
+      "read": "1",
+      "expert_state": 17,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 11,
+      "read": "2",
+      "expert_state": 17,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 11,
+      "read": "3",
+      "expert_state": 17,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 11,
+      "read": "4",
+      "expert_state": 17,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 11,
+      "read": "5",
+      "expert_state": 17,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 11,
+      "read": "6",
+      "expert_state": 17,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 11,
+      "read": "7",
+      "expert_state": 17,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 11,
+      "read": "8",
+      "expert_state": 17,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 11,
+      "read": "9",
+      "expert_state": 17,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 11,
+      "read": "x",
+      "expert_state": 17,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 13,
+      "read": "",
+      "expert_state": 0,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 13,
+      "read": "x",
+      "expert_state": 0,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 14,
+      "read": "",
+      "expert_state": 26,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 14,
+      "read": "x",
+      "expert_state": 26,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 15,
+      "read": "",
+      "expert_state": 30,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 15,
+      "read": "0",
+      "expert_state": 30,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 15,
+      "read": "1",
+      "expert_state": 30,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 15,
+      "read": "2",
+      "expert_state": 30,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 15,
+      "read": "3",
+      "expert_state": 30,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 15,
+      "read": "4",
+      "expert_state": 30,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 15,
+      "read": "5",
+      "expert_state": 30,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 15,
+      "read": "6",
+      "expert_state": 30,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 15,
+      "read": "7",
+      "expert_state": 30,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 15,
+      "read": "8",
+      "expert_state": 30,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 15,
+      "read": "9",
+      "expert_state": 30,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 16,
+      "read": "x",
+      "expert_state": 41,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 17,
+      "read": "x",
+      "expert_state": 83,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 18,
+      "read": "x",
+      "expert_state": 84,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 19,
+      "read": "",
+      "expert_state": 85,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 19,
+      "read": "0",
+      "expert_state": 85,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 19,
+      "read": "1",
+      "expert_state": 85,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 19,
+      "read": "2",
+      "expert_state": 85,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 19,
+      "read": "3",
+      "expert_state": 85,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 19,
+      "read": "4",
+      "expert_state": 85,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 19,
+      "read": "5",
+      "expert_state": 85,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 19,
+      "read": "6",
+      "expert_state": 85,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 19,
+      "read": "7",
+      "expert_state": 85,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 19,
+      "read": "8",
+      "expert_state": 85,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 19,
+      "read": "9",
+      "expert_state": 85,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 20,
+      "read": "x",
+      "expert_state": 85,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 21,
+      "read": "",
+      "expert_state": 26,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 21,
+      "read": "x",
+      "expert_state": 26,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 22,
+      "read": "",
+      "expert_state": 28,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 22,
+      "read": "x",
+      "expert_state": 28,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 23,
+      "read": "",
+      "expert_state": 28,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 24,
+      "read": "x",
+      "expert_state": 38,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 25,
+      "read": "0",
+      "expert_state": 86,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 25,
+      "read": "1",
+      "expert_state": 86,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 25,
+      "read": "2",
+      "expert_state": 86,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 25,
+      "read": "3",
+      "expert_state": 86,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 25,
+      "read": "4",
+      "expert_state": 86,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 25,
+      "read": "5",
+      "expert_state": 86,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 25,
+      "read": "6",
+      "expert_state": 86,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 25,
+      "read": "7",
+      "expert_state": 86,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 25,
+      "read": "8",
+      "expert_state": 86,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 25,
+      "read": "9",
+      "expert_state": 86,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 25,
+      "read": "x",
+      "expert_state": 86,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 26,
+      "read": "x",
+      "expert_state": 87,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 27,
+      "read": "9",
+      "expert_state": 88,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 27,
+      "read": "x",
+      "expert_state": 88,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 28,
+      "read": "x",
+      "expert_state": 89,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 29,
+      "read": "",
+      "expert_state": 104,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 29,
+      "read": "x",
+      "expert_state": 104,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 30,
+      "read": "x",
+      "expert_state": 104,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 31,
+      "read": "",
+      "expert_state": 90,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 31,
+      "read": "x",
+      "expert_state": 90,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 32,
+      "read": "0",
+      "expert_state": 95,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 32,
+      "read": "1",
+      "expert_state": 95,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 32,
+      "read": "2",
+      "expert_state": 95,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 32,
+      "read": "3",
+      "expert_state": 95,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 32,
+      "read": "4",
+      "expert_state": 95,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 32,
+      "read": "5",
+      "expert_state": 95,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 32,
+      "read": "6",
+      "expert_state": 95,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 32,
+      "read": "7",
+      "expert_state": 95,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 32,
+      "read": "8",
+      "expert_state": 95,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 32,
+      "read": "9",
+      "expert_state": 95,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 32,
+      "read": "x",
+      "expert_state": 95,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 33,
+      "read": "0",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 33,
+      "read": "1",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 33,
+      "read": "2",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 33,
+      "read": "3",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 33,
+      "read": "4",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 33,
+      "read": "5",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 33,
+      "read": "6",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 33,
+      "read": "7",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 33,
+      "read": "8",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 33,
+      "read": "9",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 33,
+      "read": "x",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 34,
+      "read": "",
+      "expert_state": 90,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 34,
+      "read": "x",
+      "expert_state": 90,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 35,
+      "read": "x",
+      "expert_state": 92,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 36,
+      "read": "0",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 36,
+      "read": "1",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 36,
+      "read": "2",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 36,
+      "read": "3",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 36,
+      "read": "4",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 36,
+      "read": "5",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 36,
+      "read": "6",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 36,
+      "read": "7",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 36,
+      "read": "8",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 36,
+      "read": "9",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 36,
+      "read": "x",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 37,
+      "read": "x",
+      "expert_state": 90,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 38,
+      "read": "0",
+      "expert_state": 106,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 38,
+      "read": "1",
+      "expert_state": 106,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 38,
+      "read": "2",
+      "expert_state": 106,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 38,
+      "read": "3",
+      "expert_state": 106,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 38,
+      "read": "4",
+      "expert_state": 106,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 38,
+      "read": "5",
+      "expert_state": 106,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 38,
+      "read": "6",
+      "expert_state": 106,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 38,
+      "read": "7",
+      "expert_state": 106,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 38,
+      "read": "8",
+      "expert_state": 106,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 38,
+      "read": "9",
+      "expert_state": 106,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 38,
+      "read": "x",
+      "expert_state": 106,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 39,
+      "read": "0",
+      "expert_state": 8,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 39,
+      "read": "1",
+      "expert_state": 8,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 39,
+      "read": "2",
+      "expert_state": 8,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 39,
+      "read": "3",
+      "expert_state": 8,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 39,
+      "read": "4",
+      "expert_state": 8,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 39,
+      "read": "5",
+      "expert_state": 8,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 39,
+      "read": "6",
+      "expert_state": 8,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 39,
+      "read": "7",
+      "expert_state": 8,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 39,
+      "read": "8",
+      "expert_state": 8,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 39,
+      "read": "9",
+      "expert_state": 8,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 39,
+      "read": "x",
+      "expert_state": 8,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 40,
+      "read": "0",
+      "expert_state": 19,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 40,
+      "read": "1",
+      "expert_state": 19,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 40,
+      "read": "2",
+      "expert_state": 19,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 40,
+      "read": "3",
+      "expert_state": 19,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 40,
+      "read": "4",
+      "expert_state": 19,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 40,
+      "read": "5",
+      "expert_state": 19,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 40,
+      "read": "6",
+      "expert_state": 19,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 40,
+      "read": "7",
+      "expert_state": 19,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 40,
+      "read": "8",
+      "expert_state": 19,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 40,
+      "read": "9",
+      "expert_state": 19,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 40,
+      "read": "x",
+      "expert_state": 19,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 41,
+      "read": "",
+      "expert_state": 9,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 41,
+      "read": "0",
+      "expert_state": 9,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 41,
+      "read": "1",
+      "expert_state": 9,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 41,
+      "read": "2",
+      "expert_state": 9,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 41,
+      "read": "3",
+      "expert_state": 9,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 41,
+      "read": "4",
+      "expert_state": 9,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 41,
+      "read": "5",
+      "expert_state": 9,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 41,
+      "read": "6",
+      "expert_state": 9,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 41,
+      "read": "7",
+      "expert_state": 9,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 41,
+      "read": "8",
+      "expert_state": 9,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 41,
+      "read": "9",
+      "expert_state": 9,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 42,
+      "read": "0",
+      "expert_state": 20,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 42,
+      "read": "1",
+      "expert_state": 20,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 42,
+      "read": "2",
+      "expert_state": 20,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 42,
+      "read": "3",
+      "expert_state": 20,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 42,
+      "read": "4",
+      "expert_state": 20,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 42,
+      "read": "5",
+      "expert_state": 20,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 42,
+      "read": "6",
+      "expert_state": 20,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 42,
+      "read": "7",
+      "expert_state": 20,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 42,
+      "read": "8",
+      "expert_state": 20,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 42,
+      "read": "9",
+      "expert_state": 20,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 42,
+      "read": "x",
+      "expert_state": 20,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 43,
+      "read": "",
+      "expert_state": 32,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 43,
+      "read": "0",
+      "expert_state": 32,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 43,
+      "read": "1",
+      "expert_state": 32,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 43,
+      "read": "2",
+      "expert_state": 32,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 43,
+      "read": "3",
+      "expert_state": 32,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 43,
+      "read": "4",
+      "expert_state": 32,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 43,
+      "read": "5",
+      "expert_state": 32,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 43,
+      "read": "6",
+      "expert_state": 32,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 43,
+      "read": "7",
+      "expert_state": 32,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 43,
+      "read": "8",
+      "expert_state": 32,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 43,
+      "read": "9",
+      "expert_state": 32,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 44,
+      "read": "x",
+      "expert_state": 48,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 45,
+      "read": "x",
+      "expert_state": 51,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 46,
+      "read": "",
+      "expert_state": 30,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 46,
+      "read": "x",
+      "expert_state": 30,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 47,
+      "read": "",
+      "expert_state": 30,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 48,
+      "read": "x",
+      "expert_state": 42,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 49,
+      "read": "0",
+      "expert_state": 100,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 49,
+      "read": "1",
+      "expert_state": 100,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 49,
+      "read": "2",
+      "expert_state": 100,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 49,
+      "read": "3",
+      "expert_state": 100,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 49,
+      "read": "4",
+      "expert_state": 100,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 49,
+      "read": "5",
+      "expert_state": 100,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 49,
+      "read": "6",
+      "expert_state": 100,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 49,
+      "read": "7",
+      "expert_state": 100,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 49,
+      "read": "8",
+      "expert_state": 100,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 49,
+      "read": "9",
+      "expert_state": 100,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 49,
+      "read": "x",
+      "expert_state": 100,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 50,
+      "read": "x",
+      "expert_state": 93,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 51,
+      "read": "0",
+      "expert_state": 10,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 51,
+      "read": "1",
+      "expert_state": 10,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 51,
+      "read": "2",
+      "expert_state": 10,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 51,
+      "read": "3",
+      "expert_state": 10,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 51,
+      "read": "4",
+      "expert_state": 10,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 51,
+      "read": "5",
+      "expert_state": 10,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 51,
+      "read": "6",
+      "expert_state": 10,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 51,
+      "read": "7",
+      "expert_state": 10,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 51,
+      "read": "8",
+      "expert_state": 10,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 51,
+      "read": "9",
+      "expert_state": 10,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 51,
+      "read": "x",
+      "expert_state": 10,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 52,
+      "read": "0",
+      "expert_state": 21,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 52,
+      "read": "1",
+      "expert_state": 21,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 52,
+      "read": "2",
+      "expert_state": 21,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 52,
+      "read": "3",
+      "expert_state": 21,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 52,
+      "read": "4",
+      "expert_state": 21,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 52,
+      "read": "5",
+      "expert_state": 21,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 52,
+      "read": "6",
+      "expert_state": 21,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 52,
+      "read": "7",
+      "expert_state": 21,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 52,
+      "read": "8",
+      "expert_state": 21,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 52,
+      "read": "9",
+      "expert_state": 21,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 52,
+      "read": "x",
+      "expert_state": 21,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 53,
+      "read": "",
+      "expert_state": 12,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 53,
+      "read": "0",
+      "expert_state": 12,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 53,
+      "read": "1",
+      "expert_state": 12,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 53,
+      "read": "2",
+      "expert_state": 12,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 53,
+      "read": "3",
+      "expert_state": 12,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 53,
+      "read": "4",
+      "expert_state": 12,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 53,
+      "read": "5",
+      "expert_state": 12,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 53,
+      "read": "6",
+      "expert_state": 12,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 53,
+      "read": "7",
+      "expert_state": 12,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 53,
+      "read": "8",
+      "expert_state": 12,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 53,
+      "read": "9",
+      "expert_state": 12,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 54,
+      "read": "0",
+      "expert_state": 23,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 54,
+      "read": "1",
+      "expert_state": 23,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 54,
+      "read": "2",
+      "expert_state": 23,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 54,
+      "read": "3",
+      "expert_state": 23,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 54,
+      "read": "4",
+      "expert_state": 23,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 54,
+      "read": "5",
+      "expert_state": 23,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 54,
+      "read": "6",
+      "expert_state": 23,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 54,
+      "read": "7",
+      "expert_state": 23,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 54,
+      "read": "8",
+      "expert_state": 23,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 54,
+      "read": "9",
+      "expert_state": 23,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 54,
+      "read": "x",
+      "expert_state": 23,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 55,
+      "read": "",
+      "expert_state": 9,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 55,
+      "read": "x",
+      "expert_state": 9,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 56,
+      "read": "",
+      "expert_state": 34,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 56,
+      "read": "0",
+      "expert_state": 34,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 56,
+      "read": "1",
+      "expert_state": 34,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 56,
+      "read": "2",
+      "expert_state": 34,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 56,
+      "read": "3",
+      "expert_state": 34,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 56,
+      "read": "4",
+      "expert_state": 34,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 56,
+      "read": "5",
+      "expert_state": 34,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 56,
+      "read": "6",
+      "expert_state": 34,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 56,
+      "read": "7",
+      "expert_state": 34,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 56,
+      "read": "8",
+      "expert_state": 34,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 56,
+      "read": "9",
+      "expert_state": 34,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 57,
+      "read": "x",
+      "expert_state": 59,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 58,
+      "read": "x",
+      "expert_state": 65,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 59,
+      "read": "x",
+      "expert_state": 63,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 60,
+      "read": "",
+      "expert_state": 27,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 60,
+      "read": "x",
+      "expert_state": 27,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 61,
+      "read": "",
+      "expert_state": 27,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 62,
+      "read": "x",
+      "expert_state": 37,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 63,
+      "read": "0",
+      "expert_state": 92,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 63,
+      "read": "1",
+      "expert_state": 92,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 63,
+      "read": "2",
+      "expert_state": 92,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 63,
+      "read": "3",
+      "expert_state": 92,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 63,
+      "read": "4",
+      "expert_state": 92,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 63,
+      "read": "5",
+      "expert_state": 92,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 63,
+      "read": "6",
+      "expert_state": 92,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 63,
+      "read": "7",
+      "expert_state": 92,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 63,
+      "read": "8",
+      "expert_state": 92,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 63,
+      "read": "9",
+      "expert_state": 92,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 63,
+      "read": "x",
+      "expert_state": 92,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 64,
+      "read": "0",
+      "expert_state": 5,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 64,
+      "read": "1",
+      "expert_state": 5,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 64,
+      "read": "2",
+      "expert_state": 5,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 64,
+      "read": "3",
+      "expert_state": 5,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 64,
+      "read": "4",
+      "expert_state": 5,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 64,
+      "read": "5",
+      "expert_state": 5,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 64,
+      "read": "6",
+      "expert_state": 5,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 64,
+      "read": "7",
+      "expert_state": 5,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 64,
+      "read": "8",
+      "expert_state": 5,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 64,
+      "read": "9",
+      "expert_state": 5,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 64,
+      "read": "x",
+      "expert_state": 5,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 65,
+      "read": "0",
+      "expert_state": 16,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 65,
+      "read": "1",
+      "expert_state": 16,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 65,
+      "read": "2",
+      "expert_state": 16,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 65,
+      "read": "3",
+      "expert_state": 16,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 65,
+      "read": "4",
+      "expert_state": 16,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 65,
+      "read": "5",
+      "expert_state": 16,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 65,
+      "read": "6",
+      "expert_state": 16,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 65,
+      "read": "7",
+      "expert_state": 16,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 65,
+      "read": "8",
+      "expert_state": 16,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 65,
+      "read": "9",
+      "expert_state": 16,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 65,
+      "read": "x",
+      "expert_state": 16,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 66,
+      "read": "",
+      "expert_state": 5,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 66,
+      "read": "0",
+      "expert_state": 5,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 66,
+      "read": "1",
+      "expert_state": 5,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 66,
+      "read": "2",
+      "expert_state": 5,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 66,
+      "read": "3",
+      "expert_state": 5,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 66,
+      "read": "4",
+      "expert_state": 5,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 66,
+      "read": "5",
+      "expert_state": 5,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 66,
+      "read": "6",
+      "expert_state": 5,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 66,
+      "read": "7",
+      "expert_state": 5,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 66,
+      "read": "8",
+      "expert_state": 5,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 66,
+      "read": "9",
+      "expert_state": 5,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 67,
+      "read": "0",
+      "expert_state": 16,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 67,
+      "read": "1",
+      "expert_state": 16,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 67,
+      "read": "2",
+      "expert_state": 16,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 67,
+      "read": "3",
+      "expert_state": 16,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 67,
+      "read": "4",
+      "expert_state": 16,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 67,
+      "read": "5",
+      "expert_state": 16,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 67,
+      "read": "6",
+      "expert_state": 16,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 67,
+      "read": "7",
+      "expert_state": 16,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 67,
+      "read": "8",
+      "expert_state": 16,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 67,
+      "read": "9",
+      "expert_state": 16,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 67,
+      "read": "x",
+      "expert_state": 16,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 68,
+      "read": "",
+      "expert_state": 5,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 68,
+      "read": "x",
+      "expert_state": 5,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 69,
+      "read": "",
+      "expert_state": 29,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 69,
+      "read": "0",
+      "expert_state": 29,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 69,
+      "read": "1",
+      "expert_state": 29,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 69,
+      "read": "2",
+      "expert_state": 29,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 69,
+      "read": "3",
+      "expert_state": 29,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 69,
+      "read": "4",
+      "expert_state": 29,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 69,
+      "read": "5",
+      "expert_state": 29,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 69,
+      "read": "6",
+      "expert_state": 29,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 69,
+      "read": "7",
+      "expert_state": 29,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 69,
+      "read": "8",
+      "expert_state": 29,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 69,
+      "read": "9",
+      "expert_state": 29,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 70,
+      "read": "x",
+      "expert_state": 39,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 71,
+      "read": "",
+      "expert_state": 29,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 71,
+      "read": "x",
+      "expert_state": 29,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 72,
+      "read": "",
+      "expert_state": 29,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 73,
+      "read": "0",
+      "expert_state": 96,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 73,
+      "read": "1",
+      "expert_state": 96,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 73,
+      "read": "2",
+      "expert_state": 96,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 73,
+      "read": "3",
+      "expert_state": 96,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 73,
+      "read": "4",
+      "expert_state": 96,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 73,
+      "read": "5",
+      "expert_state": 96,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 73,
+      "read": "6",
+      "expert_state": 96,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 73,
+      "read": "7",
+      "expert_state": 96,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 73,
+      "read": "8",
+      "expert_state": 96,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 73,
+      "read": "9",
+      "expert_state": 96,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 73,
+      "read": "x",
+      "expert_state": 96,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 74,
+      "read": "x",
+      "expert_state": 96,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 75,
+      "read": "",
+      "expert_state": 31,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 75,
+      "read": "0",
+      "expert_state": 31,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 75,
+      "read": "1",
+      "expert_state": 31,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 75,
+      "read": "2",
+      "expert_state": 31,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 75,
+      "read": "3",
+      "expert_state": 31,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 75,
+      "read": "4",
+      "expert_state": 31,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 75,
+      "read": "5",
+      "expert_state": 31,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 75,
+      "read": "6",
+      "expert_state": 31,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 75,
+      "read": "7",
+      "expert_state": 31,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 75,
+      "read": "8",
+      "expert_state": 31,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 75,
+      "read": "9",
+      "expert_state": 31,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 76,
+      "read": "x",
+      "expert_state": 44,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 77,
+      "read": "x",
+      "expert_state": 46,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 78,
+      "read": "",
+      "expert_state": 28,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 78,
+      "read": "0",
+      "expert_state": 28,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 78,
+      "read": "1",
+      "expert_state": 28,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 78,
+      "read": "2",
+      "expert_state": 28,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 78,
+      "read": "3",
+      "expert_state": 28,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 78,
+      "read": "4",
+      "expert_state": 28,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 78,
+      "read": "5",
+      "expert_state": 28,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 78,
+      "read": "6",
+      "expert_state": 28,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 78,
+      "read": "7",
+      "expert_state": 28,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 78,
+      "read": "8",
+      "expert_state": 28,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 78,
+      "read": "9",
+      "expert_state": 28,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 79,
+      "read": "0",
+      "expert_state": 12,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 79,
+      "read": "1",
+      "expert_state": 12,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 79,
+      "read": "2",
+      "expert_state": 12,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 79,
+      "read": "3",
+      "expert_state": 12,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 79,
+      "read": "4",
+      "expert_state": 12,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 79,
+      "read": "5",
+      "expert_state": 12,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 79,
+      "read": "6",
+      "expert_state": 12,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 79,
+      "read": "7",
+      "expert_state": 12,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 79,
+      "read": "8",
+      "expert_state": 12,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 79,
+      "read": "9",
+      "expert_state": 12,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 79,
+      "read": "x",
+      "expert_state": 12,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 80,
+      "read": "0",
+      "expert_state": 23,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 80,
+      "read": "1",
+      "expert_state": 23,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 80,
+      "read": "2",
+      "expert_state": 23,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 80,
+      "read": "3",
+      "expert_state": 23,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 80,
+      "read": "4",
+      "expert_state": 23,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 80,
+      "read": "5",
+      "expert_state": 23,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 80,
+      "read": "6",
+      "expert_state": 23,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 80,
+      "read": "7",
+      "expert_state": 23,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 80,
+      "read": "8",
+      "expert_state": 23,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 80,
+      "read": "9",
+      "expert_state": 23,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 80,
+      "read": "x",
+      "expert_state": 23,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 81,
+      "read": "",
+      "expert_state": 36,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 81,
+      "read": "0",
+      "expert_state": 36,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 81,
+      "read": "1",
+      "expert_state": 36,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 81,
+      "read": "2",
+      "expert_state": 36,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 81,
+      "read": "3",
+      "expert_state": 36,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 81,
+      "read": "4",
+      "expert_state": 36,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 81,
+      "read": "5",
+      "expert_state": 36,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 81,
+      "read": "6",
+      "expert_state": 36,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 81,
+      "read": "7",
+      "expert_state": 36,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 81,
+      "read": "8",
+      "expert_state": 36,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 81,
+      "read": "9",
+      "expert_state": 36,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 82,
+      "read": "x",
+      "expert_state": 74,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 83,
+      "read": "x",
+      "expert_state": 79,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 84,
+      "read": "",
+      "expert_state": 32,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 84,
+      "read": "x",
+      "expert_state": 32,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 85,
+      "read": "",
+      "expert_state": 32,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 86,
+      "read": "x",
+      "expert_state": 95,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 87,
+      "read": "0",
+      "expert_state": 7,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 87,
+      "read": "1",
+      "expert_state": 7,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 87,
+      "read": "2",
+      "expert_state": 7,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 87,
+      "read": "3",
+      "expert_state": 7,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 87,
+      "read": "4",
+      "expert_state": 7,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 87,
+      "read": "5",
+      "expert_state": 7,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 87,
+      "read": "6",
+      "expert_state": 7,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 87,
+      "read": "7",
+      "expert_state": 7,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 87,
+      "read": "8",
+      "expert_state": 7,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 87,
+      "read": "9",
+      "expert_state": 7,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 87,
+      "read": "x",
+      "expert_state": 7,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 88,
+      "read": "0",
+      "expert_state": 18,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 88,
+      "read": "1",
+      "expert_state": 18,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 88,
+      "read": "2",
+      "expert_state": 18,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 88,
+      "read": "3",
+      "expert_state": 18,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 88,
+      "read": "4",
+      "expert_state": 18,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 88,
+      "read": "5",
+      "expert_state": 18,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 88,
+      "read": "6",
+      "expert_state": 18,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 88,
+      "read": "7",
+      "expert_state": 18,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 88,
+      "read": "8",
+      "expert_state": 18,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 88,
+      "read": "9",
+      "expert_state": 18,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 88,
+      "read": "x",
+      "expert_state": 18,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 89,
+      "read": "",
+      "expert_state": 7,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 89,
+      "read": "0",
+      "expert_state": 7,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 89,
+      "read": "1",
+      "expert_state": 7,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 89,
+      "read": "2",
+      "expert_state": 7,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 89,
+      "read": "3",
+      "expert_state": 7,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 89,
+      "read": "4",
+      "expert_state": 7,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 89,
+      "read": "5",
+      "expert_state": 7,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 89,
+      "read": "6",
+      "expert_state": 7,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 89,
+      "read": "7",
+      "expert_state": 7,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 89,
+      "read": "8",
+      "expert_state": 7,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 89,
+      "read": "9",
+      "expert_state": 7,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 90,
+      "read": "0",
+      "expert_state": 18,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 90,
+      "read": "1",
+      "expert_state": 18,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 90,
+      "read": "2",
+      "expert_state": 18,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 90,
+      "read": "3",
+      "expert_state": 18,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 90,
+      "read": "4",
+      "expert_state": 18,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 90,
+      "read": "5",
+      "expert_state": 18,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 90,
+      "read": "6",
+      "expert_state": 18,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 90,
+      "read": "7",
+      "expert_state": 18,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 90,
+      "read": "8",
+      "expert_state": 18,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 90,
+      "read": "9",
+      "expert_state": 18,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 90,
+      "read": "x",
+      "expert_state": 18,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 91,
+      "read": "x",
+      "expert_state": 45,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 92,
+      "read": "",
+      "expert_state": 31,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 92,
+      "read": "x",
+      "expert_state": 31,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 93,
+      "read": "",
+      "expert_state": 31,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 94,
+      "read": "0",
+      "expert_state": 98,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 94,
+      "read": "1",
+      "expert_state": 98,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 94,
+      "read": "2",
+      "expert_state": 98,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 94,
+      "read": "3",
+      "expert_state": 98,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 94,
+      "read": "4",
+      "expert_state": 98,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 94,
+      "read": "5",
+      "expert_state": 98,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 94,
+      "read": "6",
+      "expert_state": 98,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 94,
+      "read": "7",
+      "expert_state": 98,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 94,
+      "read": "8",
+      "expert_state": 98,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 94,
+      "read": "9",
+      "expert_state": 98,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 94,
+      "read": "x",
+      "expert_state": 98,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 95,
+      "read": "x",
+      "expert_state": 52,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 96,
+      "read": "",
+      "expert_state": 36,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 96,
+      "read": "x",
+      "expert_state": 36,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 97,
+      "read": "",
+      "expert_state": 36,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 98,
+      "read": "x",
+      "expert_state": 82,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 99,
+      "read": "0",
+      "expert_state": 93,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 99,
+      "read": "1",
+      "expert_state": 93,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 99,
+      "read": "2",
+      "expert_state": 93,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 99,
+      "read": "3",
+      "expert_state": 93,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 99,
+      "read": "4",
+      "expert_state": 93,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 99,
+      "read": "5",
+      "expert_state": 93,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 99,
+      "read": "6",
+      "expert_state": 93,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 99,
+      "read": "7",
+      "expert_state": 93,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 99,
+      "read": "8",
+      "expert_state": 93,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 99,
+      "read": "9",
+      "expert_state": 93,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 99,
+      "read": "x",
+      "expert_state": 93,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 100,
+      "read": "x",
+      "expert_state": 100,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 101,
+      "read": "0",
+      "expert_state": 103,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 101,
+      "read": "1",
+      "expert_state": 103,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 101,
+      "read": "2",
+      "expert_state": 103,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 101,
+      "read": "3",
+      "expert_state": 103,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 101,
+      "read": "4",
+      "expert_state": 103,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 101,
+      "read": "5",
+      "expert_state": 103,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 101,
+      "read": "6",
+      "expert_state": 103,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 101,
+      "read": "7",
+      "expert_state": 103,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 101,
+      "read": "8",
+      "expert_state": 103,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 101,
+      "read": "9",
+      "expert_state": 103,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 101,
+      "read": "x",
+      "expert_state": 103,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 102,
+      "read": "x",
+      "expert_state": 102,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 103,
+      "read": "",
+      "expert_state": 93,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 103,
+      "read": "9",
+      "expert_state": 93,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 103,
+      "read": "x",
+      "expert_state": 93,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 104,
+      "read": "0",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 104,
+      "read": "1",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 104,
+      "read": "2",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 104,
+      "read": "3",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 104,
+      "read": "4",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 104,
+      "read": "5",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 104,
+      "read": "6",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 104,
+      "read": "7",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 104,
+      "read": "8",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 104,
+      "read": "9",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 104,
+      "read": "x",
+      "expert_state": 91,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 105,
+      "read": "0",
+      "expert_state": 90,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 105,
+      "read": "1",
+      "expert_state": 90,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 105,
+      "read": "2",
+      "expert_state": 90,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 105,
+      "read": "3",
+      "expert_state": 90,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 105,
+      "read": "4",
+      "expert_state": 90,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 105,
+      "read": "5",
+      "expert_state": 90,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 105,
+      "read": "6",
+      "expert_state": 90,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 105,
+      "read": "7",
+      "expert_state": 90,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 105,
+      "read": "8",
+      "expert_state": 90,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 105,
+      "read": "9",
+      "expert_state": 90,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 105,
+      "read": "x",
+      "expert_state": 90,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 106,
+      "read": "0",
+      "expert_state": 87,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 106,
+      "read": "1",
+      "expert_state": 87,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 106,
+      "read": "2",
+      "expert_state": 87,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 106,
+      "read": "3",
+      "expert_state": 87,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 106,
+      "read": "4",
+      "expert_state": 87,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 106,
+      "read": "5",
+      "expert_state": 87,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 106,
+      "read": "6",
+      "expert_state": 87,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 106,
+      "read": "7",
+      "expert_state": 87,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 106,
+      "read": "8",
+      "expert_state": 87,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 106,
+      "read": "9",
+      "expert_state": 87,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 106,
+      "read": "x",
+      "expert_state": 87,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 107,
+      "read": "",
+      "expert_state": 33,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 107,
+      "read": "0",
+      "expert_state": 33,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 107,
+      "read": "1",
+      "expert_state": 33,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 107,
+      "read": "2",
+      "expert_state": 33,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 107,
+      "read": "3",
+      "expert_state": 33,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 107,
+      "read": "4",
+      "expert_state": 33,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 107,
+      "read": "5",
+      "expert_state": 33,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 107,
+      "read": "6",
+      "expert_state": 33,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 107,
+      "read": "7",
+      "expert_state": 33,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 107,
+      "read": "8",
+      "expert_state": 33,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 107,
+      "read": "9",
+      "expert_state": 33,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 108,
+      "read": "x",
+      "expert_state": 53,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 109,
+      "read": "x",
+      "expert_state": 58,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 110,
+      "read": "x",
+      "expert_state": 55,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 111,
+      "read": "",
+      "expert_state": 27,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 111,
+      "read": "0",
+      "expert_state": 27,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 111,
+      "read": "1",
+      "expert_state": 27,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 111,
+      "read": "2",
+      "expert_state": 27,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 111,
+      "read": "3",
+      "expert_state": 27,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 111,
+      "read": "4",
+      "expert_state": 27,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 111,
+      "read": "5",
+      "expert_state": 27,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 111,
+      "read": "6",
+      "expert_state": 27,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 111,
+      "read": "7",
+      "expert_state": 27,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 111,
+      "read": "8",
+      "expert_state": 27,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 111,
+      "read": "9",
+      "expert_state": 27,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 112,
+      "read": "",
+      "expert_state": 35,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 112,
+      "read": "0",
+      "expert_state": 35,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 112,
+      "read": "1",
+      "expert_state": 35,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 112,
+      "read": "2",
+      "expert_state": 35,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 112,
+      "read": "3",
+      "expert_state": 35,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 112,
+      "read": "4",
+      "expert_state": 35,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 112,
+      "read": "5",
+      "expert_state": 35,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 112,
+      "read": "6",
+      "expert_state": 35,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 112,
+      "read": "7",
+      "expert_state": 35,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 112,
+      "read": "8",
+      "expert_state": 35,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 112,
+      "read": "9",
+      "expert_state": 35,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 113,
+      "read": "x",
+      "expert_state": 66,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 114,
+      "read": "x",
+      "expert_state": 69,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 115,
+      "read": "",
+      "expert_state": 11,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 115,
+      "read": "0",
+      "expert_state": 11,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 115,
+      "read": "1",
+      "expert_state": 11,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 115,
+      "read": "2",
+      "expert_state": 11,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 115,
+      "read": "3",
+      "expert_state": 11,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 115,
+      "read": "4",
+      "expert_state": 11,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 115,
+      "read": "5",
+      "expert_state": 11,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 115,
+      "read": "6",
+      "expert_state": 11,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 115,
+      "read": "7",
+      "expert_state": 11,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 115,
+      "read": "8",
+      "expert_state": 11,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 115,
+      "read": "9",
+      "expert_state": 11,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 116,
+      "read": "0",
+      "expert_state": 22,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 116,
+      "read": "1",
+      "expert_state": 22,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 116,
+      "read": "2",
+      "expert_state": 22,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 116,
+      "read": "3",
+      "expert_state": 22,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 116,
+      "read": "4",
+      "expert_state": 22,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 116,
+      "read": "5",
+      "expert_state": 22,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 116,
+      "read": "6",
+      "expert_state": 22,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 116,
+      "read": "7",
+      "expert_state": 22,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 116,
+      "read": "8",
+      "expert_state": 22,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 116,
+      "read": "9",
+      "expert_state": 22,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 116,
+      "read": "x",
+      "expert_state": 22,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 117,
+      "read": "x",
+      "expert_state": 47,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 118,
+      "read": "",
+      "expert_state": 35,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 118,
+      "read": "x",
+      "expert_state": 35,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 119,
+      "read": "",
+      "expert_state": 35,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 120,
+      "read": "x",
+      "expert_state": 72,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 121,
+      "read": "x",
+      "expert_state": 68,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 122,
+      "read": "x",
+      "expert_state": 94,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 123,
+      "read": "0",
+      "expert_state": 4,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 123,
+      "read": "1",
+      "expert_state": 4,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 123,
+      "read": "2",
+      "expert_state": 4,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 123,
+      "read": "3",
+      "expert_state": 4,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 123,
+      "read": "4",
+      "expert_state": 4,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 123,
+      "read": "5",
+      "expert_state": 4,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 123,
+      "read": "6",
+      "expert_state": 4,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 123,
+      "read": "7",
+      "expert_state": 4,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 123,
+      "read": "8",
+      "expert_state": 4,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 123,
+      "read": "9",
+      "expert_state": 4,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 123,
+      "read": "x",
+      "expert_state": 4,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 124,
+      "read": "0",
+      "expert_state": 15,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 124,
+      "read": "1",
+      "expert_state": 15,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 124,
+      "read": "2",
+      "expert_state": 15,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 124,
+      "read": "3",
+      "expert_state": 15,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 124,
+      "read": "4",
+      "expert_state": 15,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 124,
+      "read": "5",
+      "expert_state": 15,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 124,
+      "read": "6",
+      "expert_state": 15,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 124,
+      "read": "7",
+      "expert_state": 15,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 124,
+      "read": "8",
+      "expert_state": 15,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 124,
+      "read": "9",
+      "expert_state": 15,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 124,
+      "read": "x",
+      "expert_state": 15,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 125,
+      "read": "",
+      "expert_state": 6,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 125,
+      "read": "x",
+      "expert_state": 6,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 126,
+      "read": "x",
+      "expert_state": 101,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 127,
+      "read": "x",
+      "expert_state": 61,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 128,
+      "read": "0",
+      "expert_state": 11,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 128,
+      "read": "1",
+      "expert_state": 11,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 128,
+      "read": "2",
+      "expert_state": 11,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 128,
+      "read": "3",
+      "expert_state": 11,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 128,
+      "read": "4",
+      "expert_state": 11,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 128,
+      "read": "5",
+      "expert_state": 11,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 128,
+      "read": "6",
+      "expert_state": 11,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 128,
+      "read": "7",
+      "expert_state": 11,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 128,
+      "read": "8",
+      "expert_state": 11,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 128,
+      "read": "9",
+      "expert_state": 11,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 128,
+      "read": "x",
+      "expert_state": 11,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 129,
+      "read": "0",
+      "expert_state": 22,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 129,
+      "read": "1",
+      "expert_state": 22,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 129,
+      "read": "2",
+      "expert_state": 22,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 129,
+      "read": "3",
+      "expert_state": 22,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 129,
+      "read": "4",
+      "expert_state": 22,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 129,
+      "read": "5",
+      "expert_state": 22,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 129,
+      "read": "6",
+      "expert_state": 22,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 129,
+      "read": "7",
+      "expert_state": 22,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 129,
+      "read": "8",
+      "expert_state": 22,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 129,
+      "read": "9",
+      "expert_state": 22,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 129,
+      "read": "x",
+      "expert_state": 22,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 130,
+      "read": "",
+      "expert_state": 8,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 130,
+      "read": "0",
+      "expert_state": 8,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 130,
+      "read": "1",
+      "expert_state": 8,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 130,
+      "read": "2",
+      "expert_state": 8,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 130,
+      "read": "3",
+      "expert_state": 8,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 130,
+      "read": "4",
+      "expert_state": 8,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 130,
+      "read": "5",
+      "expert_state": 8,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 130,
+      "read": "6",
+      "expert_state": 8,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 130,
+      "read": "7",
+      "expert_state": 8,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 130,
+      "read": "8",
+      "expert_state": 8,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 130,
+      "read": "9",
+      "expert_state": 8,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 131,
+      "read": "0",
+      "expert_state": 19,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 131,
+      "read": "1",
+      "expert_state": 19,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 131,
+      "read": "2",
+      "expert_state": 19,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 131,
+      "read": "3",
+      "expert_state": 19,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 131,
+      "read": "4",
+      "expert_state": 19,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 131,
+      "read": "5",
+      "expert_state": 19,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 131,
+      "read": "6",
+      "expert_state": 19,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 131,
+      "read": "7",
+      "expert_state": 19,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 131,
+      "read": "8",
+      "expert_state": 19,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 131,
+      "read": "9",
+      "expert_state": 19,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 131,
+      "read": "x",
+      "expert_state": 19,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 132,
+      "read": "x",
+      "expert_state": 70,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 133,
+      "read": "0",
+      "expert_state": 97,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 133,
+      "read": "1",
+      "expert_state": 97,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 133,
+      "read": "2",
+      "expert_state": 97,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 133,
+      "read": "3",
+      "expert_state": 97,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 133,
+      "read": "4",
+      "expert_state": 97,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 133,
+      "read": "5",
+      "expert_state": 97,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 133,
+      "read": "6",
+      "expert_state": 97,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 133,
+      "read": "7",
+      "expert_state": 97,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 133,
+      "read": "8",
+      "expert_state": 97,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 133,
+      "read": "9",
+      "expert_state": 97,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 133,
+      "read": "x",
+      "expert_state": 97,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 134,
+      "read": "",
+      "expert_state": 4,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 134,
+      "read": "x",
+      "expert_state": 4,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 135,
+      "read": "0",
+      "expert_state": 15,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 135,
+      "read": "1",
+      "expert_state": 15,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 135,
+      "read": "2",
+      "expert_state": 15,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 135,
+      "read": "3",
+      "expert_state": 15,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 135,
+      "read": "4",
+      "expert_state": 15,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 135,
+      "read": "5",
+      "expert_state": 15,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 135,
+      "read": "6",
+      "expert_state": 15,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 135,
+      "read": "7",
+      "expert_state": 15,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 135,
+      "read": "8",
+      "expert_state": 15,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 135,
+      "read": "9",
+      "expert_state": 15,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 135,
+      "read": "x",
+      "expert_state": 15,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 136,
+      "read": "x",
+      "expert_state": 73,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 137,
+      "read": "x",
+      "expert_state": 67,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 138,
+      "read": "0",
+      "expert_state": 94,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 138,
+      "read": "1",
+      "expert_state": 94,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 138,
+      "read": "2",
+      "expert_state": 94,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 138,
+      "read": "3",
+      "expert_state": 94,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 138,
+      "read": "4",
+      "expert_state": 94,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 138,
+      "read": "5",
+      "expert_state": 94,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 138,
+      "read": "6",
+      "expert_state": 94,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 138,
+      "read": "7",
+      "expert_state": 94,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 138,
+      "read": "8",
+      "expert_state": 94,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 138,
+      "read": "9",
+      "expert_state": 94,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 138,
+      "read": "x",
+      "expert_state": 94,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 139,
+      "read": "x",
+      "expert_state": 97,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 140,
+      "read": "",
+      "expert_state": 33,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 140,
+      "read": "x",
+      "expert_state": 33,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 141,
+      "read": "",
+      "expert_state": 33,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 142,
+      "read": "x",
+      "expert_state": 57,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 143,
+      "read": "x",
+      "expert_state": 40,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 144,
+      "read": "x",
+      "expert_state": 50,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 145,
+      "read": "",
+      "expert_state": 4,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 145,
+      "read": "0",
+      "expert_state": 4,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 145,
+      "read": "1",
+      "expert_state": 4,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 145,
+      "read": "2",
+      "expert_state": 4,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 145,
+      "read": "3",
+      "expert_state": 4,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 145,
+      "read": "4",
+      "expert_state": 4,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 145,
+      "read": "5",
+      "expert_state": 4,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 145,
+      "read": "6",
+      "expert_state": 4,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 145,
+      "read": "7",
+      "expert_state": 4,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 145,
+      "read": "8",
+      "expert_state": 4,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 145,
+      "read": "9",
+      "expert_state": 4,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 146,
+      "read": "0",
+      "expert_state": 101,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 146,
+      "read": "1",
+      "expert_state": 101,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 146,
+      "read": "2",
+      "expert_state": 101,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 146,
+      "read": "3",
+      "expert_state": 101,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 146,
+      "read": "4",
+      "expert_state": 101,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 146,
+      "read": "5",
+      "expert_state": 101,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 146,
+      "read": "6",
+      "expert_state": 101,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 146,
+      "read": "7",
+      "expert_state": 101,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 146,
+      "read": "8",
+      "expert_state": 101,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 146,
+      "read": "9",
+      "expert_state": 101,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 146,
+      "read": "x",
+      "expert_state": 101,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 147,
+      "read": "",
+      "expert_state": 10,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 147,
+      "read": "0",
+      "expert_state": 10,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 147,
+      "read": "1",
+      "expert_state": 10,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 147,
+      "read": "2",
+      "expert_state": 10,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 147,
+      "read": "3",
+      "expert_state": 10,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 147,
+      "read": "4",
+      "expert_state": 10,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 147,
+      "read": "5",
+      "expert_state": 10,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 147,
+      "read": "6",
+      "expert_state": 10,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 147,
+      "read": "7",
+      "expert_state": 10,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 147,
+      "read": "8",
+      "expert_state": 10,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 147,
+      "read": "9",
+      "expert_state": 10,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 148,
+      "read": "0",
+      "expert_state": 21,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 148,
+      "read": "1",
+      "expert_state": 21,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 148,
+      "read": "2",
+      "expert_state": 21,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 148,
+      "read": "3",
+      "expert_state": 21,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 148,
+      "read": "4",
+      "expert_state": 21,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 148,
+      "read": "5",
+      "expert_state": 21,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 148,
+      "read": "6",
+      "expert_state": 21,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 148,
+      "read": "7",
+      "expert_state": 21,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 148,
+      "read": "8",
+      "expert_state": 21,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 148,
+      "read": "9",
+      "expert_state": 21,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 148,
+      "read": "x",
+      "expert_state": 21,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 149,
+      "read": "x",
+      "expert_state": 71,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 150,
+      "read": "",
+      "expert_state": 11,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 150,
+      "read": "x",
+      "expert_state": 11,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 151,
+      "read": "x",
+      "expert_state": 75,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 152,
+      "read": "x",
+      "expert_state": 81,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 153,
+      "read": "x",
+      "expert_state": 49,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 154,
+      "read": "x",
+      "expert_state": 77,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 155,
+      "read": "x",
+      "expert_state": 43,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 156,
+      "read": "x",
+      "expert_state": 80,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 157,
+      "read": "x",
+      "expert_state": 98,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 158,
+      "read": "",
+      "expert_state": 3,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 158,
+      "read": "0",
+      "expert_state": 3,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 158,
+      "read": "1",
+      "expert_state": 3,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 158,
+      "read": "2",
+      "expert_state": 3,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 158,
+      "read": "3",
+      "expert_state": 3,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 158,
+      "read": "4",
+      "expert_state": 3,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 158,
+      "read": "5",
+      "expert_state": 3,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 158,
+      "read": "6",
+      "expert_state": 3,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 158,
+      "read": "7",
+      "expert_state": 3,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 158,
+      "read": "8",
+      "expert_state": 3,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 158,
+      "read": "9",
+      "expert_state": 3,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 159,
+      "read": "0",
+      "expert_state": 14,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 159,
+      "read": "1",
+      "expert_state": 14,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 159,
+      "read": "2",
+      "expert_state": 14,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 159,
+      "read": "3",
+      "expert_state": 14,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 159,
+      "read": "4",
+      "expert_state": 14,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 159,
+      "read": "5",
+      "expert_state": 14,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 159,
+      "read": "6",
+      "expert_state": 14,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 159,
+      "read": "7",
+      "expert_state": 14,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 159,
+      "read": "8",
+      "expert_state": 14,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 159,
+      "read": "9",
+      "expert_state": 14,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 159,
+      "read": "x",
+      "expert_state": 14,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 160,
+      "read": "",
+      "expert_state": 34,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 160,
+      "read": "x",
+      "expert_state": 34,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 161,
+      "read": "",
+      "expert_state": 34,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 162,
+      "read": "0",
+      "expert_state": 99,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 162,
+      "read": "1",
+      "expert_state": 99,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 162,
+      "read": "2",
+      "expert_state": 99,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 162,
+      "read": "3",
+      "expert_state": 99,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 162,
+      "read": "4",
+      "expert_state": 99,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 162,
+      "read": "5",
+      "expert_state": 99,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 162,
+      "read": "6",
+      "expert_state": 99,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 162,
+      "read": "7",
+      "expert_state": 99,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 162,
+      "read": "8",
+      "expert_state": 99,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 162,
+      "read": "9",
+      "expert_state": 99,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 162,
+      "read": "x",
+      "expert_state": 99,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 163,
+      "read": "0",
+      "expert_state": 9,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 163,
+      "read": "1",
+      "expert_state": 9,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 163,
+      "read": "2",
+      "expert_state": 9,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 163,
+      "read": "3",
+      "expert_state": 9,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 163,
+      "read": "4",
+      "expert_state": 9,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 163,
+      "read": "5",
+      "expert_state": 9,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 163,
+      "read": "6",
+      "expert_state": 9,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 163,
+      "read": "7",
+      "expert_state": 9,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 163,
+      "read": "8",
+      "expert_state": 9,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 163,
+      "read": "9",
+      "expert_state": 9,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 163,
+      "read": "x",
+      "expert_state": 9,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 164,
+      "read": "0",
+      "expert_state": 20,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 164,
+      "read": "1",
+      "expert_state": 20,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 164,
+      "read": "2",
+      "expert_state": 20,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 164,
+      "read": "3",
+      "expert_state": 20,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 164,
+      "read": "4",
+      "expert_state": 20,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 164,
+      "read": "5",
+      "expert_state": 20,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 164,
+      "read": "6",
+      "expert_state": 20,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 164,
+      "read": "7",
+      "expert_state": 20,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 164,
+      "read": "8",
+      "expert_state": 20,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 164,
+      "read": "9",
+      "expert_state": 20,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 164,
+      "read": "x",
+      "expert_state": 20,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 165,
+      "read": "",
+      "expert_state": 8,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 165,
+      "read": "x",
+      "expert_state": 8,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 166,
+      "read": "",
+      "expert_state": 7,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 166,
+      "read": "x",
+      "expert_state": 7,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 167,
+      "read": "",
+      "expert_state": 12,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 167,
+      "read": "x",
+      "expert_state": 12,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 168,
+      "read": "x",
+      "expert_state": 60,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 169,
+      "read": "x",
+      "expert_state": 64,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 170,
+      "read": "",
+      "expert_state": 10,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 170,
+      "read": "x",
+      "expert_state": 10,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 171,
+      "read": "x",
+      "expert_state": 54,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 172,
+      "read": "0",
+      "expert_state": 3,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 172,
+      "read": "1",
+      "expert_state": 3,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 172,
+      "read": "2",
+      "expert_state": 3,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 172,
+      "read": "3",
+      "expert_state": 3,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 172,
+      "read": "4",
+      "expert_state": 3,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 172,
+      "read": "5",
+      "expert_state": 3,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 172,
+      "read": "6",
+      "expert_state": 3,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 172,
+      "read": "7",
+      "expert_state": 3,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 172,
+      "read": "8",
+      "expert_state": 3,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 172,
+      "read": "9",
+      "expert_state": 3,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 172,
+      "read": "x",
+      "expert_state": 3,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 173,
+      "read": "0",
+      "expert_state": 14,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 173,
+      "read": "1",
+      "expert_state": 14,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 173,
+      "read": "2",
+      "expert_state": 14,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 173,
+      "read": "3",
+      "expert_state": 14,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 173,
+      "read": "4",
+      "expert_state": 14,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 173,
+      "read": "5",
+      "expert_state": 14,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 173,
+      "read": "6",
+      "expert_state": 14,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 173,
+      "read": "7",
+      "expert_state": 14,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 173,
+      "read": "8",
+      "expert_state": 14,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 173,
+      "read": "9",
+      "expert_state": 14,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 173,
+      "read": "x",
+      "expert_state": 14,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 174,
+      "read": "x",
+      "expert_state": 56,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 175,
+      "read": "x",
+      "expert_state": 99,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 176,
+      "read": "x",
+      "expert_state": 78,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 177,
+      "read": "x",
+      "expert_state": 76,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 178,
+      "read": "",
+      "expert_state": 3,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 178,
+      "read": "x",
+      "expert_state": 3,
+      "classification": "extracted_context_exclusion"
+    },
+    {
+      "state": 179,
+      "read": "x",
+      "expert_state": 62,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 180,
+      "read": "",
+      "expert_state": 105,
+      "classification": "expert_protocol_exclusion"
+    },
+    {
+      "state": 180,
+      "read": "x",
+      "expert_state": 105,
+      "classification": "expert_protocol_exclusion"
+    }
+  ]
+}

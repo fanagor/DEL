@@ -1,0 +1,2515 @@
+[
+  {
+    "environment": "grid",
+    "lengths": [
+      4,
+      3
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "0"
+      ]
+    ],
+    "operands": [
+      "0111",
+      "110"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      3,
+      1
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "1",
+        "0"
+      ],
+      [
+        "1"
+      ]
+    ],
+    "operands": [
+      "110",
+      "1"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      4,
+      3
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1",
+        "0",
+        "1"
+      ],
+      [
+        "1",
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "0101",
+      "101"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      2,
+      3
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "0"
+      ],
+      [
+        "1",
+        "1",
+        "0"
+      ]
+    ],
+    "operands": [
+      "00",
+      "110"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      2,
+      4
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "1"
+      ],
+      [
+        "0",
+        "1",
+        "1",
+        "0"
+      ]
+    ],
+    "operands": [
+      "11",
+      "0110"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      1,
+      3
+    ],
+    "operand_tokens": [
+      [
+        "1"
+      ],
+      [
+        "1",
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "1",
+      "101"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      2,
+      3
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "1",
+        "1"
+      ]
+    ],
+    "operands": [
+      "10",
+      "011"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      1,
+      3
+    ],
+    "operand_tokens": [
+      [
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "0"
+      ]
+    ],
+    "operands": [
+      "1",
+      "110"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      1,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "0"
+      ],
+      [
+        "1",
+        "1"
+      ]
+    ],
+    "operands": [
+      "0",
+      "11"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      5,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "1",
+        "0",
+        "1",
+        "1"
+      ],
+      [
+        "0",
+        "0"
+      ]
+    ],
+    "operands": [
+      "11011",
+      "00"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      1,
+      5
+    ],
+    "operand_tokens": [
+      [
+        "0"
+      ],
+      [
+        "1",
+        "1",
+        "0",
+        "1",
+        "0"
+      ]
+    ],
+    "operands": [
+      "0",
+      "11010"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      2,
+      1
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "0"
+      ],
+      [
+        "1"
+      ]
+    ],
+    "operands": [
+      "00",
+      "1"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      1,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "0"
+      ],
+      [
+        "0",
+        "0"
+      ]
+    ],
+    "operands": [
+      "0",
+      "00"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      5,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1",
+        "1",
+        "1",
+        "0"
+      ],
+      [
+        "1",
+        "1"
+      ]
+    ],
+    "operands": [
+      "01110",
+      "11"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      1,
+      4
+    ],
+    "operand_tokens": [
+      [
+        "0"
+      ],
+      [
+        "0",
+        "1",
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "0",
+      "0101"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      3,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0"
+      ]
+    ],
+    "operands": [
+      "000",
+      "00"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      4,
+      1
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "0"
+      ]
+    ],
+    "operands": [
+      "0000",
+      "0"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      3,
+      3
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1",
+        "1"
+      ],
+      [
+        "0",
+        "1",
+        "1"
+      ]
+    ],
+    "operands": [
+      "011",
+      "011"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      5,
+      4
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "1",
+        "0",
+        "1",
+        "0"
+      ]
+    ],
+    "operands": [
+      "10000",
+      "1010"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      3,
+      4
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1",
+        "1"
+      ],
+      [
+        "0",
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "operands": [
+      "011",
+      "0111"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      4,
+      3
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "operands": [
+      "0001",
+      "111"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      2,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "0"
+      ],
+      [
+        "1",
+        "0"
+      ]
+    ],
+    "operands": [
+      "10",
+      "10"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      4,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "0",
+        "1",
+        "1"
+      ],
+      [
+        "0",
+        "0"
+      ]
+    ],
+    "operands": [
+      "1011",
+      "00"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      5,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "0",
+        "0",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "0"
+      ]
+    ],
+    "operands": [
+      "00011",
+      "10"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      1,
+      1
+    ],
+    "operand_tokens": [
+      [
+        "0"
+      ],
+      [
+        "1"
+      ]
+    ],
+    "operands": [
+      "0",
+      "1"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      2,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "10",
+      "01"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      1,
+      4
+    ],
+    "operand_tokens": [
+      [
+        "1"
+      ],
+      [
+        "1",
+        "0",
+        "1",
+        "0"
+      ]
+    ],
+    "operands": [
+      "1",
+      "1010"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      3,
+      5
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "0",
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "111",
+      "11001"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      5,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "0",
+        "1",
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "10110",
+      "01"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      5,
+      4
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "0",
+        "0",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "0",
+        "0"
+      ]
+    ],
+    "operands": [
+      "00011",
+      "1100"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      3,
+      4
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "0",
+        "1",
+        "1"
+      ]
+    ],
+    "operands": [
+      "001",
+      "0011"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      1,
+      5
+    ],
+    "operand_tokens": [
+      [
+        "0"
+      ],
+      [
+        "0",
+        "1",
+        "1",
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "0",
+      "01101"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      1,
+      5
+    ],
+    "operand_tokens": [
+      [
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    ],
+    "operands": [
+      "0",
+      "00000"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      4,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "0100",
+      "01"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      2,
+      5
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "0"
+      ],
+      [
+        "1",
+        "0",
+        "1",
+        "0",
+        "0"
+      ]
+    ],
+    "operands": [
+      "00",
+      "10100"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      2,
+      5
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "1"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "1",
+        "1"
+      ]
+    ],
+    "operands": [
+      "11",
+      "00011"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      5,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1",
+        "1",
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "01110",
+      "01"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      3,
+      4
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "0",
+        "1"
+      ],
+      [
+        "1",
+        "0",
+        "0",
+        "0"
+      ]
+    ],
+    "operands": [
+      "101",
+      "1000"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      2,
+      4
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "0",
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "11",
+      "1001"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      4,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "1111",
+      "01"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      2,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1"
+      ],
+      [
+        "1",
+        "0"
+      ]
+    ],
+    "operands": [
+      "01",
+      "10"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      4,
+      4
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "0",
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "operands": [
+      "1010",
+      "0111"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      3,
+      3
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1",
+        "1"
+      ],
+      [
+        "0",
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "011",
+      "001"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      1,
+      3
+    ],
+    "operand_tokens": [
+      [
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "0"
+      ]
+    ],
+    "operands": [
+      "0",
+      "000"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      5,
+      1
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1"
+      ]
+    ],
+    "operands": [
+      "01111",
+      "1"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      2,
+      3
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1"
+      ],
+      [
+        "1",
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "01",
+      "101"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      2,
+      5
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "0",
+        "0",
+        "0"
+      ]
+    ],
+    "operands": [
+      "01",
+      "11000"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      3,
+      1
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1"
+      ]
+    ],
+    "operands": [
+      "111",
+      "1"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      2,
+      5
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "operands": [
+      "11",
+      "11111"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      5,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "1",
+        "1"
+      ]
+    ],
+    "operands": [
+      "10000",
+      "11"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      3,
+      5
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "0",
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "011",
+      "11001"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      2,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "0"
+      ],
+      [
+        "1",
+        "1"
+      ]
+    ],
+    "operands": [
+      "00",
+      "11"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      2,
+      3
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "1",
+        "0"
+      ]
+    ],
+    "operands": [
+      "01",
+      "010"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      4,
+      4
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "0",
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "1",
+        "1"
+      ]
+    ],
+    "operands": [
+      "0010",
+      "0011"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      4,
+      4
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "0",
+        "0",
+        "1"
+      ],
+      [
+        "1",
+        "0",
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "1001",
+      "1001"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      1,
+      5
+    ],
+    "operand_tokens": [
+      [
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "0",
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "1",
+      "11001"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      1,
+      3
+    ],
+    "operand_tokens": [
+      [
+        "1"
+      ],
+      [
+        "0",
+        "1",
+        "1"
+      ]
+    ],
+    "operands": [
+      "1",
+      "011"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      4,
+      1
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1",
+        "0",
+        "1"
+      ],
+      [
+        "0"
+      ]
+    ],
+    "operands": [
+      "0101",
+      "0"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      4,
+      1
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "1",
+        "0",
+        "0"
+      ],
+      [
+        "0"
+      ]
+    ],
+    "operands": [
+      "1100",
+      "0"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      5,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "1",
+        "0",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1"
+      ]
+    ],
+    "operands": [
+      "11011",
+      "11"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      5,
+      3
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "0",
+        "1",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "1",
+        "1"
+      ]
+    ],
+    "operands": [
+      "10100",
+      "011"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      5,
+      1
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "0",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "0"
+      ]
+    ],
+    "operands": [
+      "00111",
+      "0"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      3,
+      4
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "0",
+        "1"
+      ],
+      [
+        "1",
+        "0",
+        "0",
+        "0"
+      ]
+    ],
+    "operands": [
+      "001",
+      "1000"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      4,
+      3
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "0",
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "0111",
+      "001"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      5,
+      5
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      [
+        "1",
+        "0",
+        "1",
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "10001",
+      "10101"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      4,
+      5
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1",
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "0",
+        "1",
+        "0",
+        "0"
+      ]
+    ],
+    "operands": [
+      "0101",
+      "00100"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      4,
+      1
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "0",
+        "1",
+        "1"
+      ],
+      [
+        "0"
+      ]
+    ],
+    "operands": [
+      "0011",
+      "0"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      4,
+      1
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      [
+        "1"
+      ]
+    ],
+    "operands": [
+      "0001",
+      "1"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      3,
+      3
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "010",
+      "001"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      3,
+      3
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "operands": [
+      "011",
+      "111"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      1,
+      5
+    ],
+    "operand_tokens": [
+      [
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "0",
+        "1",
+        "0"
+      ]
+    ],
+    "operands": [
+      "1",
+      "11010"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      4,
+      5
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "0",
+        "1",
+        "0"
+      ],
+      [
+        "1",
+        "0",
+        "1",
+        "1",
+        "0"
+      ]
+    ],
+    "operands": [
+      "0010",
+      "10110"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      2,
+      3
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "1"
+      ],
+      [
+        "0",
+        "1",
+        "0"
+      ]
+    ],
+    "operands": [
+      "11",
+      "010"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      3,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1"
+      ]
+    ],
+    "operands": [
+      "111",
+      "11"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      2,
+      5
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "0"
+      ],
+      [
+        "1",
+        "0",
+        "0",
+        "1",
+        "1"
+      ]
+    ],
+    "operands": [
+      "10",
+      "10011"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      5,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1"
+      ]
+    ],
+    "operands": [
+      "11111",
+      "11"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      3,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "011",
+      "01"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      5,
+      5
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "0",
+        "1",
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "1",
+        "0",
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "00110",
+      "01001"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      3,
+      5
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "1",
+        "1",
+        "0",
+        "0",
+        "0"
+      ]
+    ],
+    "operands": [
+      "000",
+      "11000"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      4,
+      3
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "0",
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "1",
+        "1"
+      ]
+    ],
+    "operands": [
+      "1010",
+      "011"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      5,
+      1
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1",
+        "0",
+        "1",
+        "1"
+      ],
+      [
+        "1"
+      ]
+    ],
+    "operands": [
+      "01011",
+      "1"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      3,
+      4
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "0",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "001",
+      "1101"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      1,
+      1
+    ],
+    "operand_tokens": [
+      [
+        "1"
+      ],
+      [
+        "1"
+      ]
+    ],
+    "operands": [
+      "1",
+      "1"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      5,
+      5
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "0",
+        "1",
+        "0",
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "01111",
+      "01001"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      1,
+      5
+    ],
+    "operand_tokens": [
+      [
+        "1"
+      ],
+      [
+        "1",
+        "0",
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "operands": [
+      "1",
+      "10111"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      5,
+      3
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "operands": [
+      "01000",
+      "111"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      4,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0"
+      ]
+    ],
+    "operands": [
+      "0100",
+      "00"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      3,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1",
+        "0"
+      ],
+      [
+        "1",
+        "0"
+      ]
+    ],
+    "operands": [
+      "010",
+      "10"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      3,
+      3
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1",
+        "0"
+      ],
+      [
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "operands": [
+      "010",
+      "111"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      4,
+      4
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "1",
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "0101",
+      "0001"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      3,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "110",
+      "01"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      1,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "0"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "0",
+      "01"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      3,
+      4
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "0",
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "111",
+      "1001"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      2,
+      5
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    ],
+    "operands": [
+      "11",
+      "10000"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      5,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "0",
+        "0",
+        "1",
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "00110",
+      "01"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      1,
+      3
+    ],
+    "operand_tokens": [
+      [
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "operands": [
+      "1",
+      "111"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      5,
+      1
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "1",
+        "1",
+        "0",
+        "1"
+      ],
+      [
+        "1"
+      ]
+    ],
+    "operands": [
+      "11101",
+      "1"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      5,
+      1
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "1"
+      ]
+    ],
+    "operands": [
+      "11000",
+      "1"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      5,
+      5
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "1",
+        "1",
+        "0",
+        "0"
+      ]
+    ],
+    "operands": [
+      "11110",
+      "01100"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  },
+  {
+    "environment": "grid",
+    "lengths": [
+      4,
+      2
+    ],
+    "operand_tokens": [
+      [
+        "1",
+        "0",
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ],
+    "operands": [
+      "1010",
+      "01"
+    ],
+    "radix": 2,
+    "task": "multiplication"
+  }
+]

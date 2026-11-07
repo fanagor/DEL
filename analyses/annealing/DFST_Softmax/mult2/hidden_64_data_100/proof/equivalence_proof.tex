@@ -1,0 +1,503 @@
+% Standalone proof. Shared notation and prose conventions: analyses/README.md.
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsthm}
+\usepackage{newtxtext,newtxmath}
+\usepackage[a4paper,margin=21mm,headheight=15pt]{geometry}
+\usepackage{microtype,booktabs,array,tabularx,longtable}
+\usepackage[table]{xcolor}
+\usepackage{tikz,fancyhdr,enumitem,seqsplit}
+\definecolor{Teal}{HTML}{176B70}
+\definecolor{Ink}{HTML}{203443}
+\definecolor{Pale}{HTML}{EDF5F5}
+\definecolor{Line}{HTML}{C7D8DB}
+\definecolor{Muted}{HTML}{536974}
+\definecolor{Warm}{HTML}{F8F4EC}
+\usepackage[colorlinks=true,linkcolor=Teal,urlcolor=Teal]{hyperref}
+\color{Ink}
+\newcommand{\blank}{\lambda}
+\newcommand{\digits}{\{0,1\}}
+\newcommand{\ph}[1]{\mathsf{#1}}
+\newcommand{\EXPERT}{\mathcal E}
+\newcommand{\CTRL}{\mathcal C}
+\newcommand{\PTO}{\operatorname{PTO}}
+\newcommand{\triple}[3]{(#1,#2,\mathsf{#3})}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\hash}[1]{{\scriptsize\ttfamily\seqsplit{#1}}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\setlist[itemize]{nosep,leftmargin=1.2em}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\color{Muted}Binary Multiplication}
+\fancyhead[R]{\small\sffamily\color{Muted}Annealing}
+\fancyfoot[L]{\scriptsize\sffamily\color{Muted}Exact PTO Equivalence}
+\fancyfoot[R]{\small\thepage}
+\renewcommand{\headrulewidth}{.35pt}
+\renewcommand{\footrulewidth}{0pt}
+\newcommand{\sectiontitle}[2]{\refstepcounter{section}\vspace*{2pt}{\LARGE\bfseries\color{Teal}\thesection\quad #2}\par\vspace{7pt}}
+\date{}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\begin{document}
+{\Huge\bfseries Exact PTO Equivalence\\[3pt]Binary Multiplication}\par
+\vspace{10pt}
+{\Large Annealed Controller}\par
+{\small\color{Muted}\path{analyses/annealing/DFST_Softmax/mult2/hidden_64_data_100/}}\par
+\vspace{7pt}
+
+\vspace{4pt}
+\sectiontitle{1 \enspace STATEMENT AND SCOPE}{Statement and Scope}\label{sec:common1}
+\textbf{Controllers.}
+The exported table \path{minimized_transition_table.pdf} defines controller
+$\CTRL$, with initial state $0$ and halt state $51$.
+The function \code{mult\_grid(2)} defines expert $\EXPERT$, with initial
+state $0$ and halt state $31$. The adjacent expert export matches
+this function entry for entry. All tables retain the exported state numbers.
+
+\textbf{Input Domain.}
+Let $D=\digits$. Row $0$ initially contains the contiguous word $a\,x\,b$,
+starting at column $0$, with $a\in D^m$, $b\in D^n$, and $m,n\ge1$.
+All remaining cells contain blanks. The head starts at $(0,0)$.
+Write $A=\operatorname{val}_{2}(a)$ and $B=\operatorname{val}_{2}(b)$.
+The domain permits arbitrary operand lengths, unequal lengths, and leading zeros.
+
+\textbf{Execution Convention.}
+The grid uses $\mathbb Z^2$, with coordinates increasing rightward and
+downward. The symbol $\blank$ denotes a blank. A transition
+$(q',w,M)$ writes $w$, performs motion $M$, and enters state $q'$.
+Motions $L,R,D,U$ move one cell. Motion $S$ writes and stops without moving.
+
+\textbf{Policy-Trajectory Observations.}
+For input $a\,x\,b$, define the policy-trajectory observation (PTO) by
+\[
+\PTO(a\,x\,b)=\bigl((r_t,w_t,M_t)\bigr)_{t=0}^{T-1},
+\]
+where $r_t$, $w_t$, and $M_t$ denote the read symbol, written symbol,
+and motion at controller step $t$. A finite execution contributes the final
+$S$ action exactly once, without halt-loop padding.
+
+\begin{theorem}[Exact PTO Equivalence]\label{thm:main}
+For every input in the stated domain,
+$\PTO_{\CTRL}(a\,x\,b)=\PTO_{\EXPERT}(a\,x\,b)$.
+Both executions terminate on the same step. The complete grids and head
+positions agree at every step, including the final configuration.
+The final grid contains only the $(m+n)$-bit representation of $AB$,
+with leading-zero padding, on row $n-1$ in columns $-n,\ldots,m-1$.
+The final head stops at $(-n-1,n-1)$.
+\end{theorem}
+
+The theorem concerns autonomous executions of the exported discrete controller
+on the stated input domain.
+\clearpage
+\sectiontitle{2 \enspace EXPERT BEHAVIOR}{Expert Behavior}\label{sec:common2}
+\subsection{Copying and Partial Products}\label{sec:part1}
+Write $b=b_{n-1}\cdots b_0$, so $B=\sum_{i=0}^{n-1}b_i2^i$.
+Assign global weight $2^{m-1-z}$ to column $z$.
+Column $m-1$ carries the units digit of the final product.
+
+\begin{lemma}[Copy Staircase]\label{lem:copy}
+Before product formation, the expert constructs exactly $n$ occupied rows.
+For $0\le i<n$, row $i$ contains
+\[
+a\,x\,b_{n-1}\cdots b_i
+\quad\text{starting in column }-i. \tag{1}
+\]
+The last row contains one right-operand bit. All remaining cells contain blanks.
+\end{lemma}
+\begin{proof}
+Row $0$ contains the input. On row $i$, the expert scans to the first blank,
+steps left to $b_i$, then steps left again. A digit at this position implies
+at least two remaining right-operand bits. The expert copies every symbol
+except $b_i$ one row down and one column left, proceeding from right to left.
+Every destination contains a blank before writing; the source word remains unchanged.
+
+The first descent reaches a blank on the new row. Each later descent reaches
+the copied right neighbor: a digit, except directly below the last digit of
+$a$, where the copied separator $x$ occupies the lower cell. The cell below
+the source separator contains a digit. After copying the first digit of $a$,
+the expert reads the blank immediately to the left and descends to the first
+digit of the new row.
+
+The new row satisfies (1) for $i+1$, with one fewer right-operand bit.
+When one right-operand bit remains, the second left step reads $x$ and starts
+product formation. Thus $n-1$ copies produce exactly $n$ occupied rows.
+\end{proof}
+
+\begin{lemma}[Aligned Partial Products]\label{lem:products}
+After product formation, row $i$ contains the $(m+1)$-bit representation of
+$A b_i$ in columns $-i-1,\ldots,m-i-1$, with a leading $0$.
+In global column weights, row $i$ represents $A b_i2^i$.
+All remaining cells contain blanks.
+\end{lemma}
+\begin{proof}
+The expert forms products from row $n-1$ upwards. On row $i$, the expert
+erases the rightmost factor bit $b_i$, the remaining factor prefix, and $x$,
+then walks left across $a$. For $b_i=0$, the expert writes zeros; for $b_i=1$,
+the expert preserves the digits of $a$. Both branches write one additional
+$0$ on the left blank. The resulting word has the claimed support and value,
+with a leading zero because $A b_i<2^m$.
+
+The expert scans right to the blank at column $m-i$ and moves up.
+For $i>0$, the upper cell contains the last digit of $a$ on row $i-1$;
+the next cell contains $x$. The expert scans the remaining factor prefix,
+selects the last bit, and repeats. Each upper prefix contains at least two
+bits, so another digit follows the selected bit during leftward erasure.
+For $i=0$, the upper cell contains a blank, ending product formation and
+starting summation on row $0$.
+\end{proof}
+
+Both passes terminate: each copy shortens the remaining factor prefix, and
+product formation visits each of the $n$ rows once. Every horizontal scan
+crosses a finite word.
+
+\newpage
+\subsection{A Fixed-Width Addition Invariant}\label{sec:part2}
+\begin{lemma}[Accumulated Product]\label{lem:merge}
+After merging through row $k$, $0\le k<n$, all rows above $k$ contain only blanks.
+Row $k$ contains a contiguous $(m+k+1)$-bit accumulator on columns
+$-k-1,\ldots,m-1$, with value
+\[
+S_k=A\sum_{i=0}^{k}b_i2^i.
+\]
+Rows below $k$ retain the partial products from Lemma~\ref{lem:products}.
+At the inspection of the next row, the expert occupies state $20$ with head
+$(-k-2,k+1)$.
+\end{lemma}
+\begin{proof}
+For $k=0$, the initial left scan crosses the product on row $0$, reads the
+leading $0$, reaches the blank at column $-2$, and descends.
+
+If row $k+1$ exists, the inspected cell contains the leading $0$ at column
+$-k-2$. The expert scans right across the lower product to the first blank,
+at column $m-k-1$. Moving up reaches an accumulator digit because
+\[
+-k-1\ \le\ m-k-1\ \le\ m-1.
+\]
+The expert scans the remaining upper digits, reaches the right blank, and
+steps left to column $m-1$. The lower cell contains a blank because the
+original lower product ends at $m-k-2$. The first column therefore adds
+the upper bit to zero without a carry.
+
+The expert processes the remaining columns from right to left. For upper
+bit $u$, lower bit $v$ (with a blank counting as zero), and incoming carry
+$c$, the update satisfies
+\[
+u+v+c=w+2c',\qquad w\in\{0,1\},\quad c'\in\{0,1\}. \tag{2}
+\]
+The expert erases the upper bit, writes $w$ below, and stores $c'$ in the
+control state. The processed lower suffix contains the correct sum suffix,
+the unprocessed cells retain the previous values, and the carry records
+the contribution to the next column. Equation~(2) preserves this invariant.
+
+The original lower word extends one column farther left than the upper word,
+with a leading $0$ at $-k-2$. After consuming the upper word, carry zero
+preserves this bit, whereas carry one changes the bit to $1$ and clears.
+The expert reaches the blank at $-k-3$ on row $k+1$ and descends.
+Row $k$ now contains only blanks, and row $k+1$ represents
+$S_k+A b_{k+1}2^{k+1}=S_{k+1}$ on the claimed support.
+\end{proof}
+
+\begin{lemma}[Carry Confinement]\label{lem:carry}
+During an upper-digit update with incoming carry $1$, the lower cell
+contains an original binary digit. If the carry outlives the upper word,
+the next lower cell contains the original leading $0$.
+\end{lemma}
+\begin{proof}
+A blank gap lies to the right of the original lower product. The first
+column has carry zero, and $u+0+0\le1$, so no carry originates in the gap.
+A carry first arises inside the lower digit block. Further leftward steps
+remain inside that block until the leading zero. The upper word ends one
+column before that zero, where $0+0+1=1$ clears the carry.
+\end{proof}
+
+Each merge consumes finitely many upper digits and at most one extra carry
+column. After $n-1$ merges, state $20$ reads the blank below the final row
+and moves up to state $30$, which emits the final $S$ action and enters halt
+state $31$. Lemma~\ref{lem:merge} gives the $(m+n)$-bit product and final head
+$(-n-1,n-1)$. All other cells contain blanks.
+
+\clearpage
+\sectiontitle{3 \enspace OBSERVATION PROTOCOL}{Observation Protocol}\label{sec:common3}
+The observation protocol refines expert states by geometric context. Each phase records the permitted read symbols and successor phases. Section~\ref{sec:common4} gives the complete protocol together with the controller-state relation; the shared tables avoid repeating the same phase definitions.
+
+\begin{lemma}[Protocol Coverage]\label{lem:coverage}
+Every expert execution on a well-formed multiplication follows the
+$94$ phases in Section~\ref{sec:common4}, from phase $0$ to phase $93$.
+\end{lemma}
+\begin{proof}
+The copy and product invariants (Lemmas~\ref{lem:copy}--\ref{lem:products})
+give all copying and product-reading conditions. The scan annotations
+remember unchanged cells and distinguish one digit from at least two;
+the explanations in Sections~\ref{sec:part3}--\ref{sec:part5} prove these refinements.
+Lemmas~\ref{lem:merge}--\ref{lem:carry} and the blank-gap argument in
+Section~\ref{sec:part6} supply the addition and boundary conditions. Induction over
+each transition, each copied row and each merged row establishes coverage.
+The finite-pass arguments in the expert invariants give termination in phase $93$.
+\end{proof}
+
+\clearpage
+\sectiontitle{4 \enspace SIMULATION CERTIFICATE}{Simulation Certificate}\label{sec:common4}
+\subsection{Copying and Remembered Factor Bits}\label{sec:part3}
+The next four tables define a finite protocol and simulation relation.
+Phase $i$ pairs expert state $g_i$ with a controller state $q\in Q_i$,
+with identical grids and heads. An entry $x:(j,w,M)$ means read $x$,
+write $w$, move $M$, and advance to \emph{phase} $j$.
+The symbol $d\in\{0,1\}$ means either digit, consistently within that entry.
+For \emph{each} $q\in Q_i$, the actual successor lies in $Q_j$.
+
+\begin{center}
+\fontsize{9.2}{11}\selectfont\renewcommand{\arraystretch}{1.21}
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{r p{5.5cm} c c X}
+\toprule\rowcolor{Pale}$i$ & Phase & $g_i$ & $Q_i$ & Read $:$ (next phase, write, move)\\\midrule
+0 & First left-operand digit & 0 & $\{0\}$ & $d:\triple{1}{d}{R}$ \\
+1 & Scan left operand & 0 & $\{0,24\}$ & $d:\triple{1}{d}{R}\quad x:\triple{2}{x}{R}$ \\
+2 & First right-operand digit & 0 & $\{7\}$ & $0:\triple{3}{0}{R}\quad 1:\triple{4}{1}{R}$ \\
+3 & Scan factor; last bit 0 & 0 & $\{48\}$ & $0:\triple{3}{0}{R}\quad 1:\triple{4}{1}{R}\quad \blank:\triple{5}{\blank}{L}$ \\
+4 & Scan factor; last bit 1 & 0 & $\{48\}$ & $0:\triple{3}{0}{R}\quad 1:\triple{4}{1}{R}\quad \blank:\triple{6}{\blank}{L}$ \\
+5 & Revisit last factor bit 0 & 1 & $\{14\}$ & $0:\triple{7}{0}{L}$ \\
+6 & Revisit last factor bit 1 & 1 & $\{14\}$ & $1:\triple{8}{1}{L}$ \\
+7 & Copy or use remembered bit 0 & 2 & $\{49\}$ & $0:\triple{9}{0}{D}\quad 1:\triple{11}{1}{D}\quad x:\triple{25}{x}{R}$ \\
+8 & Copy or use remembered bit 1 & 2 & $\{19\}$ & $0:\triple{9}{0}{D}\quad 1:\triple{11}{1}{D}\quad x:\triple{26}{x}{R}$ \\
+9 & First copied 0: descend & 3 & $\{16\}$ & $\blank:\triple{10}{\blank}{L}$ \\
+10 & First copied 0: write & 6 & $\{13\}$ & $\blank:\triple{13}{0}{U}$ \\
+11 & First copied 1: descend & 4 & $\{4\}$ & $\blank:\triple{12}{\blank}{L}$ \\
+12 & First copied 1: write & 7 & $\{41\}$ & $\blank:\triple{13}{1}{U}$ \\
+13 & Continue after first copy & 9 & $\{35\}$ & $0:\triple{14}{0}{D}\quad 1:\triple{16}{1}{D}\quad x:\triple{19}{x}{D}$ \\
+14 & Copy 0 above a lower digit & 3 & $\{44,47\}$ & $d:\triple{15}{d}{L}$ \\
+15 & Write copied 0 & 6 & $\{9,49\}$ & $\blank:\triple{18}{0}{U}$ \\
+16 & Copy 1 above a lower digit & 4 & $\{26\}$ & $d:\triple{17}{d}{L}$ \\
+17 & Write copied 1 & 7 & $\{2,3\}$ & $\blank:\triple{18}{1}{U}$ \\
+18 & Continue the copy & 9 & $\{34\}$ & $0:\triple{14}{0}{D}\quad 1:\triple{16}{1}{D}\quad x:\triple{19}{x}{D}\quad \blank:\triple{24}{\blank}{D}$ \\
+19 & Descend below operator & 5 & $\{45\}$ & $d:\triple{20}{d}{L}$ \\
+20 & Write shifted operator & 8 & $\{5\}$ & $\blank:\triple{21}{x}{U}$ \\
+21 & Copy last left-operand digit & 9 & $\{34\}$ & $0:\triple{22}{0}{D}\quad 1:\triple{23}{1}{D}$ \\
+22 & Copied 0 above lower operator & 3 & $\{44\}$ & $x:\triple{15}{x}{L}$ \\
+23 & Copied 1 above lower operator & 4 & $\{26\}$ & $x:\triple{17}{x}{L}$ \\
+24 & Begin scan on copied row & 0 & $\{36\}$ & $d:\triple{1}{d}{R}$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Coverage.} Both operands contain at least one digit. The initial scan therefore
+meets a digit, $x$, and a right-operand digit before a blank. Phases $3$--$8$
+remember the last factor bit: the scan's last digit, the digit revisited
+by the first left step, and (if only one factor bit remains) the digit
+selected for multiplication all refer to the same unchanged cell.
+
+Lemma~\ref{lem:copy} proves the remaining restrictions: the first descent
+sees a blank; subsequent descents see the already copied right-neighbor
+digit, except below the last left-operand digit, where the lower cell
+contains $x$. Every destination contains a blank. Copying $x$ exposes a
+source digit. Restarting on a copied row also reads a digit. These conditions
+hold for arbitrary operand lengths and values.
+
+\newpage
+\subsection{Forming and Scanning Partial Products}\label{sec:part4}
+The product scan starts just to the right of the new padding zero.
+``One'' denotes a scan after exactly one product digit; the remaining
+scan phases follow at least two product digits. Each scan also records the most recently read digit.
+
+\begin{center}
+\fontsize{9.2}{11}\selectfont\renewcommand{\arraystretch}{1.21}
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{r p{5.5cm} c c X}
+\toprule\rowcolor{Pale}$i$ & Phase & $g_i$ & $Q_i$ & Read $:$ (next phase, write, move)\\\midrule
+25 & Select remembered factor bit 0 & 10 & $\{10\}$ & $0:\triple{27}{\blank}{L}$ \\
+26 & Select remembered factor bit 1 & 10 & $\{3\}$ & $1:\triple{28}{\blank}{L}$ \\
+27 & Erase operator for factor 0 & 11 & $\{10\}$ & $x:\triple{29}{\blank}{L}$ \\
+28 & Erase operator for factor 1 & 12 & $\{4\}$ & $x:\triple{31}{\blank}{L}$ \\
+29 & First digit of product by 0 & 13 & $\{25\}$ & $d:\triple{30}{0}{L}$ \\
+30 & Continue product by 0 & 13 & $\{25\}$ & $d:\triple{30}{0}{L}\quad \blank:\triple{33}{0}{R}$ \\
+31 & First digit of product by 1 & 14 & $\{6\}$ & $d:\triple{32}{d}{L}$ \\
+32 & Continue product by 1 & 14 & $\{6\}$ & $d:\triple{32}{d}{L}\quad \blank:\triple{33}{0}{R}$ \\
+33 & First digit after product padding & 15 & $\{15,36\}$ & $0:\triple{34}{0}{R}\quad 1:\triple{35}{1}{R}$ \\
+34 & After one product digit 0 & 15 & $\{0\}$ & $0:\triple{36}{0}{R}\quad 1:\triple{37}{1}{R}\quad \blank:\triple{38}{\blank}{U}$ \\
+35 & After one product digit 1 & 15 & $\{24\}$ & $0:\triple{36}{0}{R}\quad 1:\triple{37}{1}{R}\quad \blank:\triple{39}{\blank}{U}$ \\
+36 & Product scan; last digit 0 & 15 & $\{24\}$ & $0:\triple{36}{0}{R}\quad 1:\triple{37}{1}{R}\quad \blank:\triple{40}{\blank}{U}$ \\
+37 & Product scan; last digit 1 & 15 & $\{24\}$ & $0:\triple{36}{0}{R}\quad 1:\triple{37}{1}{R}\quad \blank:\triple{41}{\blank}{U}$ \\
+38 & Inspect above one-digit product 0 & 16 & $\{39\}$ & $d:\triple{42}{d}{R}\quad \blank:\triple{52}{\blank}{D}$ \\
+39 & Inspect above one-digit product 1 & 16 & $\{17\}$ & $d:\triple{42}{d}{R}\quad \blank:\triple{53}{\blank}{D}$ \\
+40 & Inspect above; last digit 0 & 16 & $\{17\}$ & $d:\triple{42}{d}{R}\quad \blank:\triple{54}{\blank}{D}$ \\
+41 & Inspect above; last digit 1 & 16 & $\{17\}$ & $d:\triple{42}{d}{R}\quad \blank:\triple{55}{\blank}{D}$ \\
+42 & Cross upper operator & 17 & $\{8,43\}$ & $x:\triple{43}{x}{R}$ \\
+43 & First bit in upper factor prefix & 17 & $\{16\}$ & $0:\triple{44}{0}{R}\quad 1:\triple{45}{1}{R}$ \\
+44 & Scan factor; last bit 0 & 17 & $\{16\}$ & $0:\triple{44}{0}{R}\quad 1:\triple{45}{1}{R}\quad \blank:\triple{46}{\blank}{L}$ \\
+45 & Scan factor; last bit 1 & 17 & $\{16\}$ & $0:\triple{44}{0}{R}\quad 1:\triple{45}{1}{R}\quad \blank:\triple{47}{\blank}{L}$ \\
+46 & Select remembered factor bit 0 & 10 & $\{13\}$ & $0:\triple{48}{\blank}{L}$ \\
+47 & Select remembered factor bit 1 & 10 & $\{13\}$ & $1:\triple{50}{\blank}{L}$ \\
+48 & First remaining bit to erase (0) & 11 & $\{27\}$ & $d:\triple{49}{\blank}{L}$ \\
+49 & Erase factor prefix (0) & 11 & $\{10\}$ & $d:\triple{49}{\blank}{L}\quad x:\triple{29}{\blank}{L}$ \\
+50 & First remaining bit to erase (1) & 12 & $\{22\}$ & $d:\triple{51}{\blank}{L}$ \\
+51 & Erase factor prefix (1) & 12 & $\{1\}$ & $d:\triple{51}{\blank}{L}\quad x:\triple{31}{\blank}{L}$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Coverage.} Lemma~\ref{lem:products} gives a nonempty block of $m$
+product digits after the padding zero. This justifies the first-digit phase
+and the split into exactly one or at least two scanned digits. At the right blank, the most recently read digit equals the units digit.
+
+The bottom row contains one factor bit; erasing that bit exposes $x$.
+Every higher row contains at least two factor bits, so another digit
+precedes $x$ during erasure. An upward return from a completed row reaches
+either a blank or the last left-operand digit followed by $x$.
+The upper factor scan records the last bit, which remains unchanged until selection. All these facts follow from the copy staircase.
+
+\newpage
+\subsection{Starting the Sum and Aligning a Row}\label{sec:part5}
+These phases retain the last product digit until the next visit and
+distinguish a one-digit left operand from a longer operand. The remembered
+bit and length class serve as proof annotations without adding machine registers.
+
+\begin{center}
+\fontsize{9.2}{11}\selectfont\renewcommand{\arraystretch}{1.21}
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{r p{5.5cm} c c X}
+\toprule\rowcolor{Pale}$i$ & Phase & $g_i$ & $Q_i$ & Read $:$ (next phase, write, move)\\\midrule
+52 & Begin one-digit sum; last bit 0 & 18 & $\{20\}$ & $\blank:\triple{56}{\blank}{L}$ \\
+53 & Begin one-digit sum; last bit 1 & 18 & $\{42\}$ & $\blank:\triple{57}{\blank}{L}$ \\
+54 & Begin sum; remember last digit 0 & 18 & $\{42\}$ & $\blank:\triple{58}{\blank}{L}$ \\
+55 & Begin sum; remember last digit 1 & 18 & $\{42\}$ & $\blank:\triple{59}{\blank}{L}$ \\
+56 & Revisit sole product digit 0 & 19 & $\{28\}$ & $0:\triple{60}{0}{L}$ \\
+57 & Revisit sole product digit 1 & 19 & $\{11\}$ & $1:\triple{60}{1}{L}$ \\
+58 & Revisit product units digit 0 & 19 & $\{11\}$ & $0:\triple{62}{0}{L}$ \\
+59 & Revisit product units digit 1 & 19 & $\{11\}$ & $1:\triple{62}{1}{L}$ \\
+60 & Read the sole leading zero & 19 & $\{2\}$ & $0:\triple{61}{0}{L}$ \\
+61 & Left boundary after sole digit & 19 & $\{23\}$ & $\blank:\triple{66}{\blank}{D}$ \\
+62 & Second digit of initial left scan & 19 & $\{2,26\}$ & $d:\triple{63}{d}{L}$ \\
+63 & Third digit of initial left scan & 19 & $\{2,23\}$ & $0:\triple{64}{0}{L}\quad 1:\triple{65}{1}{L}$ \\
+64 & Left scan after reading zero & 19 & $\{23\}$ & $0:\triple{64}{0}{L}\quad 1:\triple{65}{1}{L}\quad \blank:\triple{66}{\blank}{D}$ \\
+65 & Left scan after reading one & 19 & $\{23\}$ & $0:\triple{64}{0}{L}\quad 1:\triple{65}{1}{L}$ \\
+66 & Inspect fresh lower leading cell & 20 & $\{12,36\}$ & $0:\triple{67}{0}{R}\quad \blank:\triple{92}{\blank}{U}$ \\
+67 & First digit after lower leading zero & 21 & $\{0\}$ & $d:\triple{68}{d}{R}$ \\
+68 & Scan the lower partial product & 21 & $\{24\}$ & $d:\triple{68}{d}{R}\quad \blank:\triple{69}{\blank}{U}$ \\
+69 & First upper alignment digit & 28 & $\{17\}$ & $d:\triple{70}{d}{R}$ \\
+70 & Next upper alignment cell & 28 & $\{8\}$ & $d:\triple{71}{d}{R}\quad \blank:\triple{72}{\blank}{L}$ \\
+71 & Finish aligning the upper row & 28 & $\{4,8\}$ & $d:\triple{71}{d}{R}\quad \blank:\triple{72}{\blank}{L}$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Initial Left-Scan Coverage.}
+On the top row, the product's units digit has not changed between the right scan and the first left step of summation. If $m=1$, the full padded word equals $0d$: scanning left reads $d$, then $0$, then a blank (phases
+$56$--$57$, $60$--$61$). If $m\ge2$, the padded word has at least three digits,
+so two more digits must follow the first one (phases $62$--$63$).
+In both cases the padding zero immediately precedes the left blank.
+
+\textbf{Alignment Coverage.}
+Lemma~\ref{lem:merge} gives either a blank in the inspected lower cell
+(no remaining row) or the next row's leading $0$. After that zero comes
+at least one digit. The upward move from the lower right boundary reaches
+an upper digit, so alignment begins inside the upper word. The expert scans to the right blank and then returns left to the units digit. The first lower units cell contains a blank. These facts justify every alignment branch here and
+the first three phases in the next certificate subsection.
+
+\newpage
+\subsection{Column Addition, Carries and Stopping}\label{sec:part6}
+Separate phases track carry-zero returns from lower blanks and lower digits. This distinction prevents an
+impossible early end of the upper word from entering the proof protocol.
+
+\begin{center}
+\fontsize{9.2}{11}\selectfont\renewcommand{\arraystretch}{1.21}
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{r p{5.5cm} c c X}
+\toprule\rowcolor{Pale}$i$ & Phase & $g_i$ & $Q_i$ & Read $:$ (next phase, write, move)\\\midrule
+72 & Read upper units digit & 22 & $\{32,41\}$ & $0:\triple{73}{\blank}{D}\quad 1:\triple{74}{\blank}{D}$ \\
+73 & Write units digit 0 below & 24 & $\{27,46\}$ & $\blank:\triple{88}{0}{U}$ \\
+74 & Write units digit 1 below & 25 & $\{22\}$ & $\blank:\triple{88}{1}{U}$ \\
+75 & Return above, carry zero & 23 & $\{50\}$ & $\blank:\triple{76}{\blank}{L}$ \\
+76 & Read upper bit, carry zero & 22 & $\{37\}$ & $0:\triple{77}{\blank}{D}\quad 1:\triple{78}{\blank}{D}\quad \blank:\triple{83}{\blank}{D}$ \\
+77 & Add value zero below & 24 & $\{30\}$ & $d:\triple{75}{d}{U}\quad \blank:\triple{90}{0}{U}$ \\
+78 & Add value one below & 25 & $\{29\}$ & $\blank:\triple{90}{1}{U}\quad 0:\triple{75}{1}{U}\quad 1:\triple{79}{0}{U}$ \\
+79 & Return above, carry one & 27 & $\{10\}$ & $\blank:\triple{80}{\blank}{L}$ \\
+80 & Read upper bit, carry one & 26 & $\{38\}$ & $0:\triple{81}{\blank}{D}\quad 1:\triple{82}{\blank}{D}\quad \blank:\triple{85}{\blank}{D}$ \\
+81 & Add one inside lower digit block & 25 & $\{29\}$ & $0:\triple{75}{1}{U}\quad 1:\triple{79}{0}{U}$ \\
+82 & Add two inside lower digit block & 29 & $\{9\}$ & $d:\triple{79}{d}{U}$ \\
+83 & Preserve unneeded leading zero & 19 & $\{20\}$ & $0:\triple{84}{0}{L}$ \\
+84 & Blank to the left of merged row & 19 & $\{31,34\}$ & $\blank:\triple{66}{\blank}{D}$ \\
+85 & Apply final carry to leading zero & 25 & $\{42\}$ & $0:\triple{86}{1}{U}$ \\
+86 & Return after final carry & 23 & $\{47\}$ & $\blank:\triple{87}{\blank}{L}$ \\
+87 & Step down left of merged row & 22 & $\{33\}$ & $\blank:\triple{84}{\blank}{D}$ \\
+88 & Return after units digit & 23 & $\{18,21\}$ & $\blank:\triple{89}{\blank}{L}$ \\
+89 & Read the second upper digit & 22 & $\{21\}$ & $0:\triple{77}{\blank}{D}\quad 1:\triple{78}{\blank}{D}$ \\
+90 & Return from the lower blank gap & 23 & $\{21\}$ & $\blank:\triple{91}{\blank}{L}$ \\
+91 & Upper digit after lower blank gap & 22 & $\{21\}$ & $0:\triple{77}{\blank}{D}\quad 1:\triple{78}{\blank}{D}$ \\
+92 & Emit final stop & 30 & $\{35,40\}$ & $\blank:\triple{93}{\blank}{S}$ \\
+93 & Halted & 31 & $\{51\}$ & $\text{--}$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{The Lower Blank Gap.}
+While merging row $k$ into row $k+1$, the upper word begins at $-k-1$;
+the original lower word ends at $m-k-2\ge-k-1$. A blank below an upper digit
+must therefore lie to the right of that lower endpoint. The next column
+left still has index at least $-k-1$, so the next upper reading contains a digit.
+This proves the restriction in phase $91$. Independently, the upper word
+has length $m+k+1\ge2$, proving the second-digit restriction in phase $89$.
+
+\textbf{Carry and Boundary Coverage.}
+Lemma~\ref{lem:carry} excludes lower blanks in the carry-one digit phases
+and forces $0$ for the final carry extension. Returning above a written
+lower digit reads the upper blank just erased. When the upper word ends,
+the next lower cell contains the original leading zero: carry zero
+preserves this bit, whereas carry one changes the bit to $1$. Both branches reach the blank to the
+left of the merged row. When no next row remains, the upward move reaches
+a blank, and the expert emits the final $S$. Phase $93$ has no further PTO actions.
+
+\textbf{Local Transition Identity.}
+For every listed input branch $x:(j,w,M)$ and every $q\in Q_i$, direct
+comparison with the two exported tables gives
+\begin{equation}
+\delta_\EXPERT(g_i,x)=(g_j,w,M),\qquad
+\delta_\CTRL(q,x)=(q',w,M)\quad\text{for some }q'\in Q_j. \tag{3}
+\end{equation}
+The certificate contains $109$ phase--state pairs and $201$ local checks,
+covering $133$ distinct nonterminal controller entries. A transition reaches
+a halt state exactly when $j=93$, with $M=S$. Initially $g_0=0$ and $Q_0=\{0\}$.
+Protocol coverage excludes the remaining controller entries on valid inputs.
+
+\clearpage
+\sectiontitle{5 \enspace EQUIVALENCE PROOF}{Equivalence Proof}\label{sec:common5}
+\label{sec:equivalence}
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Initially both configurations have the same grid and head,
+with control states $0$ related by phase $0$. Suppose the relation holds
+before a controller step. Lemma~\ref{lem:coverage} supplies an allowed read symbol
+$x$. Equal grids and heads give the same read symbol to both controllers.
+Equation~(3) gives equal writes and motions and preserves the relation
+between successor states. The next grids and heads therefore agree.
+
+Induction establishes equality of every finite execution prefix. The terminal
+condition permits a halt exactly on an edge to the terminal phase.
+The finite copy, product, and merge passes establish termination.
+Both controllers therefore halt together with equal complete PTOs and final
+configurations. Lemma~\ref{lem:merge} gives the product, padding, and final head.
+\end{proof}
+
+\bigskip
+\sectiontitle{6 \enspace VERIFICATION AND ARTIFACTS}{Verification and Artifacts}\label{sec:common6}
+\textbf{Verification.}
+Run \code{python3 verify\_equivalence.py {-}{-}quick} from this proof directory to check
+file fingerprints, CSV/JSON agreement, the exported expert against the
+\code{mult\_grid(2)} source, and all $201$ certificate obligations.
+Omitting \code{{-}{-}quick} additionally compares independent executions on
+all $15{,}876$ operand pairs of lengths $1$--$6$, plus $45$ directed and
+$128$ fixed-seed random cases, including $1024$-bit operands.
+All $10{,}184{,}741$ PTO steps agree. The checks also compare final grids,
+heads, and padded products. These tests exercise $132$ distinct nonterminal entries.
+The unbounded result follows from the invariants and induction above.
+
+\textbf{Artifact Identity.}
+The title page gives the repository-relative case directory. This proof directory
+contains the controller and expert exports, reference code, protocol, checker,
+and saved verification report. The verification script stores or reads SHA-256 checksums for these artifacts. A checksum identifies the exact bytes
+of a file; the checker compares the stored and computed values to detect changes.
+These checks bind the certificate to the supplied exports. The invariants,
+protocol coverage, and local transition identity establish equivalence.
+\end{document}

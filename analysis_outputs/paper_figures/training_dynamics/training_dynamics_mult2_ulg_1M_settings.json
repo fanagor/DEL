@@ -1,0 +1,42 @@
+{
+  "task": "mult2",
+  "metric": "ulg",
+  "loss_window": 1000,
+  "evaluation_every": 100000,
+  "runs": {
+    "DFST": "/tmlscratch/hpapazov/DEL/analyses/training_dynamics/DFST/mult2",
+    "RNN": "/tmlscratch/hpapazov/DEL/analyses/training_dynamics/RNN/mult2",
+    "GRU": "/tmlscratch/hpapazov/DEL/analyses/training_dynamics/GRU/mult2"
+  },
+  "protocols": {
+    "DFST": {
+      "protocol": "teacher_forced_exact_match",
+      "seed": 42,
+      "samples": 10,
+      "cap": 1000,
+      "search": "binary",
+      "scan": "parallel"
+    },
+    "RNN": {
+      "protocol": "teacher_forced_exact_match",
+      "seed": 42,
+      "samples": 10,
+      "cap": 1000,
+      "search": "binary",
+      "scan": "parallel"
+    },
+    "GRU": {
+      "protocol": "teacher_forced_exact_match",
+      "seed": 42,
+      "samples": 10,
+      "cap": 1000,
+      "search": "binary",
+      "scan": "parallel"
+    }
+  },
+  "colors": {
+    "DFST": "#a4503e",
+    "RNN": "#1f5d7a",
+    "GRU": "#c98538"
+  }
+}

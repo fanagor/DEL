@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "differentiable-exact-learning"
+version = "0.1.0"
+description = "DEL: Differentiable Exact Learning from expert policy-trajectory observations"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["torch>=2.2", "numpy>=1.24", "PyYAML>=6"]
+
+[project.optional-dependencies]
+tracking = ["wandb>=0.19.11", "matplotlib>=3.7"]
+analysis = ["reportlab>=4", "matplotlib>=3.7", "pandas>=2", "scipy>=1.10", "scikit-learn>=1.2", "networkx>=3", "tqdm>=4", "jupyterlab>=4", "nbclient>=0.10", "ipywidgets>=8"]
+dev = ["pytest>=8", "ruff>=0.8", "nbformat>=5", "nbclient>=0.10", "ipykernel>=6"]
+
+[project.scripts]
+del = "differentiable_exact_learning.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+differentiable_exact_learning = ["config.yaml", "viewer/static/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+exclude = ["notebooks"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]

@@ -1,0 +1,16 @@
+epsilon: 1
+max_length: 10
+max_steps: 100000
+samples: 100
+source_sha256: 5ca668ddd2aec46143aca38f6f1bbb370ae9e7f4e46279e7026067dfd0837a38
+source_step: 250000
+method: metric_extraction
+source_run: runs/DFST/add2/warmup_50000_steps_250000
+source_checkpoint: final_model_checkpoint.pt
+scope: extracted_discrete_controller
+random_samples: 100
+base_samples: 100
+teaching_set: false
+teaching_samples: 0
+sampling_recipe: null
+inputs: data/inputs.json

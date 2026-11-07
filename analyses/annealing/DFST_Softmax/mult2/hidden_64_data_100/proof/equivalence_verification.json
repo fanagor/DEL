@@ -1,0 +1,2609 @@
+{
+  "source_hashes_match": true,
+  "csv_matches_json": true,
+  "expert_equals_mult_grid_2": true,
+  "reference_state_count": 32,
+  "controller_state_count": 52,
+  "protocol_phases": 94,
+  "phase_controller_pairs": 109,
+  "local_checks": 201,
+  "certified_nonterminal_entries": 133,
+  "total_nonterminal_entries": 204,
+  "phase_states": [
+    {
+      "phase": "start",
+      "meaning": "First left-operand digit",
+      "ground": 0,
+      "controller": [
+        0
+      ]
+    },
+    {
+      "phase": "scan_a",
+      "meaning": "Scan left operand",
+      "ground": 0,
+      "controller": [
+        0,
+        24
+      ]
+    },
+    {
+      "phase": "first_b",
+      "meaning": "First right-operand digit",
+      "ground": 0,
+      "controller": [
+        7
+      ]
+    },
+    {
+      "phase": "scan_b_0",
+      "meaning": "Scan factor; last bit 0",
+      "ground": 0,
+      "controller": [
+        48
+      ]
+    },
+    {
+      "phase": "scan_b_1",
+      "meaning": "Scan factor; last bit 1",
+      "ground": 0,
+      "controller": [
+        48
+      ]
+    },
+    {
+      "phase": "skip_last_0",
+      "meaning": "Revisit last factor bit 0",
+      "ground": 1,
+      "controller": [
+        14
+      ]
+    },
+    {
+      "phase": "skip_last_1",
+      "meaning": "Revisit last factor bit 1",
+      "ground": 1,
+      "controller": [
+        14
+      ]
+    },
+    {
+      "phase": "copy_decision_0",
+      "meaning": "Copy or use remembered bit 0",
+      "ground": 2,
+      "controller": [
+        49
+      ]
+    },
+    {
+      "phase": "copy_decision_1",
+      "meaning": "Copy or use remembered bit 1",
+      "ground": 2,
+      "controller": [
+        19
+      ]
+    },
+    {
+      "phase": "first_down_0",
+      "meaning": "First copied 0: descend",
+      "ground": 3,
+      "controller": [
+        16
+      ]
+    },
+    {
+      "phase": "first_write_0",
+      "meaning": "First copied 0: write",
+      "ground": 6,
+      "controller": [
+        13
+      ]
+    },
+    {
+      "phase": "first_down_1",
+      "meaning": "First copied 1: descend",
+      "ground": 4,
+      "controller": [
+        4
+      ]
+    },
+    {
+      "phase": "first_write_1",
+      "meaning": "First copied 1: write",
+      "ground": 7,
+      "controller": [
+        41
+      ]
+    },
+    {
+      "phase": "copy_after_first",
+      "meaning": "Continue after first copy",
+      "ground": 9,
+      "controller": [
+        35
+      ]
+    },
+    {
+      "phase": "regular_down_0",
+      "meaning": "Copy 0 above a lower digit",
+      "ground": 3,
+      "controller": [
+        44,
+        47
+      ]
+    },
+    {
+      "phase": "regular_write_0",
+      "meaning": "Write copied 0",
+      "ground": 6,
+      "controller": [
+        9,
+        49
+      ]
+    },
+    {
+      "phase": "regular_down_1",
+      "meaning": "Copy 1 above a lower digit",
+      "ground": 4,
+      "controller": [
+        26
+      ]
+    },
+    {
+      "phase": "regular_write_1",
+      "meaning": "Write copied 1",
+      "ground": 7,
+      "controller": [
+        2,
+        3
+      ]
+    },
+    {
+      "phase": "copy_loop",
+      "meaning": "Continue the copy",
+      "ground": 9,
+      "controller": [
+        34
+      ]
+    },
+    {
+      "phase": "operator_down",
+      "meaning": "Descend below operator",
+      "ground": 5,
+      "controller": [
+        45
+      ]
+    },
+    {
+      "phase": "operator_write",
+      "meaning": "Write shifted operator",
+      "ground": 8,
+      "controller": [
+        5
+      ]
+    },
+    {
+      "phase": "first_a_copy",
+      "meaning": "Copy last left-operand digit",
+      "ground": 9,
+      "controller": [
+        34
+      ]
+    },
+    {
+      "phase": "operator_neighbor_0",
+      "meaning": "Copied 0 above lower operator",
+      "ground": 3,
+      "controller": [
+        44
+      ]
+    },
+    {
+      "phase": "operator_neighbor_1",
+      "meaning": "Copied 1 above lower operator",
+      "ground": 4,
+      "controller": [
+        26
+      ]
+    },
+    {
+      "phase": "copy_restart",
+      "meaning": "Begin scan on copied row",
+      "ground": 0,
+      "controller": [
+        36
+      ]
+    },
+    {
+      "phase": "last_factor_0",
+      "meaning": "Select remembered factor bit 0",
+      "ground": 10,
+      "controller": [
+        10
+      ]
+    },
+    {
+      "phase": "last_factor_1",
+      "meaning": "Select remembered factor bit 1",
+      "ground": 10,
+      "controller": [
+        3
+      ]
+    },
+    {
+      "phase": "erase_single_0",
+      "meaning": "Erase operator for factor 0",
+      "ground": 11,
+      "controller": [
+        10
+      ]
+    },
+    {
+      "phase": "erase_single_1",
+      "meaning": "Erase operator for factor 1",
+      "ground": 12,
+      "controller": [
+        4
+      ]
+    },
+    {
+      "phase": "product_first_0",
+      "meaning": "First digit of product by 0",
+      "ground": 13,
+      "controller": [
+        25
+      ]
+    },
+    {
+      "phase": "product_rest_0",
+      "meaning": "Continue product by 0",
+      "ground": 13,
+      "controller": [
+        25
+      ]
+    },
+    {
+      "phase": "product_first_1",
+      "meaning": "First digit of product by 1",
+      "ground": 14,
+      "controller": [
+        6
+      ]
+    },
+    {
+      "phase": "product_rest_1",
+      "meaning": "Continue product by 1",
+      "ground": 14,
+      "controller": [
+        6
+      ]
+    },
+    {
+      "phase": "product_scan_first",
+      "meaning": "First digit after product padding",
+      "ground": 15,
+      "controller": [
+        15,
+        36
+      ]
+    },
+    {
+      "phase": "product_scan_one_0",
+      "meaning": "After one product digit 0",
+      "ground": 15,
+      "controller": [
+        0
+      ]
+    },
+    {
+      "phase": "product_scan_one_1",
+      "meaning": "After one product digit 1",
+      "ground": 15,
+      "controller": [
+        24
+      ]
+    },
+    {
+      "phase": "product_scan_0",
+      "meaning": "Product scan; last digit 0",
+      "ground": 15,
+      "controller": [
+        24
+      ]
+    },
+    {
+      "phase": "product_scan_1",
+      "meaning": "Product scan; last digit 1",
+      "ground": 15,
+      "controller": [
+        24
+      ]
+    },
+    {
+      "phase": "inspect_above_one_0",
+      "meaning": "Inspect above one-digit product 0",
+      "ground": 16,
+      "controller": [
+        39
+      ]
+    },
+    {
+      "phase": "inspect_above_one_1",
+      "meaning": "Inspect above one-digit product 1",
+      "ground": 16,
+      "controller": [
+        17
+      ]
+    },
+    {
+      "phase": "inspect_above_0",
+      "meaning": "Inspect above; last digit 0",
+      "ground": 16,
+      "controller": [
+        17
+      ]
+    },
+    {
+      "phase": "inspect_above_1",
+      "meaning": "Inspect above; last digit 1",
+      "ground": 16,
+      "controller": [
+        17
+      ]
+    },
+    {
+      "phase": "upper_operator",
+      "meaning": "Cross upper operator",
+      "ground": 17,
+      "controller": [
+        8,
+        43
+      ]
+    },
+    {
+      "phase": "upper_first_b",
+      "meaning": "First bit in upper factor prefix",
+      "ground": 17,
+      "controller": [
+        16
+      ]
+    },
+    {
+      "phase": "upper_scan_b_0",
+      "meaning": "Scan factor; last bit 0",
+      "ground": 17,
+      "controller": [
+        16
+      ]
+    },
+    {
+      "phase": "upper_scan_b_1",
+      "meaning": "Scan factor; last bit 1",
+      "ground": 17,
+      "controller": [
+        16
+      ]
+    },
+    {
+      "phase": "upper_factor_0",
+      "meaning": "Select remembered factor bit 0",
+      "ground": 10,
+      "controller": [
+        13
+      ]
+    },
+    {
+      "phase": "upper_factor_1",
+      "meaning": "Select remembered factor bit 1",
+      "ground": 10,
+      "controller": [
+        13
+      ]
+    },
+    {
+      "phase": "erase_first_0",
+      "meaning": "First remaining bit to erase (0)",
+      "ground": 11,
+      "controller": [
+        27
+      ]
+    },
+    {
+      "phase": "erase_rest_0",
+      "meaning": "Erase factor prefix (0)",
+      "ground": 11,
+      "controller": [
+        10
+      ]
+    },
+    {
+      "phase": "erase_first_1",
+      "meaning": "First remaining bit to erase (1)",
+      "ground": 12,
+      "controller": [
+        22
+      ]
+    },
+    {
+      "phase": "erase_rest_1",
+      "meaning": "Erase factor prefix (1)",
+      "ground": 12,
+      "controller": [
+        1
+      ]
+    },
+    {
+      "phase": "sum_entry_one_0",
+      "meaning": "Begin one-digit sum; last bit 0",
+      "ground": 18,
+      "controller": [
+        20
+      ]
+    },
+    {
+      "phase": "sum_entry_one_1",
+      "meaning": "Begin one-digit sum; last bit 1",
+      "ground": 18,
+      "controller": [
+        42
+      ]
+    },
+    {
+      "phase": "sum_entry_0",
+      "meaning": "Begin sum; remember last digit 0",
+      "ground": 18,
+      "controller": [
+        42
+      ]
+    },
+    {
+      "phase": "sum_entry_1",
+      "meaning": "Begin sum; remember last digit 1",
+      "ground": 18,
+      "controller": [
+        42
+      ]
+    },
+    {
+      "phase": "initial_left_one_0",
+      "meaning": "Revisit sole product digit 0",
+      "ground": 19,
+      "controller": [
+        28
+      ]
+    },
+    {
+      "phase": "initial_left_one_1",
+      "meaning": "Revisit sole product digit 1",
+      "ground": 19,
+      "controller": [
+        11
+      ]
+    },
+    {
+      "phase": "initial_left_0",
+      "meaning": "Revisit product units digit 0",
+      "ground": 19,
+      "controller": [
+        11
+      ]
+    },
+    {
+      "phase": "initial_left_1",
+      "meaning": "Revisit product units digit 1",
+      "ground": 19,
+      "controller": [
+        11
+      ]
+    },
+    {
+      "phase": "initial_left_padding",
+      "meaning": "Read the sole leading zero",
+      "ground": 19,
+      "controller": [
+        2
+      ]
+    },
+    {
+      "phase": "initial_left_boundary",
+      "meaning": "Left boundary after sole digit",
+      "ground": 19,
+      "controller": [
+        23
+      ]
+    },
+    {
+      "phase": "initial_left_second",
+      "meaning": "Second digit of initial left scan",
+      "ground": 19,
+      "controller": [
+        2,
+        26
+      ]
+    },
+    {
+      "phase": "initial_left_third",
+      "meaning": "Third digit of initial left scan",
+      "ground": 19,
+      "controller": [
+        2,
+        23
+      ]
+    },
+    {
+      "phase": "left_after_0",
+      "meaning": "Left scan after reading zero",
+      "ground": 19,
+      "controller": [
+        23
+      ]
+    },
+    {
+      "phase": "left_after_1",
+      "meaning": "Left scan after reading one",
+      "ground": 19,
+      "controller": [
+        23
+      ]
+    },
+    {
+      "phase": "inspect_below",
+      "meaning": "Inspect fresh lower leading cell",
+      "ground": 20,
+      "controller": [
+        12,
+        36
+      ]
+    },
+    {
+      "phase": "lower_first",
+      "meaning": "First digit after lower leading zero",
+      "ground": 21,
+      "controller": [
+        0
+      ]
+    },
+    {
+      "phase": "lower_scan",
+      "meaning": "Scan the lower partial product",
+      "ground": 21,
+      "controller": [
+        24
+      ]
+    },
+    {
+      "phase": "align_first",
+      "meaning": "First upper alignment digit",
+      "ground": 28,
+      "controller": [
+        17
+      ]
+    },
+    {
+      "phase": "align_next",
+      "meaning": "Next upper alignment cell",
+      "ground": 28,
+      "controller": [
+        8
+      ]
+    },
+    {
+      "phase": "align_rest",
+      "meaning": "Finish aligning the upper row",
+      "ground": 28,
+      "controller": [
+        4,
+        8
+      ]
+    },
+    {
+      "phase": "top_first",
+      "meaning": "Read upper units digit",
+      "ground": 22,
+      "controller": [
+        32,
+        41
+      ]
+    },
+    {
+      "phase": "first_add_0",
+      "meaning": "Write units digit 0 below",
+      "ground": 24,
+      "controller": [
+        27,
+        46
+      ]
+    },
+    {
+      "phase": "first_add_1",
+      "meaning": "Write units digit 1 below",
+      "ground": 25,
+      "controller": [
+        22
+      ]
+    },
+    {
+      "phase": "return_0",
+      "meaning": "Return above, carry zero",
+      "ground": 23,
+      "controller": [
+        50
+      ]
+    },
+    {
+      "phase": "top_0",
+      "meaning": "Read upper bit, carry zero",
+      "ground": 22,
+      "controller": [
+        37
+      ]
+    },
+    {
+      "phase": "add_0",
+      "meaning": "Add value zero below",
+      "ground": 24,
+      "controller": [
+        30
+      ]
+    },
+    {
+      "phase": "add_1",
+      "meaning": "Add value one below",
+      "ground": 25,
+      "controller": [
+        29
+      ]
+    },
+    {
+      "phase": "return_1",
+      "meaning": "Return above, carry one",
+      "ground": 27,
+      "controller": [
+        10
+      ]
+    },
+    {
+      "phase": "top_1",
+      "meaning": "Read upper bit, carry one",
+      "ground": 26,
+      "controller": [
+        38
+      ]
+    },
+    {
+      "phase": "add_1_nonblank",
+      "meaning": "Add one inside lower digit block",
+      "ground": 25,
+      "controller": [
+        29
+      ]
+    },
+    {
+      "phase": "add_2_nonblank",
+      "meaning": "Add two inside lower digit block",
+      "ground": 29,
+      "controller": [
+        9
+      ]
+    },
+    {
+      "phase": "leading_zero",
+      "meaning": "Preserve unneeded leading zero",
+      "ground": 19,
+      "controller": [
+        20
+      ]
+    },
+    {
+      "phase": "left_of_sum",
+      "meaning": "Blank to the left of merged row",
+      "ground": 19,
+      "controller": [
+        31,
+        34
+      ]
+    },
+    {
+      "phase": "carry_extension",
+      "meaning": "Apply final carry to leading zero",
+      "ground": 25,
+      "controller": [
+        42
+      ]
+    },
+    {
+      "phase": "extension_return",
+      "meaning": "Return after final carry",
+      "ground": 23,
+      "controller": [
+        47
+      ]
+    },
+    {
+      "phase": "extension_top",
+      "meaning": "Step down left of merged row",
+      "ground": 22,
+      "controller": [
+        33
+      ]
+    },
+    {
+      "phase": "first_return",
+      "meaning": "Return after units digit",
+      "ground": 23,
+      "controller": [
+        18,
+        21
+      ]
+    },
+    {
+      "phase": "top_second",
+      "meaning": "Read the second upper digit",
+      "ground": 22,
+      "controller": [
+        21
+      ]
+    },
+    {
+      "phase": "gap_return",
+      "meaning": "Return from the lower blank gap",
+      "ground": 23,
+      "controller": [
+        21
+      ]
+    },
+    {
+      "phase": "top_gap",
+      "meaning": "Upper digit after lower blank gap",
+      "ground": 22,
+      "controller": [
+        21
+      ]
+    },
+    {
+      "phase": "finish",
+      "meaning": "Emit final stop",
+      "ground": 30,
+      "controller": [
+        35,
+        40
+      ]
+    },
+    {
+      "phase": "halt",
+      "meaning": "Halted",
+      "ground": 31,
+      "controller": [
+        51
+      ]
+    }
+  ],
+  "checked_edges": [
+    [
+      "start",
+      0,
+      "0",
+      "scan_a",
+      24,
+      "0",
+      "R"
+    ],
+    [
+      "start",
+      0,
+      "1",
+      "scan_a",
+      24,
+      "1",
+      "R"
+    ],
+    [
+      "scan_a",
+      24,
+      "0",
+      "scan_a",
+      24,
+      "0",
+      "R"
+    ],
+    [
+      "scan_a",
+      24,
+      "1",
+      "scan_a",
+      24,
+      "1",
+      "R"
+    ],
+    [
+      "scan_a",
+      24,
+      "x",
+      "first_b",
+      7,
+      "x",
+      "R"
+    ],
+    [
+      "first_b",
+      7,
+      "0",
+      "scan_b_0",
+      48,
+      "0",
+      "R"
+    ],
+    [
+      "first_b",
+      7,
+      "1",
+      "scan_b_1",
+      48,
+      "1",
+      "R"
+    ],
+    [
+      "scan_b_0",
+      48,
+      "0",
+      "scan_b_0",
+      48,
+      "0",
+      "R"
+    ],
+    [
+      "scan_b_0",
+      48,
+      "1",
+      "scan_b_1",
+      48,
+      "1",
+      "R"
+    ],
+    [
+      "scan_b_0",
+      48,
+      "",
+      "skip_last_0",
+      14,
+      "",
+      "L"
+    ],
+    [
+      "scan_b_1",
+      48,
+      "0",
+      "scan_b_0",
+      48,
+      "0",
+      "R"
+    ],
+    [
+      "scan_b_1",
+      48,
+      "1",
+      "scan_b_1",
+      48,
+      "1",
+      "R"
+    ],
+    [
+      "scan_b_1",
+      48,
+      "",
+      "skip_last_1",
+      14,
+      "",
+      "L"
+    ],
+    [
+      "skip_last_0",
+      14,
+      "0",
+      "copy_decision_0",
+      49,
+      "0",
+      "L"
+    ],
+    [
+      "skip_last_1",
+      14,
+      "1",
+      "copy_decision_1",
+      19,
+      "1",
+      "L"
+    ],
+    [
+      "copy_decision_0",
+      49,
+      "0",
+      "first_down_0",
+      16,
+      "0",
+      "D"
+    ],
+    [
+      "copy_decision_0",
+      49,
+      "1",
+      "first_down_1",
+      4,
+      "1",
+      "D"
+    ],
+    [
+      "copy_decision_0",
+      49,
+      "x",
+      "last_factor_0",
+      10,
+      "x",
+      "R"
+    ],
+    [
+      "copy_decision_1",
+      19,
+      "0",
+      "first_down_0",
+      16,
+      "0",
+      "D"
+    ],
+    [
+      "copy_decision_1",
+      19,
+      "1",
+      "first_down_1",
+      4,
+      "1",
+      "D"
+    ],
+    [
+      "copy_decision_1",
+      19,
+      "x",
+      "last_factor_1",
+      3,
+      "x",
+      "R"
+    ],
+    [
+      "first_down_0",
+      16,
+      "",
+      "first_write_0",
+      13,
+      "",
+      "L"
+    ],
+    [
+      "first_down_1",
+      4,
+      "",
+      "first_write_1",
+      41,
+      "",
+      "L"
+    ],
+    [
+      "last_factor_0",
+      10,
+      "0",
+      "erase_single_0",
+      10,
+      "",
+      "L"
+    ],
+    [
+      "last_factor_1",
+      3,
+      "1",
+      "erase_single_1",
+      4,
+      "",
+      "L"
+    ],
+    [
+      "first_write_0",
+      13,
+      "",
+      "copy_after_first",
+      35,
+      "0",
+      "U"
+    ],
+    [
+      "first_write_1",
+      41,
+      "",
+      "copy_after_first",
+      35,
+      "1",
+      "U"
+    ],
+    [
+      "erase_single_0",
+      10,
+      "x",
+      "product_first_0",
+      25,
+      "",
+      "L"
+    ],
+    [
+      "erase_single_1",
+      4,
+      "x",
+      "product_first_1",
+      6,
+      "",
+      "L"
+    ],
+    [
+      "copy_after_first",
+      35,
+      "0",
+      "regular_down_0",
+      47,
+      "0",
+      "D"
+    ],
+    [
+      "copy_after_first",
+      35,
+      "1",
+      "regular_down_1",
+      26,
+      "1",
+      "D"
+    ],
+    [
+      "copy_after_first",
+      35,
+      "x",
+      "operator_down",
+      45,
+      "x",
+      "D"
+    ],
+    [
+      "product_first_0",
+      25,
+      "0",
+      "product_rest_0",
+      25,
+      "0",
+      "L"
+    ],
+    [
+      "product_first_0",
+      25,
+      "1",
+      "product_rest_0",
+      25,
+      "0",
+      "L"
+    ],
+    [
+      "product_first_1",
+      6,
+      "0",
+      "product_rest_1",
+      6,
+      "0",
+      "L"
+    ],
+    [
+      "product_first_1",
+      6,
+      "1",
+      "product_rest_1",
+      6,
+      "1",
+      "L"
+    ],
+    [
+      "regular_down_0",
+      47,
+      "0",
+      "regular_write_0",
+      9,
+      "0",
+      "L"
+    ],
+    [
+      "regular_down_0",
+      47,
+      "1",
+      "regular_write_0",
+      9,
+      "1",
+      "L"
+    ],
+    [
+      "regular_down_1",
+      26,
+      "0",
+      "regular_write_1",
+      2,
+      "0",
+      "L"
+    ],
+    [
+      "regular_down_1",
+      26,
+      "1",
+      "regular_write_1",
+      2,
+      "1",
+      "L"
+    ],
+    [
+      "operator_down",
+      45,
+      "0",
+      "operator_write",
+      5,
+      "0",
+      "L"
+    ],
+    [
+      "operator_down",
+      45,
+      "1",
+      "operator_write",
+      5,
+      "1",
+      "L"
+    ],
+    [
+      "product_rest_0",
+      25,
+      "0",
+      "product_rest_0",
+      25,
+      "0",
+      "L"
+    ],
+    [
+      "product_rest_0",
+      25,
+      "1",
+      "product_rest_0",
+      25,
+      "0",
+      "L"
+    ],
+    [
+      "product_rest_0",
+      25,
+      "",
+      "product_scan_first",
+      15,
+      "0",
+      "R"
+    ],
+    [
+      "product_rest_1",
+      6,
+      "0",
+      "product_rest_1",
+      6,
+      "0",
+      "L"
+    ],
+    [
+      "product_rest_1",
+      6,
+      "1",
+      "product_rest_1",
+      6,
+      "1",
+      "L"
+    ],
+    [
+      "product_rest_1",
+      6,
+      "",
+      "product_scan_first",
+      36,
+      "0",
+      "R"
+    ],
+    [
+      "regular_write_0",
+      9,
+      "",
+      "copy_loop",
+      34,
+      "0",
+      "U"
+    ],
+    [
+      "regular_write_1",
+      2,
+      "",
+      "copy_loop",
+      34,
+      "1",
+      "U"
+    ],
+    [
+      "operator_write",
+      5,
+      "",
+      "first_a_copy",
+      34,
+      "x",
+      "U"
+    ],
+    [
+      "product_scan_first",
+      15,
+      "0",
+      "product_scan_one_0",
+      0,
+      "0",
+      "R"
+    ],
+    [
+      "product_scan_first",
+      15,
+      "1",
+      "product_scan_one_1",
+      24,
+      "1",
+      "R"
+    ],
+    [
+      "product_scan_first",
+      36,
+      "0",
+      "product_scan_one_0",
+      0,
+      "0",
+      "R"
+    ],
+    [
+      "product_scan_first",
+      36,
+      "1",
+      "product_scan_one_1",
+      24,
+      "1",
+      "R"
+    ],
+    [
+      "copy_loop",
+      34,
+      "0",
+      "regular_down_0",
+      44,
+      "0",
+      "D"
+    ],
+    [
+      "copy_loop",
+      34,
+      "1",
+      "regular_down_1",
+      26,
+      "1",
+      "D"
+    ],
+    [
+      "copy_loop",
+      34,
+      "x",
+      "operator_down",
+      45,
+      "x",
+      "D"
+    ],
+    [
+      "copy_loop",
+      34,
+      "",
+      "copy_restart",
+      36,
+      "",
+      "D"
+    ],
+    [
+      "first_a_copy",
+      34,
+      "0",
+      "operator_neighbor_0",
+      44,
+      "0",
+      "D"
+    ],
+    [
+      "first_a_copy",
+      34,
+      "1",
+      "operator_neighbor_1",
+      26,
+      "1",
+      "D"
+    ],
+    [
+      "product_scan_one_0",
+      0,
+      "0",
+      "product_scan_0",
+      24,
+      "0",
+      "R"
+    ],
+    [
+      "product_scan_one_0",
+      0,
+      "1",
+      "product_scan_1",
+      24,
+      "1",
+      "R"
+    ],
+    [
+      "product_scan_one_0",
+      0,
+      "",
+      "inspect_above_one_0",
+      39,
+      "",
+      "U"
+    ],
+    [
+      "product_scan_one_1",
+      24,
+      "0",
+      "product_scan_0",
+      24,
+      "0",
+      "R"
+    ],
+    [
+      "product_scan_one_1",
+      24,
+      "1",
+      "product_scan_1",
+      24,
+      "1",
+      "R"
+    ],
+    [
+      "product_scan_one_1",
+      24,
+      "",
+      "inspect_above_one_1",
+      17,
+      "",
+      "U"
+    ],
+    [
+      "regular_down_0",
+      44,
+      "0",
+      "regular_write_0",
+      9,
+      "0",
+      "L"
+    ],
+    [
+      "regular_down_0",
+      44,
+      "1",
+      "regular_write_0",
+      9,
+      "1",
+      "L"
+    ],
+    [
+      "copy_restart",
+      36,
+      "0",
+      "scan_a",
+      0,
+      "0",
+      "R"
+    ],
+    [
+      "copy_restart",
+      36,
+      "1",
+      "scan_a",
+      24,
+      "1",
+      "R"
+    ],
+    [
+      "operator_neighbor_0",
+      44,
+      "x",
+      "regular_write_0",
+      49,
+      "x",
+      "L"
+    ],
+    [
+      "operator_neighbor_1",
+      26,
+      "x",
+      "regular_write_1",
+      3,
+      "x",
+      "L"
+    ],
+    [
+      "product_scan_0",
+      24,
+      "0",
+      "product_scan_0",
+      24,
+      "0",
+      "R"
+    ],
+    [
+      "product_scan_0",
+      24,
+      "1",
+      "product_scan_1",
+      24,
+      "1",
+      "R"
+    ],
+    [
+      "product_scan_0",
+      24,
+      "",
+      "inspect_above_0",
+      17,
+      "",
+      "U"
+    ],
+    [
+      "product_scan_1",
+      24,
+      "0",
+      "product_scan_0",
+      24,
+      "0",
+      "R"
+    ],
+    [
+      "product_scan_1",
+      24,
+      "1",
+      "product_scan_1",
+      24,
+      "1",
+      "R"
+    ],
+    [
+      "product_scan_1",
+      24,
+      "",
+      "inspect_above_1",
+      17,
+      "",
+      "U"
+    ],
+    [
+      "inspect_above_one_0",
+      39,
+      "0",
+      "upper_operator",
+      8,
+      "0",
+      "R"
+    ],
+    [
+      "inspect_above_one_0",
+      39,
+      "1",
+      "upper_operator",
+      43,
+      "1",
+      "R"
+    ],
+    [
+      "inspect_above_one_0",
+      39,
+      "",
+      "sum_entry_one_0",
+      20,
+      "",
+      "D"
+    ],
+    [
+      "inspect_above_one_1",
+      17,
+      "0",
+      "upper_operator",
+      8,
+      "0",
+      "R"
+    ],
+    [
+      "inspect_above_one_1",
+      17,
+      "1",
+      "upper_operator",
+      8,
+      "1",
+      "R"
+    ],
+    [
+      "inspect_above_one_1",
+      17,
+      "",
+      "sum_entry_one_1",
+      42,
+      "",
+      "D"
+    ],
+    [
+      "scan_a",
+      0,
+      "0",
+      "scan_a",
+      24,
+      "0",
+      "R"
+    ],
+    [
+      "scan_a",
+      0,
+      "1",
+      "scan_a",
+      24,
+      "1",
+      "R"
+    ],
+    [
+      "scan_a",
+      0,
+      "x",
+      "first_b",
+      7,
+      "x",
+      "R"
+    ],
+    [
+      "regular_write_0",
+      49,
+      "",
+      "copy_loop",
+      34,
+      "0",
+      "U"
+    ],
+    [
+      "regular_write_1",
+      3,
+      "",
+      "copy_loop",
+      34,
+      "1",
+      "U"
+    ],
+    [
+      "inspect_above_0",
+      17,
+      "0",
+      "upper_operator",
+      8,
+      "0",
+      "R"
+    ],
+    [
+      "inspect_above_0",
+      17,
+      "1",
+      "upper_operator",
+      8,
+      "1",
+      "R"
+    ],
+    [
+      "inspect_above_0",
+      17,
+      "",
+      "sum_entry_0",
+      42,
+      "",
+      "D"
+    ],
+    [
+      "inspect_above_1",
+      17,
+      "0",
+      "upper_operator",
+      8,
+      "0",
+      "R"
+    ],
+    [
+      "inspect_above_1",
+      17,
+      "1",
+      "upper_operator",
+      8,
+      "1",
+      "R"
+    ],
+    [
+      "inspect_above_1",
+      17,
+      "",
+      "sum_entry_1",
+      42,
+      "",
+      "D"
+    ],
+    [
+      "upper_operator",
+      8,
+      "x",
+      "upper_first_b",
+      16,
+      "x",
+      "R"
+    ],
+    [
+      "upper_operator",
+      43,
+      "x",
+      "upper_first_b",
+      16,
+      "x",
+      "R"
+    ],
+    [
+      "sum_entry_one_0",
+      20,
+      "",
+      "initial_left_one_0",
+      28,
+      "",
+      "L"
+    ],
+    [
+      "sum_entry_one_1",
+      42,
+      "",
+      "initial_left_one_1",
+      11,
+      "",
+      "L"
+    ],
+    [
+      "sum_entry_0",
+      42,
+      "",
+      "initial_left_0",
+      11,
+      "",
+      "L"
+    ],
+    [
+      "sum_entry_1",
+      42,
+      "",
+      "initial_left_1",
+      11,
+      "",
+      "L"
+    ],
+    [
+      "upper_first_b",
+      16,
+      "0",
+      "upper_scan_b_0",
+      16,
+      "0",
+      "R"
+    ],
+    [
+      "upper_first_b",
+      16,
+      "1",
+      "upper_scan_b_1",
+      16,
+      "1",
+      "R"
+    ],
+    [
+      "initial_left_one_0",
+      28,
+      "0",
+      "initial_left_padding",
+      2,
+      "0",
+      "L"
+    ],
+    [
+      "initial_left_one_1",
+      11,
+      "1",
+      "initial_left_padding",
+      2,
+      "1",
+      "L"
+    ],
+    [
+      "initial_left_0",
+      11,
+      "0",
+      "initial_left_second",
+      26,
+      "0",
+      "L"
+    ],
+    [
+      "initial_left_1",
+      11,
+      "1",
+      "initial_left_second",
+      2,
+      "1",
+      "L"
+    ],
+    [
+      "upper_scan_b_0",
+      16,
+      "0",
+      "upper_scan_b_0",
+      16,
+      "0",
+      "R"
+    ],
+    [
+      "upper_scan_b_0",
+      16,
+      "1",
+      "upper_scan_b_1",
+      16,
+      "1",
+      "R"
+    ],
+    [
+      "upper_scan_b_0",
+      16,
+      "",
+      "upper_factor_0",
+      13,
+      "",
+      "L"
+    ],
+    [
+      "upper_scan_b_1",
+      16,
+      "0",
+      "upper_scan_b_0",
+      16,
+      "0",
+      "R"
+    ],
+    [
+      "upper_scan_b_1",
+      16,
+      "1",
+      "upper_scan_b_1",
+      16,
+      "1",
+      "R"
+    ],
+    [
+      "upper_scan_b_1",
+      16,
+      "",
+      "upper_factor_1",
+      13,
+      "",
+      "L"
+    ],
+    [
+      "initial_left_padding",
+      2,
+      "0",
+      "initial_left_boundary",
+      23,
+      "0",
+      "L"
+    ],
+    [
+      "initial_left_second",
+      26,
+      "0",
+      "initial_left_third",
+      2,
+      "0",
+      "L"
+    ],
+    [
+      "initial_left_second",
+      26,
+      "1",
+      "initial_left_third",
+      2,
+      "1",
+      "L"
+    ],
+    [
+      "initial_left_second",
+      2,
+      "0",
+      "initial_left_third",
+      23,
+      "0",
+      "L"
+    ],
+    [
+      "initial_left_second",
+      2,
+      "1",
+      "initial_left_third",
+      23,
+      "1",
+      "L"
+    ],
+    [
+      "upper_factor_0",
+      13,
+      "0",
+      "erase_first_0",
+      27,
+      "",
+      "L"
+    ],
+    [
+      "upper_factor_1",
+      13,
+      "1",
+      "erase_first_1",
+      22,
+      "",
+      "L"
+    ],
+    [
+      "initial_left_boundary",
+      23,
+      "",
+      "inspect_below",
+      12,
+      "",
+      "D"
+    ],
+    [
+      "initial_left_third",
+      2,
+      "0",
+      "left_after_0",
+      23,
+      "0",
+      "L"
+    ],
+    [
+      "initial_left_third",
+      2,
+      "1",
+      "left_after_1",
+      23,
+      "1",
+      "L"
+    ],
+    [
+      "initial_left_third",
+      23,
+      "0",
+      "left_after_0",
+      23,
+      "0",
+      "L"
+    ],
+    [
+      "initial_left_third",
+      23,
+      "1",
+      "left_after_1",
+      23,
+      "1",
+      "L"
+    ],
+    [
+      "erase_first_0",
+      27,
+      "0",
+      "erase_rest_0",
+      10,
+      "",
+      "L"
+    ],
+    [
+      "erase_first_0",
+      27,
+      "1",
+      "erase_rest_0",
+      10,
+      "",
+      "L"
+    ],
+    [
+      "erase_first_1",
+      22,
+      "0",
+      "erase_rest_1",
+      1,
+      "",
+      "L"
+    ],
+    [
+      "erase_first_1",
+      22,
+      "1",
+      "erase_rest_1",
+      1,
+      "",
+      "L"
+    ],
+    [
+      "inspect_below",
+      12,
+      "0",
+      "lower_first",
+      0,
+      "0",
+      "R"
+    ],
+    [
+      "inspect_below",
+      12,
+      "",
+      "finish",
+      35,
+      "",
+      "U"
+    ],
+    [
+      "left_after_0",
+      23,
+      "0",
+      "left_after_0",
+      23,
+      "0",
+      "L"
+    ],
+    [
+      "left_after_0",
+      23,
+      "1",
+      "left_after_1",
+      23,
+      "1",
+      "L"
+    ],
+    [
+      "left_after_0",
+      23,
+      "",
+      "inspect_below",
+      12,
+      "",
+      "D"
+    ],
+    [
+      "left_after_1",
+      23,
+      "0",
+      "left_after_0",
+      23,
+      "0",
+      "L"
+    ],
+    [
+      "left_after_1",
+      23,
+      "1",
+      "left_after_1",
+      23,
+      "1",
+      "L"
+    ],
+    [
+      "erase_rest_0",
+      10,
+      "0",
+      "erase_rest_0",
+      10,
+      "",
+      "L"
+    ],
+    [
+      "erase_rest_0",
+      10,
+      "1",
+      "erase_rest_0",
+      10,
+      "",
+      "L"
+    ],
+    [
+      "erase_rest_0",
+      10,
+      "x",
+      "product_first_0",
+      25,
+      "",
+      "L"
+    ],
+    [
+      "erase_rest_1",
+      1,
+      "0",
+      "erase_rest_1",
+      1,
+      "",
+      "L"
+    ],
+    [
+      "erase_rest_1",
+      1,
+      "1",
+      "erase_rest_1",
+      1,
+      "",
+      "L"
+    ],
+    [
+      "erase_rest_1",
+      1,
+      "x",
+      "product_first_1",
+      6,
+      "",
+      "L"
+    ],
+    [
+      "lower_first",
+      0,
+      "0",
+      "lower_scan",
+      24,
+      "0",
+      "R"
+    ],
+    [
+      "lower_first",
+      0,
+      "1",
+      "lower_scan",
+      24,
+      "1",
+      "R"
+    ],
+    [
+      "finish",
+      35,
+      "",
+      "halt",
+      51,
+      "",
+      "S"
+    ],
+    [
+      "lower_scan",
+      24,
+      "0",
+      "lower_scan",
+      24,
+      "0",
+      "R"
+    ],
+    [
+      "lower_scan",
+      24,
+      "1",
+      "lower_scan",
+      24,
+      "1",
+      "R"
+    ],
+    [
+      "lower_scan",
+      24,
+      "",
+      "align_first",
+      17,
+      "",
+      "U"
+    ],
+    [
+      "align_first",
+      17,
+      "0",
+      "align_next",
+      8,
+      "0",
+      "R"
+    ],
+    [
+      "align_first",
+      17,
+      "1",
+      "align_next",
+      8,
+      "1",
+      "R"
+    ],
+    [
+      "align_next",
+      8,
+      "0",
+      "align_rest",
+      4,
+      "0",
+      "R"
+    ],
+    [
+      "align_next",
+      8,
+      "1",
+      "align_rest",
+      4,
+      "1",
+      "R"
+    ],
+    [
+      "align_next",
+      8,
+      "",
+      "top_first",
+      32,
+      "",
+      "L"
+    ],
+    [
+      "align_rest",
+      4,
+      "0",
+      "align_rest",
+      8,
+      "0",
+      "R"
+    ],
+    [
+      "align_rest",
+      4,
+      "1",
+      "align_rest",
+      4,
+      "1",
+      "R"
+    ],
+    [
+      "align_rest",
+      4,
+      "",
+      "top_first",
+      41,
+      "",
+      "L"
+    ],
+    [
+      "top_first",
+      32,
+      "0",
+      "first_add_0",
+      46,
+      "",
+      "D"
+    ],
+    [
+      "top_first",
+      32,
+      "1",
+      "first_add_1",
+      22,
+      "",
+      "D"
+    ],
+    [
+      "align_rest",
+      8,
+      "0",
+      "align_rest",
+      4,
+      "0",
+      "R"
+    ],
+    [
+      "align_rest",
+      8,
+      "1",
+      "align_rest",
+      4,
+      "1",
+      "R"
+    ],
+    [
+      "align_rest",
+      8,
+      "",
+      "top_first",
+      32,
+      "",
+      "L"
+    ],
+    [
+      "top_first",
+      41,
+      "0",
+      "first_add_0",
+      27,
+      "",
+      "D"
+    ],
+    [
+      "top_first",
+      41,
+      "1",
+      "first_add_1",
+      22,
+      "",
+      "D"
+    ],
+    [
+      "first_add_0",
+      46,
+      "",
+      "first_return",
+      18,
+      "0",
+      "U"
+    ],
+    [
+      "first_add_1",
+      22,
+      "",
+      "first_return",
+      21,
+      "1",
+      "U"
+    ],
+    [
+      "first_add_0",
+      27,
+      "",
+      "first_return",
+      21,
+      "0",
+      "U"
+    ],
+    [
+      "first_return",
+      18,
+      "",
+      "top_second",
+      21,
+      "",
+      "L"
+    ],
+    [
+      "first_return",
+      21,
+      "",
+      "top_second",
+      21,
+      "",
+      "L"
+    ],
+    [
+      "top_second",
+      21,
+      "0",
+      "add_0",
+      30,
+      "",
+      "D"
+    ],
+    [
+      "top_second",
+      21,
+      "1",
+      "add_1",
+      29,
+      "",
+      "D"
+    ],
+    [
+      "add_0",
+      30,
+      "",
+      "gap_return",
+      21,
+      "0",
+      "U"
+    ],
+    [
+      "add_0",
+      30,
+      "0",
+      "return_0",
+      50,
+      "0",
+      "U"
+    ],
+    [
+      "add_0",
+      30,
+      "1",
+      "return_0",
+      50,
+      "1",
+      "U"
+    ],
+    [
+      "add_1",
+      29,
+      "",
+      "gap_return",
+      21,
+      "1",
+      "U"
+    ],
+    [
+      "add_1",
+      29,
+      "0",
+      "return_0",
+      50,
+      "1",
+      "U"
+    ],
+    [
+      "add_1",
+      29,
+      "1",
+      "return_1",
+      10,
+      "0",
+      "U"
+    ],
+    [
+      "gap_return",
+      21,
+      "",
+      "top_gap",
+      21,
+      "",
+      "L"
+    ],
+    [
+      "return_0",
+      50,
+      "",
+      "top_0",
+      37,
+      "",
+      "L"
+    ],
+    [
+      "return_1",
+      10,
+      "",
+      "top_1",
+      38,
+      "",
+      "L"
+    ],
+    [
+      "top_gap",
+      21,
+      "0",
+      "add_0",
+      30,
+      "",
+      "D"
+    ],
+    [
+      "top_gap",
+      21,
+      "1",
+      "add_1",
+      29,
+      "",
+      "D"
+    ],
+    [
+      "top_0",
+      37,
+      "0",
+      "add_0",
+      30,
+      "",
+      "D"
+    ],
+    [
+      "top_0",
+      37,
+      "1",
+      "add_1",
+      29,
+      "",
+      "D"
+    ],
+    [
+      "top_0",
+      37,
+      "",
+      "leading_zero",
+      20,
+      "",
+      "D"
+    ],
+    [
+      "top_1",
+      38,
+      "0",
+      "add_1_nonblank",
+      29,
+      "",
+      "D"
+    ],
+    [
+      "top_1",
+      38,
+      "1",
+      "add_2_nonblank",
+      9,
+      "",
+      "D"
+    ],
+    [
+      "top_1",
+      38,
+      "",
+      "carry_extension",
+      42,
+      "",
+      "D"
+    ],
+    [
+      "leading_zero",
+      20,
+      "0",
+      "left_of_sum",
+      31,
+      "0",
+      "L"
+    ],
+    [
+      "add_1_nonblank",
+      29,
+      "0",
+      "return_0",
+      50,
+      "1",
+      "U"
+    ],
+    [
+      "add_1_nonblank",
+      29,
+      "1",
+      "return_1",
+      10,
+      "0",
+      "U"
+    ],
+    [
+      "add_2_nonblank",
+      9,
+      "0",
+      "return_1",
+      10,
+      "0",
+      "U"
+    ],
+    [
+      "add_2_nonblank",
+      9,
+      "1",
+      "return_1",
+      10,
+      "1",
+      "U"
+    ],
+    [
+      "carry_extension",
+      42,
+      "0",
+      "extension_return",
+      47,
+      "1",
+      "U"
+    ],
+    [
+      "left_of_sum",
+      31,
+      "",
+      "inspect_below",
+      36,
+      "",
+      "D"
+    ],
+    [
+      "extension_return",
+      47,
+      "",
+      "extension_top",
+      33,
+      "",
+      "L"
+    ],
+    [
+      "inspect_below",
+      36,
+      "0",
+      "lower_first",
+      0,
+      "0",
+      "R"
+    ],
+    [
+      "inspect_below",
+      36,
+      "",
+      "finish",
+      40,
+      "",
+      "U"
+    ],
+    [
+      "extension_top",
+      33,
+      "",
+      "left_of_sum",
+      34,
+      "",
+      "D"
+    ],
+    [
+      "finish",
+      40,
+      "",
+      "halt",
+      51,
+      "",
+      "S"
+    ],
+    [
+      "left_of_sum",
+      34,
+      "",
+      "inspect_below",
+      36,
+      "",
+      "D"
+    ]
+  ],
+  "execution_checks": {
+    "exhaustive_pairs_lengths_1_through_6": 15876,
+    "compared_transitions": 10184741,
+    "directed_cases": 45,
+    "random_cases": 128,
+    "max_operand_length": 1024,
+    "distinct_nonterminal_entries_exercised": 132,
+    "certified_entries_not_exercised": [
+      [
+        15,
+        "1"
+      ]
+    ],
+    "full_traces_final_grids_and_heads_agree": true,
+    "arithmetic_output_and_padding_match": true
+  },
+  "pdf_printed_entries_match_csv": 208
+}
