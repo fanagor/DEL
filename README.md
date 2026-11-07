@@ -386,11 +386,11 @@ model's training methods and existing direct-call behavior unchanged.
 
 DFST follows the paper's tensor convention directly:
 
-\[
+$$
 h_t = A(x_t)h_{t-1},\qquad
 \hat s_t = B(x_t)h_{t-1},\qquad
 \hat m_t = C(x_t)h_{t-1}.
-\]
+$$
 
 `A` stores transitions, `B` predicts symbols, `C` predicts movements, and `h0`
 stores the initial state. Training can use a tested logarithmic-depth matrix
