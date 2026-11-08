@@ -1,5 +1,10 @@
 # Paper Artifacts
 
+The final NeurIPS 2026 paper, **[Differentiable Exact Learning](differentiable_exact_learning.pdf)**
+by Hristo Papazov, Francesco D'Angelo, and Nicolas Flammarion, accompanies the
+configurations, trained weights, results, and proofs collected here. The PDF includes
+the full appendices.
+
 [figures.yaml](figures.yaml) selects final-evaluation runs, all eight extracted-controller cases and the two 1M-step training-dynamics comparisons. [analyses.yaml](analyses.yaml) catalogs the five metric extractions and three annealing cases, with notebook indices, released source runs, proof domains, proof documents, checkers and saved reports. A separate `training_dynamics` section catalogs saved loss histories, checkpoint evaluations and measurement settings. Figure selections remain in `figures.yaml`.
 
 All case paths point directly to curated directories under `analyses/metric_extraction/` or `analyses/annealing/`. The `path` field identifies the published artifacts; `source_run` identifies the released neural checkpoint used for extraction. Proof paths resolve relative to the case directory. Proof domains concern extracted discrete controllers, not the continuous neural models. Universal metric extraction covers nonempty inputs; universal annealing also covers empty input.
@@ -25,7 +30,7 @@ The command uses released files and saved histories without a tracking-service c
 
 The final-results notebooks require evaluations for every selected run. Evaluation ceilings retain the saved `at_cap` flags.
 
-Use the main paper for the central comparisons, extraction mechanism, and precise claims. Include the supporting proof statements and arguments in the appendix or supplement. The repository contains the configurations, machine-readable tables, plots, and executable checkers needed to inspect those claims.
+The [paper](differentiable_exact_learning.pdf) presents the central comparisons, extraction methods, and precise claims; the appendices provide the supporting proof statements and arguments. The repository supplies the configurations, machine-readable tables, plots, and executable checkers needed to inspect those claims.
 
 The training-dynamics notebook loads 1M-step add2 and mult2 selections from
 `training_dynamics` in [figures.yaml](figures.yaml). Override `RUNS` in the notebook

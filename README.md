@@ -1,23 +1,34 @@
 # DEL: Differentiable Exact Learning
 
-DEL abbreviates **Differentiable Exact Learning**. The distribution uses
-`differentiable-exact-learning`, Python imports use `differentiable_exact_learning`, and shell
-commands start with `del`. Python reserves lowercase `del` as a keyword.
+Companion repository for **[Differentiable Exact Learning](paper/differentiable_exact_learning.pdf)**,
+NeurIPS 2026, by **Hristo Papazov, Francesco D'Angelo, and Nicolas Flammarion**.
 
-DEL learns algorithms from **policy-trajectory observations (PTOs)**: read symbols,
-written symbols, and movements from expert executions. The controller receives
-observations and action targets, never the expert's internal state.
+The repository provides the paper, code, full experimental configurations, trained
+model weights, evaluation results, training histories, figure notebooks, and
+extracted controllers with mathematical proofs and executable proof checkers.
 
-![Observe PTOs pairing environment inputs with expert actions; learn differentiably with a state-tracking neural network for extreme length generalization; extract a discrete controller provably equivalent to the expert in the illustrated case.](docs/assets/binary_addition_overview.svg)
+**[Read the Paper](paper/differentiable_exact_learning.pdf)** ·
+**[Explore the Results](paper/README.md)** ·
+**[Browse Trained Models](runs/README.md)** ·
+**[Run the Interactive Viewer](#interactive-tape-and-grid-viewer)** ·
+**[Quick Start](#quick-start)**
 
-Each PTO pairs environment inputs (read symbols) with expert actions (writes and movements)
-over an execution. DEL trains a state-tracking neural network to predict those actions.
-The [binary-addition case](analyses/metric_extraction/DFST/add2/warmup_50000_steps_250000/README.md)
-includes an extracted finite-state discrete controller and a proof of exact agreement
-with the expert for all nonempty binary operands.
+DEL trains neural controllers to learn algorithms from **policy-trajectory
+observations (PTOs)**: sequences of read symbols, writes, and movements from expert
+executions. The learner observes the expert's actions, never the expert's internal
+states. A state-tracking controller interacts with an unbounded external environment;
+the experiments cover **DFST, Softmax DFST, RNN, and GRU** controllers on arithmetic
+and universal-machine tasks.
+
+![Observe expert PTOs without hidden states, learn differentiably with a state-tracking neural controller, and extract a discrete controller for a proof of expert equivalence.](docs/assets/learning_pipeline.svg)
+
+Differentiable training yields extreme length generalization. Extraction then
+recovers discrete controllers, and task-specific proofs establish exact agreement
+with the expert algorithms. The paper states the additional assumptions needed to
+transfer those guarantees to neural execution.
 
 <details>
-<summary>Try the interactive binary-addition demo</summary>
+<summary>Try the interactive binary-addition demo locally</summary>
 
 After [installing DEL](#install), run:
 
@@ -28,34 +39,38 @@ del animate grid:add2 '101+11'
 The command opens the expert execution in a local browser. Change the input,
 pause playback, or advance one step at a time.
 See the [viewer guide](#interactive-tape-and-grid-viewer) for more controllers
-and trained-model playback.
+and trained-model playback. The [binary-addition analysis](analyses/metric_extraction/DFST/add2/warmup_50000_steps_250000/README.md)
+includes the extracted controller and a proof covering all nonempty binary operands.
 
 </details>
 
-This repository accompanies *Differentiable Exact Learning of Algorithms* and
-contains arithmetic Turing machines, arithmetic grid agents, the universal
-teleporting agent, and four differentiable controllers: **DFST, DFST_Softmax,
-RNN and GRU**. DFST_Softmax and GRU extend the experiments
-described in the current manuscript.
+## Results at a Glance
 
-One training loop handles every controller, environment, and data source. One
-configuration defines the experiment. Evaluation uses teacher forcing throughout.
+![Paper Figure 1: DFST length generalization on arithmetic and universal simulation, showing short training inputs and successful tests up to the evaluation caps.](docs/assets/front_page_summary.svg)
 
-The **universal teleporting agent** executes encoded binary Turing machines.
-The **universal learning task** trains a neural controller from the agent’s
-policy-trajectory observations across programs and inputs. Configuration files
-use `data.environment: teleporting`; recipe paths use `universal`.
+Compact DFSTs trained on short PTOs reach the tested caps of **5,000 digits for
+addition**, **1,000 digits for multiplication**, and **500 input symbols for
+universal simulation**, including held-out programs. Shading marks training input
+lengths; endpoints mark successful tests at the evaluation caps. The paper and
+saved evaluations give the task-specific protocols and full results.
 
 ## Paper Runs and Analyses
 
-[runs/](runs/README.md) groups the selected experiments by controller, task,
-and varied parameters. Each completed run contains the configuration, final checkpoint,
-and final evaluation. [paper/figures.yaml](paper/figures.yaml) selects the runs used in the figures.
+| Material | Location |
+|---|---|
+| Final paper, including appendices and proofs | [Paper PDF](paper/differentiable_exact_learning.pdf) |
+| Full configurations, trained weights, and final evaluations for the released runs | [runs/](runs/README.md) |
+| Training recipes and sweep commands | [configs/](configs/README.md) |
+| Figure selections and reproduction commands | [paper/](paper/README.md) |
+| Eight notebooks for results, extraction, and annealing | [notebooks/](notebooks/README.md) |
+| Extracted controllers, proofs, and executable checkers | [analyses/](analyses/README.md) |
+| Training loss histories and checkpoint evaluations for DFST, RNN, and GRU | [Training dynamics](analyses/README.md#training-dynamics) |
 
-The [eight paper notebooks](notebooks/README.md) plot the final results and display the
-selected extraction and annealing cases. Training dynamics comparisons read the
-saved histories and checkpoint evaluations in `analyses/training_dynamics/`. [analyses/](analyses/README.md) also contains extracted machines, figures, proof documents and verification scripts.
-See [paper/](paper/README.md) for the run selections and reproduction commands.
+Each completed run in `runs/` contains a resolved `config.yaml`, a
+`final_model_checkpoint.pt`, and an `evaluation.json`.
+[paper/figures.yaml](paper/figures.yaml) selects the runs used in the figures;
+[paper/analyses.yaml](paper/analyses.yaml) catalogs the extraction cases and training
+histories. The notebooks can display the released results without retraining.
 
 ## Install
 
@@ -72,6 +87,10 @@ python -m pip install -e '.[dev,analysis]'
 The core depends on PyTorch, NumPy, and PyYAML. Install `.[tracking]` to enable optional W&B logging.
 `requirements-tested.txt` records the exact versions used for the local CPU
 validation; GPU-specific PyTorch installation remains platform-dependent.
+
+The package name uses `differentiable-exact-learning`, Python imports use
+`differentiable_exact_learning`, and shell commands use `del`. The longer Python
+name avoids the reserved keyword `del`.
 
 ## Quick Start
 
@@ -117,7 +136,7 @@ src/differentiable_exact_learning/
 configs/               # Representative training recipes grouped by model
 docs/                  # Teaching-set specifications and coverage tables
 runs/                  # Selected final configurations, weights and evaluations
-paper/                 # Run, figure and extracted-controller selections
+paper/                 # Paper PDF and run, figure and controller selections
 analyses/              # Curated analysis artifacts, grouped by method
   metric_extraction/   # Extracted machines, stability plots and proofs
   annealing/           # Annealed controllers, probability plots and proofs
@@ -130,6 +149,15 @@ scripts/               # Artifact export, plotting and notebook validation
 ```
 
 ## Experiments and Configuration
+
+One training loop handles all four controller families and the tape, grid, and
+teleporting environments. Evaluation uses teacher forcing; the interactive viewer
+runs autonomous executions.
+
+The universal teleporting agent executes encoded binary Turing machines. The
+universal learning task trains a neural controller from PTOs across programs and
+inputs. Configuration files use `data.environment: teleporting`; recipe paths use
+`universal`.
 
 The canonical configuration,
 [`src/differentiable_exact_learning/config.yaml`](src/differentiable_exact_learning/config.yaml),
