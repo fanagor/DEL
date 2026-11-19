@@ -4,7 +4,7 @@
 
 Can a learner exactly recover the underlying procedure by observing an algorithm's execution? In [Differentiable Exact Learning](https://arxiv.org/abs/2611.21486v1), we give a neural controller demonstrations of an expert Turing machine acting on a grid. The learner sees every symbol the expert reads and writes, and every movement of the head. The expert’s internal states remain hidden. From these observations, we train controllers on tiny datasets of short inputs, generalize to extremely long inputs, and finally extract small discrete controllers from the neural networks whose behavior provably matches the expert's.
 
-The learning pipeline starts with expert demonstrations, trains a neural controller, and extracts a discrete controller for verification. !(docs/assets/learning_pipeline.svg)
+The learning pipeline starts with expert demonstrations, trains a neural controller, and extracts a discrete controller for verification. ![](docs/assets/learning_pipeline.svg)
 
 ## Results at a Glance
 
