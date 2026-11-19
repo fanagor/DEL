@@ -1,30 +1,21 @@
-# Universal Teleporting Agent: metric extraction
+# Universal Simulation by Metric Extraction
 
-Notebook case index: `4`. Source run: `runs/DFST/universal/data_75_steps_500000`.
+We trained a 15-dimensional DFST on 75 demonstrations for 500,000 updates before extraction. The [released run](../../../../../runs/DFST/universal/data_75_steps_500000) contains the original weights and training configuration. The [case configuration](config.yaml) identifies that checkpoint by checksum and records the settings for metric extraction.
 
-Proof domain: Correctly encoded binary Turing machines with nonempty binary inputs.
+## Inspect the Recovered Controller
 
-`config.yaml` records the source checkpoint checksum and method settings.
-`machines/` contains the extracted and expert transition maps in JSON, readable
-CSV and PDF, together with the state maps. `figures/` contains the main plots;
-`data/` contains the measurements and inputs needed for inspection and plotting.
-Sampled PTO results, counterexamples and coverage checks live in `checks/`.
-Annealing cases also contain `data/probabilities/` for the slider and
-`checkpoints/annealed_model_checkpoint.pt` for the final annealed weights.
+Metric extraction groups hidden states observed during autonomous execution and merges compatible transitions to recover a deterministic controller. The [extracted table](machines/extracted.csv) lists each observed read and the corresponding write, motion, and successor across 44 source states. Compare those rules with the [expert table](machines/expert.csv). The [machine directory](machines/) also provides JSON and PDF versions and the state-numbering maps.
 
-Use `CASE_INDEX = 4` with `RECOMPUTE = False` in the corresponding
-method notebook to display this case. Set `RECOMPUTE = True` to compute a new
-analysis. `SAVE_INTERMEDIATES = True` additionally saves debugging artifacts
-under `intermediates/`; the default produces the compact layout.
+Inspect the [sampled inputs](data/inputs.json), [threshold attempts](data/epsilon_attempts.json), and [graph-stability measurements](data/graph_stability.csv) to trace the construction from neural trajectories to discrete states. The [figures](figures/) summarize the measurements, and the [execution checks](checks/) document the finite comparisons for this case.
 
-The [proof](proof/equivalence_proof.pdf) concerns the extracted discrete controller.
-The self-contained `proof/` bundle includes the checker and all fingerprinted
-dependencies. From the repository root, run:
+To open the saved analysis, select `CASE_INDEX = 4` in the [method notebook](../../../../../notebooks/metric_FST_extraction.ipynb) and leave `RECOMPUTE = False`. To repeat the procedure from the checkpoint, select `RECOMPUTE = True`. Enable `SAVE_INTERMEDIATES` to retain intermediate artifacts as well as the final controller.
+
+## Verify Expert Equivalence
+
+The proof covers every correctly encoded binary Turing machine on every nonempty binary word. The [empty-input counterexample](checks/empty_input_counterexample.json) shows why the domain excludes the empty word. The [mathematical argument](proof/equivalence_proof.pdf) establishes agreement of the extracted and expert controllers throughout every valid execution. The [checker](proof/verify_equivalence.py) verifies the finite obligations and performs supplementary replay checks. From the repository root, run the following command.
 
 ```sh
 python analyses/metric_extraction/DFST/universal/data_75_steps_500000/proof/verify_equivalence.py
 ```
 
-The checker verifies finite obligations and supplementary executions. The
-mathematical argument establishes protocol coverage and the unbounded claim.
-Equivalence of the continuous neural model requires additional assumptions.
+The [saved report](proof/equivalence_verification.json) records the verification results. The [paper](https://arxiv.org/abs/2611.21486v1) states the additional assumptions needed to extend the discrete-controller guarantee to neural execution.

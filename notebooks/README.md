@@ -1,10 +1,8 @@
-# Notebooks
+# Exploring the Notebooks
 
-Install the package with `pip install -e '.[analysis,dev]'` from the repository root and use that Python environment in Jupyter.
+To see how a controller acts on a single input, open the [controller walkthrough](controller_walkthrough.ipynb). You can inspect an expert’s state count, measure the length of a policy-trajectory observation, and follow the head across the grid. The walkthrough runs with built-in experts by default. If you enable a local animation, interrupt the viewer cell when you want to continue.
 
-[controller_walkthrough.ipynb](controller_walkthrough.ipynb) introduces the implemented experts with a state-count catalog, single-input PTO measurements and animations. The default walkthrough requires no model weights and complements the eight paper notebooks. Check the animation switches before running those cells; an enabled animation serves the viewer until interrupted.
-
-The directory contains nine notebooks: the controller walkthrough above and these eight paper workflows:
+For the paper experiments, install DEL with `pip install -e '.[analysis,dev]'` from the repository root and select the same Python environment in Jupyter. The eight notebooks below read the released runs and analyses.
 
 | Notebook | Purpose |
 |---|---|
@@ -17,59 +15,45 @@ The directory contains nine notebooks: the controller walkthrough above and thes
 | [metric_FST_extraction.ipynb](metric_FST_extraction.ipynb) | Saved metric-extraction cases and a repeatable procedure |
 | [anneal_dfst_softmax_to_fst.ipynb](anneal_dfst_softmax_to_fst.ipynb) | Saved annealing cases, probability-heatmap sliders for add2/mult2/universal, and a repeatable procedure |
 
-The arithmetic, universal and front-page notebooks load final `evaluation.json` files from `runs/`. Each selected result requires a final evaluation. The two method notebooks display the selected curated `analyses/` case by default; set `RECOMPUTE = True` and choose `CASE_INDEX` to repeat a procedure from the recorded settings.
+## Rebuild a Figure
 
-Metric-extraction `CASE_INDEX` follows **0 = add2, 1 = mult2, 2 = add10, 3 = mult10, 4 = universal**. The universal case uses DFST, dataset size 75 and 500k training steps. Annealing uses a separate index sequence.
+The arithmetic, universal, and front-page notebooks read each selected run’s final `evaluation.json`. Start with the default selections to reconstruct the published plots. The training-dynamics notebook loads one million updates of loss history and ten checkpoint evaluations for each binary task and controller family. The notebook exports four two-panel figures pairing loss with ULG or RLG. Edit `RUNS` to choose your own histories, or set a model entry to `None` to omit the corresponding curve.
 
-Both method notebooks expose `CHECKPOINT_PATH` in Section 1. Set `RECOMPUTE = True`, choose a published recipe with `CASE_INDEX`, then replace `CHECKPOINT_PATH` with a released or intermediate checkpoint file. The loader reads the saved step and configuration. Review the method settings and final PTO-test settings in the same cell. Relative paths resolve from the repository root.
+## Inspect or Repeat an Extraction
 
-The loading cell only loads and displays the checkpoint. Continue through the remaining cells for the full analysis: metric extraction keeps the neural weights fixed; annealing continues training before FST extraction. Both conclude with sampled PTO checks of the extracted controller. Section 1 explains the supported models, and the final section lists the output files. Restart the kernel after changing checkpoints to refresh dependent results.
+Both method notebooks open a saved case with `RECOMPUTE = False`. For metric extraction, indices 0 through 4 select binary addition, binary multiplication, decimal addition, decimal multiplication, and universal simulation, respectively. The universal case uses a DFST trained on 75 demonstrations for 500,000 updates. Annealing has a separate index for each of three cases. The [case catalog](../paper/analyses.yaml) records both sets of indices.
 
-New outputs go to `analysis_outputs/` at the repository root. The Figure Outputs section lists the export folders and `DEL_ANALYSIS_DIR` behavior. `DEL_REPO_ROOT` selects the checkout when a notebook runs outside the checkout.
+To analyze another checkpoint, set `RECOMPUTE = True`, choose a starting recipe with `CASE_INDEX`, and set `CHECKPOINT_PATH` in Section 1 to a released or intermediate checkpoint. Review the method parameters and final PTO checks in the same cell. The loader displays the saved step and configuration. Run the remaining cells to extract a controller and compare sampled executions with the expert. Metric extraction keeps the weights fixed. Annealing continues training before the discrete readout. After changing checkpoints, restart the kernel and run the cells again.
 
-`training_dynamics.ipynb` exports four 1 × 2 figures, one per task and metric, using 1M-step histories. The default selections contain DFST, RNN and GRU. Edit paths in `RUNS`; leave `None` to omit a model. Supplied paths require complete histories and ten ULG/RLG evaluations. Legends and exported tables contain only the selected models. Single-input PTO measurement appears in `controller_walkthrough.ipynb`.
+For metric extraction, enable `TEACHING_SET` to append the complete teaching core after the random or custom sample. `MAX_LENGTH` bounds the random inputs. Teaching examples retain the prescribed lengths. When restoring a recipe, use `CASE_CONFIG.get("random_samples", CASE_CONFIG["samples"])` for `N_TRAJECTORIES` and `CASE_CONFIG.get("teaching_set", False)` for the teaching-set switch. These settings count the random sample and the teaching core separately.
 
-Validate the eight paper notebooks and execute temporary copies:
+The default output includes the configuration, final controller maps, plots, measurements, and checks. To save additional diagnostic files under `intermediates/`, enable `SAVE_INTERMEDIATES`. Both output modes support the annealing probability slider. The [analysis guide](../analyses/README.md) explains how to inspect a saved case.
+
+## Check the Notebooks
+
+Run the following command from the repository root to validate and execute temporary copies of the eight paper workflows. Omit both `--paper` and `--execute` to validate the structure and code of all nine notebooks, including the walkthrough.
 
 ```sh
 python scripts/check_notebooks.py --paper --execute --timeout 180
 ```
 
-The command checks the eight paper notebooks and needs the released runs and analysis cases. Saved notebooks and published figures remain unchanged. To validate every notebook's structure, omit `--paper --execute`.
-
-
-For metric extraction, `TEACHING_SET = CASE_CONFIG.get("teaching_set", False)`
-controls optional teaching inputs. Set `True` to append the complete teaching
-core for the loaded checkpoint's expert after the standard or custom sample.
-`MAX_LENGTH` bounds random inputs; teaching inputs retain the prescribed lengths.
-New experiment metadata records the random count, teaching count and total count.
-When restoring a recipe, use `CASE_CONFIG.get("random_samples", CASE_CONFIG["samples"])`
-for `N_TRAJECTORIES` to avoid counting teaching inputs twice.
-
-The method notebooks use `CASE_INDEX` to display one saved case. Compact outputs
-contain configuration, final machine maps, plots, diagnostic data and checks.
-Set `SAVE_INTERMEDIATES = True` during recomputation to save debugging artifacts
-under `intermediates/`. Annealing probability snapshots support the viewer in
-both storage modes. See [the analysis layout](../analyses/README.md) for the folder contents.
-
-
 ## Figure Outputs
 
-Figure notebooks save PDFs, SVGs, PNGs and supporting tables under
-`analysis_outputs/paper_figures/`:
+By default, the figure notebooks save PDFs, SVGs, PNGs, and supporting tables under
+`analysis_outputs/paper_figures/`. The subdirectories group results by model and figure family.
 
 | Folder | Contents |
 |---|---|
-| `DFST/<task>/` | Generalization plots for add2, add10, mult2, mult10 or universal; universal run and metric tables |
+| `DFST/<task>/` | Generalization plots for add2, add10, mult2, mult10 or universal, plus universal run and metric tables |
 | `DFST/arithmetic/` | Combined arithmetic plots and the arithmetic metric table |
-| `DFST_Softmax/<task>/` | Generalization plots for add2, mult2 or universal; universal run and metric tables |
+| `DFST_Softmax/<task>/` | Generalization plots for add2, mult2 or universal, plus universal run and metric tables |
 | `DFST_Softmax/arithmetic/` | Arithmetic metric table |
 | `front_page_summary/` | Summary figure and selected-run table |
 | `training_dynamics/` | Per-task ULG and RLG figures, curve tables and settings for add2 and mult2 |
 
-Set `DEL_ANALYSIS_DIR` to replace the figure root. Every figure notebook appends
+Set `DEL_REPO_ROOT` when running notebooks outside the checkout. Set `DEL_ANALYSIS_DIR` to replace the figure root. Every figure notebook appends
 the model/task or figure-family subfolders shown above. Relative roots resolve
 from the repository root. Repeated exports replace matching filenames.
 The controller walkthrough displays examples and animations inline.
-Extraction and annealing use separate case directories under `analysis_outputs/`;
-for those two notebooks, `DEL_ANALYSIS_DIR` specifies the complete case directory.
+Extraction and annealing use separate case directories under `analysis_outputs/`.
+For those two notebooks, `DEL_ANALYSIS_DIR` specifies the complete case directory.

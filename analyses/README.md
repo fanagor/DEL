@@ -1,6 +1,27 @@
 # Analysis Artifacts
 
-[paper/analyses.yaml](../paper/analyses.yaml) catalogs controller extractions and training histories in separate sections. Extracted-controller paths group cases by method and source run:
+The analyses answer two questions about a trained controller. First, can we recover a discrete program and prove that the program matches the expert? Second, how does length generalization develop during training? Start with an extraction case below to inspect a recovered program, or jump to [Training Dynamics](#training-dynamics) to follow a controller across checkpoints.
+
+## Choose an Extraction Case
+
+The table links each proof to the experiment that supplied the neural weights. Metric extraction uses fixed DFST weights and hidden-state trajectories. Annealing continues training a Softmax DFST before reading off discrete transitions. The [analysis catalog](../paper/analyses.yaml) records the source runs, case indices, input domains, proof files, and checker commands.
+
+| Method | Source run | Case |
+|---|---|---|
+| Metric extraction | DFST add2, warmup 50,000, steps 250,000 | [Binary addition](metric_extraction/DFST/add2/warmup_50000_steps_250000/README.md) |
+| Metric extraction | DFST mult2, warmup 25,000, steps 500,000 | [Binary multiplication](metric_extraction/DFST/mult2/warmup_25000_steps_500000/README.md) |
+| Metric extraction | DFST add10, warmup 50,000, steps 4,000,000 | [Decimal addition](metric_extraction/DFST/add10/warmup_50000_steps_4000000/README.md) |
+| Metric extraction | DFST mult10, warmup 0, steps 4,000,000 | [Decimal multiplication](metric_extraction/DFST/mult10/warmup_0_steps_4000000/README.md) |
+| Metric extraction | DFST universal, data 75, steps 500,000 | [Universal Teleporting Agent](metric_extraction/DFST/universal/data_75_steps_500000/README.md) |
+| Annealing | Softmax add2, hidden 22, data 75 | [Binary addition](annealing/DFST_Softmax/add2/hidden_22_data_75/README.md) |
+| Annealing | Softmax mult2, hidden 64, data 100 | [Binary multiplication](annealing/DFST_Softmax/mult2/hidden_64_data_100/README.md) |
+| Annealing | Softmax universal, hidden 30, data 150 | [Universal Teleporting Agent](annealing/DFST_Softmax/universal/hidden_30_data_150/README.md) |
+
+For a first example, try binary addition. The case guide takes you from the extracted transition table to the proof for operands of arbitrary finite length. The universal cases illustrate why the input domain matters. Metric extraction certifies the interpreter on nonempty binary inputs. The annealed controller’s proof also covers the empty input.
+
+## Inside a Case
+
+Each case keeps the neural checkpoint reference, the extracted machine, and the evidence supporting the proof together. The following layout shows where to find each artifact.
 
 ```text
 analyses/<method>/<model>/<task>/<run_id>/
@@ -14,121 +35,38 @@ analyses/<method>/<model>/<task>/<run_id>/
     proof/          # Self-contained proof, checker, dependencies and saved report
 ```
 
-`config.yaml` records the source run, checkpoint checksum and method settings.
-Metric extraction saves sampled inputs in `data/inputs.json`, stability measurements
-in `data/graph_stability.csv` and threshold attempts in `data/epsilon_attempts.json`.
-Annealing saves `data/sharpness.csv`, `data/training.jsonl`, probability tensors in
-`data/probabilities/` and `checkpoints/annealed_model_checkpoint.pt`.
+The configuration records the source checkpoint checksum and the method settings. In a metric-extraction case, `data/inputs.json` records the sampled inputs, `data/epsilon_attempts.json` records the thresholds tried, and `data/graph_stability.csv` tracks the graph as more trajectories enter the sample. For annealing, `data/training.jsonl` and `data/sharpness.csv` track optimization and concentration. The probability snapshots drive the notebook slider. The final annealed weights live in `checkpoints/annealed_model_checkpoint.pt`.
 
-`machines/extracted.json` preserves the final controller structure. The matching
-CSV uses readable symbols and movements; the PDF presents the transition table.
-`machines/expert.*` provides the same formats for the expert. State numbering
-matches across all formats. `machines/state_map.json` records minimization;
-`machines/expert_state_map.json` records expert numbering.
-
-Each `proof/` directory contains an independent mathematical argument, checker,
-reference implementations, certificate dependencies and saved report. Keep this
-bundle intact: fingerprints bind the checker to the accompanying files.
-
-The notebooks display only the selected `CASE_INDEX`. Saved views require no
-trajectory generation or training. `SAVE_INTERMEDIATES = False` produces the
-compact layout. Set `True` to additionally save trajectories, prefix graphs,
-intermediate checkpoints and probability figures under `intermediates/`.
-Published cases contain the compact artifacts and proof bundles.
-
-| Method | Source run | Case |
-|---|---|---|
-| Metric extraction | DFST add2, warmup 50,000, steps 250,000 | [Binary addition](metric_extraction/DFST/add2/warmup_50000_steps_250000/README.md) |
-| Metric extraction | DFST mult2, warmup 25,000, steps 500,000 | [Binary multiplication](metric_extraction/DFST/mult2/warmup_25000_steps_500000/README.md) |
-| Metric extraction | DFST add10, warmup 50,000, steps 4,000,000 | [Decimal addition](metric_extraction/DFST/add10/warmup_50000_steps_4000000/README.md) |
-| Metric extraction | DFST mult10, warmup 0, steps 4,000,000 | [Decimal multiplication](metric_extraction/DFST/mult10/warmup_0_steps_4000000/README.md) |
-| Metric extraction | DFST universal, data 75, steps 500,000 | [Universal Teleporting Agent](metric_extraction/DFST/universal/data_75_steps_500000/README.md) |
-| Annealing | Softmax add2, hidden 22, data 75 | [Binary addition](annealing/DFST_Softmax/add2/hidden_22_data_75/README.md) |
-| Annealing | Softmax mult2, hidden 64, data 100 | [Binary multiplication](annealing/DFST_Softmax/mult2/hidden_64_data_100/README.md) |
-| Annealing | Softmax universal, hidden 30, data 150 | [Universal Teleporting Agent](annealing/DFST_Softmax/universal/hidden_30_data_150/README.md) |
-
-Metric-extraction notebook indices follow **0 = add2, 1 = mult2, 2 = add10, 3 = mult10, 4 = universal**. The universal proof covers correctly encoded binary Turing machines with nonempty binary inputs.
-
-These cases illustrate selected extraction regimes. Each theorem states the valid input domain and concerns the extracted discrete controller. The checker establishes finite local obligations and runs supplementary executions. The mathematical argument supplies protocol coverage and the unbounded claim. Finite tests and graph-stability plots do not establish that claim for the continuous neural model.
-
-Use [metric extraction](../notebooks/metric_FST_extraction.ipynb) or [annealing](../notebooks/anneal_dfst_softmax_to_fst.ipynb) to inspect the saved cases. Set `RECOMPUTE = True` to repeat a selected procedure. New results go to `analysis_outputs/`.
-
-[paper/analyses.yaml](../paper/analyses.yaml) catalogs the curated cases directly. To import a new case, supply a separate import manifest to `python scripts/curate_analyses.py --manifest /private/path/imports.yaml`. Published cases require no access to the source extraction directories.
+Use the JSON machine for computation, the CSV to look up a transition, and the PDF to read the table in full. All three formats share state numbers. The accompanying state maps record minimization and expert numbering. To display a case, select `CASE_INDEX` in the [metric-extraction notebook](../notebooks/metric_FST_extraction.ipynb) or the [annealing notebook](../notebooks/anneal_dfst_softmax_to_fst.ipynb). Set `RECOMPUTE = True` to repeat the procedure in `analysis_outputs/`. Enable `SAVE_INTERMEDIATES` to keep trajectories, prefix graphs, intermediate checkpoints, and diagnostic plots where applicable.
 
 ## Proof Conventions
 
-All eight equivalence proofs use the same notation and document structure:
+Each proof begins with the expert, the extracted controller, and the valid inputs. The argument relates an expert state and grid configuration to a phase of the algorithm, then shows that every permitted transition preserves this relation. The finite certificate checks transitions. The phase invariants and induction establish agreement throughout executions of arbitrary length. The resulting theorem concerns the discrete controller. The [paper](https://arxiv.org/abs/2611.21486v1) gives the assumptions for extending the theorem to neural execution.
 
-- Write `\mathcal E` for the expert and `\mathcal C` for the exported controller.
-- Use phase index `i`, expert state `g_i`, and controller-state set `Q_i`. Write a permitted edge as `i --x--> j`; the local certificate compares transitions on read symbol `x` and requires the controller successor to belong to `Q_j`.
-- Write `(q′, w, M)` for a transition, `lambda` for blank, and `PTO` for the sequence of read/write/motion triples. Count the final stopping action once. For universal simulation, use `kappa` for the ternary code width and include hidden rune symbols in the configuration relation.
-- Present the controllers, input domain, execution convention, PTO definition, and theorem first. Follow with expert invariants, protocol coverage, the simulation certificate, the equivalence argument, and reproducibility information. Keep task-specific refinements and domain restrictions explicit.
-- Avoid third-person personal and possessive pronouns. Avoid standalone forms of “to be”; auxiliary uses in passive or progressive constructions remain permitted. Prefer active voice, descriptive verbs, concise prose, and American English. Use an en dash rather than an em dash.
-- Keep each LaTeX source standalone. Match the common preamble, typography, headings, and terminology across the eight documents. Use section and theorem references instead of fixed page numbers.
+The proof bundles use common notation so readers can compare cases.
 
-Every proof bundle contains `verify_equivalence.py` and `fingerprints.json`.
-The checker declares an exact required-artifact list and verifies every listed
-SHA-256 checksum before checking the finite certificate. Required artifacts cover
-the controller exports, expert tables and reference implementation, protocol or
-certificate files, supplementary replay inputs, and the checker itself.
-Transition-table PDFs accompany and identify rendered controller tables where
-provided. The manifest excludes manuscript LaTeX/PDF files, generated verification
-reports, training configurations and experiment metadata.
+| Symbol or Convention | Meaning |
+|---|---|
+| $\mathcal E$, $\mathcal C$ | Expert and exported controller |
+| $i$, $g_i$, $Q_i$ | Phase index, expert state, and related set of controller states |
+| $i \xrightarrow{x} j$ | Permitted phase transition on read symbol $x$. The certificate compares actions and checks membership of the successor in $Q_j$. |
+| $(q',w,M)$ | Successor state, written symbol, and movement |
+| $\lambda$, PTO | Blank symbol and policy-trajectory observation. Each trajectory counts the final stopping action once. |
+| $\kappa$ | Ternary code width in the universal interpreter. The configuration relation also tracks hidden rune symbols. |
 
-`--quick` checks artifact integrity and all finite proof obligations. The default
-command also performs the case-specific replay checks. Mult10 stores the
-extraction replay instances in `replay_inputs.json`; the checksum covers those
-inputs without depending on run names or training metadata. Preserve each case's
-stated input domain and proof scope when interpreting the results.
+Every `proof/` bundle includes a standalone LaTeX argument, `verify_equivalence.py`, a fingerprint manifest, and a saved report. Run the checker with `--quick` for file integrity and all finite proof obligations. Run the default command for supplementary executions as well. Decimal multiplication stores the replay instances in `replay_inputs.json`. Keep the bundled reference code, exported machines, certificate inputs, and checker together so the SHA-256 fingerprints continue to identify the same proof inputs.
 
-Compile each `proof/equivalence_proof.tex` twice with `pdflatex` to resolve cross-references, then inspect the rendered PDF. Run the adjacent `verify_equivalence.py` after revisions. Preserve the controller exports, reference snapshots, finite protocols, and saved verification reports when editing presentation alone; the checkers pin these dependencies by fingerprint.
+To edit a proof, retain the domain and execution convention, use section and theorem references, and compile the standalone LaTeX file twice. The fingerprint manifest covers the computational dependencies and excludes the manuscript, generated reports, and training metadata. Follow the [repository writing conventions](../AGENTS.md) for definitions, narration, and headings. Maintainers importing a new case can follow the [import guide](../scripts/README.md#import-manifests).
 
 ## Training Dynamics
 
-Each model/task folder contains one selected training history. The configuration
-records the seed, training budget, warmup and other settings.
-Each history folder supports plotting independently of `runs/`. The notebooks
-read the local configuration, loss log and saved evaluations; no released
-checkpoint or cross-directory run link participates in loading a history.
+The six histories compare DFST, RNN, and GRU on binary addition and multiplication. Each directory under `training_dynamics/<model>/<task>/` contains one complete million-update history. The [training-dynamics notebook](../notebooks/training_dynamics.ipynb) reads the files directly without loading weights or contacting a tracking service.
 
-`training_dynamics/<model>/<task>/` contains the histories read by
-[training_dynamics.ipynb](../notebooks/training_dynamics.ipynb):
+| File | What to Inspect |
+|---|---|
+| `config.yaml` | Dataset, seed, controller dimensions, optimizer, warmup, and training budget |
+| `metrics.jsonl` | Loss measurements over the course of training |
+| `experiment.json` | Evaluation settings (`evaluation`), checkpoint interval (`evaluation_every`), step list (`evaluation_steps`), and the loss-log checksum (`metrics_sha256`) |
+| `evaluations/step_*.json` | Ten checkpoint measurements at 100,000-update intervals, including ULG and RLG, tested lengths, sampling settings, scan, seed, and protocol |
 
-```text
-config.yaml
-metrics.jsonl
-experiment.json
-evaluations/
-    step_0000100000.json
-    step_0000200000.json
-    ...
-```
-
-Each training-history `experiment.json` contains the same four fields:
-
-- `evaluation`: evaluation settings for the recorded checkpoints.
-- `evaluation_every`: checkpoint interval in training steps.
-- `evaluation_steps`: scheduled checkpoint steps; each completed history contains
-  the corresponding files under `evaluations/`.
-- `metrics_sha256`: SHA-256 checksum of the adjacent `metrics.jsonl` loss history.
-
-The checksum detects changes to the exact log bytes, including formatting.
-Run folders identify the model, task and selected training regime. Each evaluation
-contains `evaluation_config`, `protocol`, `random_samples`, `scan`, `seed`,
-`step` and `tasks`. Checkpoint-source paths and fingerprints do not form part
-of the training-history evaluation schema. Proof bundles store any supplementary replay inputs separately from training metadata.
-
-Keep the configuration, loss history, experiment settings and checkpoint
-evaluations for reproduction. Temporary evaluation progress, locks and sync logs
-do not form part of the curated histories. The training-dynamics notebook accepts
-additional RNN and GRU histories through explicit run selections.
-An omitted model contributes no curve. Figure exports go to
-`analysis_outputs/paper_figures/training_dynamics/`.
-
-The six histories cover DFST, RNN, and GRU on binary addition and multiplication.
-Each history contains ten checkpoint evaluations. At every checkpoint, RLG
-tests all four ordered binary repdigit pairs. The saved evaluation files
-record the measured scores, test lengths, and evaluation settings.
-
-Use each run's `config.yaml` to train with the recorded training settings, or
-choose a representative recipe from [configs/](../configs/README.md).
+RLG checks all four ordered binary repdigit pairs at each candidate length. To add a local history to a comparison, select the directory in the notebook and supply the configuration, complete loss log, experiment settings, and checkpoint evaluations. The notebook exports figures and tables to `analysis_outputs/paper_figures/training_dynamics/`. For training from scratch, use the saved run configuration or choose a [representative recipe](../configs/README.md).

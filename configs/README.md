@@ -1,13 +1,10 @@
 # Training Recipes
 
-Choose a recipe by model and task. `add2` and `mult2` use binary arithmetic; `add10` and `mult10` use decimal arithmetic. `universal` selects the universal learning task in the teleporting environment. The expert follows the universal teleporting agent.
+Choose a recipe by the computation you want to learn. The names `add2` and `mult2` refer to binary addition and multiplication. The suffix `10` selects decimal operands. The `universal` task trains one controller to interpret multiple binary Turing machines encoded on the grid.
 
-A null `run.name` selects an automatic output name of `run-<identity>`. The identity
-depends on the training configuration and expert. Set an explicit name to choose
-a readable prefix, or pass `--run-dir` to choose the output directory.
+## Choose a Starting Configuration
 
-
-These recipes provide one starting configuration per experiment category. The table records the current recipe settings. Related run configurations are linked for reference; checkpoint and evaluation schedules can differ. Use the files in `runs/` when reproducing those exact experiments. Runtime settings use relative paths, automatic device selection and disabled W&B tracking. The RNN and GRU recipes reproduce the 1M-step runs plotted by [training_dynamics.ipynb](../notebooks/training_dynamics.ipynb), including their seeds; other seeds often stay below the RLG cap. They use gradient clipping 0.1 and decay to 1e-7. RNN add2 starts at its peak of 0.01 with orthogonal recurrence. The other three use peak 0.003, `identity_zero_input` recurrence and a learnable all-ones initial state; the GRU recipes warm up for 100,000 steps and hold the peak (`training.constant_steps`) until step 900,000 for add2 and 300,000 for mult2.
+The table pairs each starting recipe with a saved paper configuration. Recipes use relative paths, automatic device selection, and local logging. To match a particular paper run, use the saved configuration in the last column, including the original checkpoint and evaluation schedule.
 
 | Recipe | Hidden dimensions | Dataset size | Training steps | Warmup steps | Related run |
 |---|---:|---:|---:|---:|---|
@@ -24,7 +21,9 @@ These recipes provide one starting configuration per experiment category. The ta
 | [GRU/add2.yaml](GRU/add2.yaml) | 32 | 25 | 1,000,000 | 100,000 | [GRU add2 history](../analyses/training_dynamics/GRU/add2/config.yaml) |
 | [GRU/mult2.yaml](GRU/mult2.yaml) | 64 | 100 | 1,000,000 | 100,000 | [GRU mult2 history](../analyses/training_dynamics/GRU/mult2/config.yaml) |
 
-All DFST and DFST_Softmax recipes save checkpoints every 10,000 steps and log training measurements every 100 steps. The evaluation schedules follow:
+The four recurrent recipes use the seeds from the [training-dynamics comparison](../notebooks/training_dynamics.ipynb), clip gradients at 0.1, and decay the learning rate to `1e-7`. Binary-addition RNN training starts at 0.01 with orthogonal recurrent weights. The other three recipes use a peak of 0.003, identity recurrence with zero input weights, and a learnable all-ones initial state. Both GRUs warm up for 100,000 updates, then hold the peak until update 900,000 for addition or 300,000 for multiplication.
+
+All DFST and Softmax DFST recipes save checkpoints every 10,000 updates and log training measurements every 100. The following table shows when evaluation runs and which scan the evaluator uses.
 
 | Recipe | Evaluation interval | Final evaluation | Evaluation scan |
 |---|---:|---|---|
@@ -43,21 +42,21 @@ DFST learning rates decay from 0.01 for binary arithmetic or 0.001 for decimal a
 
 Run commands from the repository root after installing the package with `pip install -e .`.
 
-Preview the complete configuration:
+First inspect the resolved settings for a binary-addition DFST.
 
 ```sh
 del config --config configs/DFST/add2.yaml
 ```
 
-Start training:
+To train with those settings, change the subcommand to `train`.
 
 ```sh
 del train --config configs/DFST/add2.yaml
 ```
 
-The command prints the output directory, which contains the saved configuration, loss history, checkpoints and evaluations. Recipe runs start from scratch and include final evaluation. Full training and length-generalization evaluation can take substantial compute.
+By default, DEL derives the run name from the configuration and expert. Set `run.name` for a readable prefix or pass `--run-dir` to choose the directory. Training prints the output directory, which contains the saved configuration, loss history, checkpoints and evaluations. Recipe runs start from scratch and include final evaluation. Full training and length-generalization evaluation can take substantial compute.
 
-For a short CPU check, reduce both the training budget and evaluation work:
+For a short CPU check, reduce both the training budget and the evaluation ceiling as follows.
 
 ```sh
 del train --config configs/DFST/add2.yaml \
@@ -71,16 +70,16 @@ del train --config configs/DFST/add2.yaml \
 
 ## Change Settings
 
-Settings are applied in order: package defaults, the recipe, then dotted command-line overrides. Overrides leave the recipe unchanged. The recipes specify training and evaluation settings. Meaningful nulls remain: `model.embed_dim: null` selects frozen one-hot inputs, `data.max_steps: null` allows expert execution until halt, and `initialization.checkpoint: null` starts training from scratch.
+DEL loads package defaults, applies the recipe, and finally applies dotted command-line overrides. Some null values carry specific meanings. For example, `model.embed_dim: null` selects frozen one-hot inputs, `data.max_steps: null` allows expert execution until halt, and `initialization.checkpoint: null` starts training from scratch.
 
-Preview a different Softmax capacity and dataset size:
+The following example previews a Softmax DFST with 22 hidden coordinates and 75 training demonstrations.
 
 ```sh
 del config --config configs/DFST_Softmax/add2.yaml \
   model.hidden_size=22 data.size=75
 ```
 
-Run a DFST budget and data-size sweep for the universal learning task:
+To vary two settings together, use a shell loop. This example trains a universal DFST at each combination of dataset size and update budget.
 
 ```sh
 for size in 75 150 225; do
@@ -91,13 +90,13 @@ for size in 75 150 225; do
 done
 ```
 
-Arithmetic schedule sweeps vary `training.steps` and `training.warmup_steps`; Softmax sweeps vary `model.hidden_size` and `data.size`. The total training budget determines the learning-rate schedule, so changing the budget defines a different experiment. When shortening a run, set a warmup smaller than the selected budget. `data.seed` controls sampling, and `run.model_seed` controls model initialization.
+Arithmetic schedule sweeps vary `training.steps` and `training.warmup_steps`. Softmax sweeps vary `model.hidden_size` and `data.size`. The total training budget determines the learning-rate schedule, so changing the budget defines a different experiment. When shortening a run, set a warmup smaller than the selected budget. `data.seed` controls sampling, and `run.model_seed` controls model initialization.
 
-To enable W&B, install `pip install -e '.[tracking]'`, authenticate with your W&B service, and pass `run.wandb.enabled=true run.wandb.project=<project>`. No tracking account is required for local training.
+To enable W&B, install `pip install -e '.[tracking]'`, authenticate with your W&B service, and pass `run.wandb.enabled=true run.wandb.project=<project>`. Local training writes metrics without a tracking account.
 
 ## Reproduce a Selected Run
 
-Exact experiment configurations live alongside the weights in `runs/<model>/<task>/<run_id>/config.yaml`. Use those files to reproduce a selected run; these recipes do not enumerate every sweep combination.
+Exact experiment configurations live alongside the weights in `runs/<model>/<task>/<run_id>/config.yaml`. Choose the saved configuration to reproduce a specific sweep cell.
 
 ```sh
 del train --config runs/DFST/add2/warmup_50000_steps_500000/config.yaml \

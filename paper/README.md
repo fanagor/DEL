@@ -1,21 +1,12 @@
-# Paper Artifacts
+# Guide to the Paper Artifacts
 
-The NeurIPS 2026 paper, **[Differentiable Exact Learning](https://arxiv.org/abs/2611.21486v1)**
-by Hristo Papazov, Francesco D'Angelo, and Nicolas Flammarion, accompanies the
-configurations, trained weights, results, and proofs collected here. The arXiv version includes
-the appendices.
+The [NeurIPS 2026 paper and appendices](https://arxiv.org/abs/2611.21486v1) present the learning framework, the generalization experiments, and the proofs. Use this guide to trace a plotted value back to the run that produced the measurement or a theorem back to the controller and checker that support the claim.
 
-[figures.yaml](figures.yaml) selects final-evaluation runs, all eight extracted-controller cases and the two 1M-step training-dynamics comparisons. [analyses.yaml](analyses.yaml) catalogs the five metric extractions and three annealing cases, with notebook indices, released source runs, proof domains, proof documents, checkers and saved reports. A separate `training_dynamics` section catalogs saved loss histories, checkpoint evaluations and measurement settings. Figure selections remain in `figures.yaml`.
+## Find a Figure or Proof
 
-All case paths point directly to curated directories under `analyses/metric_extraction/` or `analyses/annealing/`. The `path` field identifies the published artifacts; `source_run` identifies the released neural checkpoint used for extraction. Proof paths resolve relative to the case directory. Proof domains concern extracted discrete controllers, not the continuous neural models. Universal metric extraction covers nonempty inputs; universal annealing also covers empty input.
+The [figure selections](figures.yaml) identify the final runs, training histories, and extraction cases behind the figures. The [analysis catalog](analyses.yaml) gives the notebook index, source checkpoint, extracted machine, input domain, proof, checker, and saved report for each of the eight certificates. In a catalog entry, `source_run` points to the trained neural controller and `path` points to the extraction case. Proof paths start at the case directory.
 
-Run the paper workflows from the repository root:
-
-```sh
-python scripts/check_notebooks.py --paper --execute --timeout 180
-```
-
-The command uses released files and saved histories without a tracking-service connection. Temporary copies and output directories keep published artifacts unchanged. Extraction and annealing notebooks display the selected saved case by default.
+Each notebook below addresses a different question. For the headline result, start with the front-page summary. For variation across settings, open the corresponding arithmetic or universal sweep.
 
 | Result | Notebook |
 |---|---|
@@ -28,53 +19,20 @@ The command uses released files and saved histories without a tracking-service c
 | Metric extraction cases | [Metric extraction](../notebooks/metric_FST_extraction.ipynb) |
 | Annealing cases | [Annealing](../notebooks/anneal_dfst_softmax_to_fst.ipynb) |
 
-The final-results notebooks require evaluations for every selected run. Evaluation ceilings retain the saved `at_cap` flags.
+## Reproduce the Figures
 
-The [paper](https://arxiv.org/abs/2611.21486v1) presents the central comparisons, extraction methods, and precise claims; the appendices provide the supporting proof statements and arguments. The repository supplies the configurations, machine-readable tables, plots, and executable checkers needed to inspect those claims.
+After installing the [notebook dependencies](../README.md#install), open a notebook and run the cells in order. To execute all eight paper workflows on temporary copies, run the following command from the repository root.
 
-The training-dynamics notebook loads 1M-step add2 and mult2 selections from
-`training_dynamics` in [figures.yaml](figures.yaml). Override `RUNS` in the notebook
-for a local comparison. The default selections include DFST, RNN and GRU
-histories for each task under `analyses/training_dynamics/<model>/<task>/`;
-leave `None` to omit a model. Each supplied run requires complete loss history
-and ten 100k-step ULG/RLG evaluations. These figures use trajectory evaluations,
-while the sweep figures use final evaluations from `runs/`.
+```sh
+python scripts/check_notebooks.py --paper --execute --timeout 180
+```
 
-Maintainer import tools require explicit manifests outside the public repository.
-Use `scripts/export_paper_runs.py --manifest /private/path/selection.yaml` for
-training outputs, or `scripts/curate_analyses.py --manifest /private/path/imports.yaml`
-for new extraction outputs. Existing published cases require no import step.
+The figure notebooks read released evaluations, including the `at_cap` flags that identify successful ceiling probes. Each training-dynamics curve draws on a loss log and ten evaluations spaced 100,000 updates apart. To compare another history, change `RUNS` in the notebook and supply the full one-million-update history. Set a selection to `None` to omit a curve.
 
-Public checkpoints omit tracking identities and disable tracking by default.
-Sanitization preserves model tensors, optimizer state and random-generator state.
-Evaluation files and analysis configurations record the sanitized checkpoint
-checksums. Checkpoint `format_version` fields remain necessary for model loading;
-the two paper manifests need no schema-version field.
+The extraction notebooks display a saved case by default. Choose `CASE_INDEX` to inspect a different controller. When recomputing a case, enable `SAVE_INTERMEDIATES` to retain diagnostic artifacts alongside final outputs. The [analysis guide](../analyses/README.md) describes the files and proof domains. In particular, the universal metric-extraction proof covers nonempty inputs, and the universal annealing proof also covers the empty input.
 
-The method notebooks use `CASE_INDEX` to display one saved case. Compact outputs
-contain configuration, final machine maps, plots, diagnostic data and checks.
-Set `SAVE_INTERMEDIATES = True` during recomputation to save debugging artifacts
-under `intermediates/`. Annealing probability snapshots support the viewer in
-both storage modes. See [the analysis layout](../analyses/README.md) for the folder contents.
-
+For maintainers adding a result, the [release tools](../scripts/README.md#import-manifests) import training outputs and extraction cases from explicit private manifests. Released checkpoints retain model, optimizer, and random-generator state and carry a format version for loading. The export removes tracking identities and records checksums in the evaluation and analysis files.
 
 ## Figure Outputs
 
-Figure notebooks save PDFs, SVGs, PNGs and supporting tables under
-`analysis_outputs/paper_figures/`:
-
-| Folder | Contents |
-|---|---|
-| `DFST/<task>/` | Generalization plots for add2, add10, mult2, mult10 or universal; universal run and metric tables |
-| `DFST/arithmetic/` | Combined arithmetic plots and the arithmetic metric table |
-| `DFST_Softmax/<task>/` | Generalization plots for add2, mult2 or universal; universal run and metric tables |
-| `DFST_Softmax/arithmetic/` | Arithmetic metric table |
-| `front_page_summary/` | Summary figure and selected-run table |
-| `training_dynamics/` | Per-task ULG and RLG figures, curve tables and settings for add2 and mult2 |
-
-Set `DEL_ANALYSIS_DIR` to replace the figure root. Every figure notebook appends
-the model/task or figure-family subfolders shown above. Relative roots resolve
-from the repository root. Repeated exports replace matching filenames.
-The controller walkthrough displays examples and animations inline.
-Extraction and annealing use separate case directories under `analysis_outputs/`;
-for those two notebooks, `DEL_ANALYSIS_DIR` specifies the complete case directory.
+Browse the [rendered figures and numerical tables](../analysis_outputs/paper_figures/) to inspect a result without starting Jupyter. The [notebook output guide](../notebooks/README.md#figure-outputs) lists the destination for each figure family and explains how to choose a different output directory.
