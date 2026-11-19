@@ -12,7 +12,7 @@ import torch
 import yaml
 
 from ..checkpoint import atomic_json
-from ..config import validate_config
+from ..config import restore_program_encoding, validate_config
 from ..data import create_expert
 from ..models import build_model
 from .public_metadata import public_checkpoint_bytes, public_metadata
@@ -66,6 +66,7 @@ def read_catalog(root, manifest):
 def resolved_config(saved):
     """Resolve automatic defaults while retaining nulls with scientific meaning."""
     config = deepcopy(saved["config"])
+    restore_program_encoding(config["data"], saved.get("expert_digest"))
     config["data"].setdefault("variant", "default")
     config["data"].setdefault("teaching_set", False)
     config["evaluation"].setdefault("scan", "sequential")

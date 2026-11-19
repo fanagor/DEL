@@ -276,7 +276,7 @@ def shift_right_tm():
     return transitions
 
 
-def scaling_A_tm(m):
+def scaling_A_tm(m, *, terminal_step=True):
     """
     Creates the transition diagram of a Turing machine
     with m+2 states and 3m+6 transitions with the following
@@ -285,7 +285,8 @@ def scaling_A_tm(m):
     a 0 and moves right. If it reads a blank symbol, it writes
     (i+1)%2 and moves left if i%2=0 and right if i%2=1. The last
     state is the halting state. Note that no matter the input
-    length, the TM always performs m computational steps followed by one symbol-preserving S step.
+    length, the default table performs m computational steps and one symbol-preserving S step.
+    Some released universal runs encode state m directly as the halt state.
     """
     transitions = {}
 
@@ -294,9 +295,10 @@ def scaling_A_tm(m):
         transitions[(i, "1")] = (i + 1, "0", "R")
         transitions[(i, "")] = (i + 1, str((i + 1) % 2), "L" if i % 2 == 0 else "R")
 
+    halt = m + int(terminal_step)
     for symbol in ("0", "1", ""):
-        transitions[(m, symbol)] = (m + 1, symbol, "S")
-        transitions[(m + 1, symbol)] = (m + 1, symbol, "S")
+        transitions[(m, symbol)] = (halt, symbol, "S")
+        transitions[(halt, symbol)] = (halt, symbol, "S")
 
     return transitions
 

@@ -31,6 +31,12 @@ def _identity(model, expert, config):
                 for key in ("environment", "task", "radix", "eval_tasks", "max_steps")
             },
             **(
+                {"scaling_a_terminal_step": False}
+                if expert.environment == "teleporting"
+                and not config["data"].get("scaling_a_terminal_step", True)
+                else {}
+            ),
+            **(
                 {"variant": config["data"]["variant"]}
                 if config["data"].get("environment") == "grid"
                 and config["data"].get("variant", "default") != "default"

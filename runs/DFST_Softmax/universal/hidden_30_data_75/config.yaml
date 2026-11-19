@@ -11,6 +11,7 @@ data:
   teaching_set: false
   cache_dir: .cache/data
   max_steps: null
+  scaling_a_terminal_step: false
   train_tasks:
   - scaling_A_m5
   - scaling_B_m5

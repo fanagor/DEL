@@ -239,3 +239,28 @@ def test_scaling_a_explicit_terminal_stop(m):
             assert len(actions) <= m + 1
         assert len(actions) == m + 1
         assert actions[-1] == "S" and "S" not in actions[:-1]
+
+
+def test_released_softmax_universal_reconstructs_saved_scaling_program():
+    from pathlib import Path
+
+    run = Path(__file__).resolve().parents[1] / "runs/DFST_Softmax/universal/hidden_30_data_150"
+    model, expert, config, saved = load_run(run)
+    assert dataset_spec(config["data"])["expert_digest"] == saved["expert_digest"]
+    assert config["data"]["scaling_a_terminal_step"] is False
+    recipe = load_config(run / "config.yaml")
+    assert dataset_spec(recipe["data"])["expert_digest"] == saved["expert_digest"]
+    assert (
+        load_config(run / "config.yaml", ["data.scaling_a_terminal_step=true"])["data"][
+            "scaling_a_terminal_step"
+        ]
+        is True
+    )
+    assert model.hidden_size == 30
+    for m in (5, 500):
+        transitions = expert.program_transitions(f"scaling_A_m{m}")
+        assert max(q for q, _ in transitions) == m
+        assert transitions[m, "0"] == (m, "0", "S")
+        assert transitions[m - 1, "0"] == (m, "1", "L")
+        assert transitions != task_transitions(f"scaling_A_m{m}")
+    assert expert.program_transitions("parity") == task_transitions("parity")

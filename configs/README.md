@@ -71,7 +71,7 @@ del train --config configs/DFST/add2.yaml \
 
 ## Change Settings
 
-Settings are applied in order: package defaults, the recipe, then dotted command-line overrides. Overrides leave the recipe unchanged. Each recipe explicitly includes the current configuration fields. Meaningful nulls remain: `model.embed_dim: null` selects frozen one-hot inputs, `data.max_steps: null` allows expert execution until halt, and `initialization.checkpoint: null` starts training from scratch.
+Settings are applied in order: package defaults, the recipe, then dotted command-line overrides. Overrides leave the recipe unchanged. The recipes specify training and evaluation settings. Meaningful nulls remain: `model.embed_dim: null` selects frozen one-hot inputs, `data.max_steps: null` allows expert execution until halt, and `initialization.checkpoint: null` starts training from scratch.
 
 Preview a different Softmax capacity and dataset size:
 
@@ -103,5 +103,7 @@ Exact experiment configurations live alongside the weights in `runs/<model>/<tas
 del train --config runs/DFST/add2/warmup_50000_steps_500000/config.yaml \
   run.device=auto run.wandb.enabled=false run.output_dir=outputs/reproductions
 ```
+
+The released universal Softmax runs encode scaling-A programs with state $m$ as the halt state. The matching recipe and all nine released run configurations set `data.scaling_a_terminal_step=false`. The checkpoint loader recovers the same setting from the original expert fingerprint. Ordinary universal DFST runs use a separate terminal state.
 
 See [paper/figures.yaml](../paper/figures.yaml) for figure selections and the selected run directories for saved training configurations. Adding or editing a recipe does not change those selections or the released artifacts.

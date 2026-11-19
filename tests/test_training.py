@@ -388,6 +388,16 @@ def test_evaluation_cli_accepts_options_between_overrides(tmp_path):
     assert result["random_samples"] == 1
 
 
+def test_evaluation_cli_accepts_checkpoint_file(tmp_path):
+    from differentiable_exact_learning.cli import main
+
+    path = train(small_config(tmp_path))
+    checkpoint = path / "checkpoints/latest.pt"
+    main(["evaluate", str(checkpoint), "--device", "cpu"])
+    assert json.loads(checkpoint.with_suffix(".evaluation.json").read_text())["step"] == 4
+    assert (checkpoint.parent / "evaluation_progress").is_dir()
+
+
 def test_cli_rejects_unknown_flags():
     from differentiable_exact_learning.cli import main
 

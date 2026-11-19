@@ -58,13 +58,47 @@ def construct_model(config, expert, device):
     return model.to(device)
 
 
+def _load_inference_checkpoint(path):
+    """Recover the published repdigit protocol from the matching final evaluation."""
+    if path.name != "final_model_checkpoint.pt":
+        return read_checkpoint(path)
+    with path.open("rb") as stream:
+        saved = read_checkpoint(stream)
+        report = path.with_name("evaluation.json")
+        if not report.is_file():
+            return saved
+        with report.open() as file:
+            evaluation = json.load(file)
+        if evaluation.get("final") is not True or evaluation.get("checkpoint") != path.name:
+            return saved
+        stream.seek(0)
+        digest = hashlib.sha256()
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+        if (
+            evaluation.get("source_sha256") != digest.hexdigest()
+            or evaluation.get("expert_digest") != saved.get("expert_digest")
+            or evaluation.get("step") != saved.get("step")
+        ):
+            raise ValueError(f"Final evaluation does not match checkpoint {path}")
+        if (
+            saved["config"]["evaluation"]["hard_cases"] == "diagonal"
+            and evaluation.get("evaluation_config", {}).get("hard_cases") == "all"
+        ):
+            saved["config"]["evaluation"]["hard_cases"] = "all"
+    return saved
+
+
 def load_run(path, checkpoint="latest.pt", device="cpu"):
     """Reconstruct the saved architecture; never guess a model from tensor keys."""
     path = Path(path)
     if path.is_file():
-        saved = read_checkpoint(path)
-    elif checkpoint == "latest.pt" and (path / "final_model_checkpoint.pt").exists():
-        saved = read_checkpoint(path / "final_model_checkpoint.pt")
+        saved = _load_inference_checkpoint(path)
+    elif (
+        checkpoint in {"latest.pt", "final_model_checkpoint.pt"}
+        and (path / "final_model_checkpoint.pt").exists()
+    ):
+        saved = _load_inference_checkpoint(path / "final_model_checkpoint.pt")
     elif checkpoint == "latest.pt":
         _, saved = latest_checkpoint(path)
     else:

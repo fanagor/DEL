@@ -254,3 +254,25 @@ def test_public_metadata_clears_run_identity_without_mutating_source():
     assert run["seed"] == 42
     assert run["wandb"] == {"enabled": False, "project": "DEL", "entity": None}
     assert source["config"]["run"]["name"] == "private-experiment"
+
+
+def test_released_arithmetic_evaluation_recovers_only_verified_repdigit_protocol(tmp_path):
+    import shutil
+
+    root = Path(__file__).resolve().parents[1]
+    source = root / "runs/DFST/add2/warmup_50000_steps_250000"
+    path = tmp_path / CHECKPOINT
+    shutil.copyfile(source / CHECKPOINT, path)
+    original = load_run(path)[2]["evaluation"]
+    assert original["hard_cases"] == "diagonal"
+    result = json.loads((source / "evaluation.json").read_text())
+    result["evaluation_config"]["scan"] = "sequential"
+    report = tmp_path / "evaluation.json"
+    report.write_text(json.dumps(result))
+    restored = load_run(tmp_path)[2]["evaluation"]
+    assert restored == {**original, "hard_cases": "all"}
+    assert load_run(tmp_path, CHECKPOINT)[2]["evaluation"] == restored
+    result["source_sha256"] = "wrong-checkpoint"
+    report.write_text(json.dumps(result))
+    with pytest.raises(ValueError, match="Final evaluation does not match checkpoint"):
+        load_run(path)

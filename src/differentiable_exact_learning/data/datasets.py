@@ -58,12 +58,12 @@ def dataset_spec(config: Mapping[str, Any]) -> dict:
     # A change to an expert program invalidates cached traces automatically.
     relevant = [expert.transitions]
     if expert.environment == "teleporting":
-        from .experts import task_transitions
-
-        relevant.extend(task_transitions(t) for t in expert.train_tasks)
+        relevant.extend(expert.program_transitions(t) for t in expert.train_tasks)
         if spec.get("teaching_set"):
             existing = set(expert.train_tasks)
-            relevant.extend(task_transitions(t) for t, _ in TP_TEACHING_SPEC if t not in existing)
+            relevant.extend(
+                expert.program_transitions(t) for t, _ in TP_TEACHING_SPEC if t not in existing
+            )
     serialized = repr([sorted(table.items()) for table in relevant]).encode()
     spec["expert_digest"] = hashlib.sha256(serialized).hexdigest()
     return spec

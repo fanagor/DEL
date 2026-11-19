@@ -1,9 +1,9 @@
 # Paper Artifacts
 
-The final NeurIPS 2026 paper, **[Differentiable Exact Learning](differentiable_exact_learning.pdf)**
+The NeurIPS 2026 paper, **[Differentiable Exact Learning](https://arxiv.org/abs/2611.21486v1)**
 by Hristo Papazov, Francesco D'Angelo, and Nicolas Flammarion, accompanies the
-configurations, trained weights, results, and proofs collected here. The PDF includes
-the full appendices.
+configurations, trained weights, results, and proofs collected here. The arXiv version includes
+the appendices.
 
 [figures.yaml](figures.yaml) selects final-evaluation runs, all eight extracted-controller cases and the two 1M-step training-dynamics comparisons. [analyses.yaml](analyses.yaml) catalogs the five metric extractions and three annealing cases, with notebook indices, released source runs, proof domains, proof documents, checkers and saved reports. A separate `training_dynamics` section catalogs saved loss histories, checkpoint evaluations and measurement settings. Figure selections remain in `figures.yaml`.
 
@@ -30,7 +30,7 @@ The command uses released files and saved histories without a tracking-service c
 
 The final-results notebooks require evaluations for every selected run. Evaluation ceilings retain the saved `at_cap` flags.
 
-The [paper](differentiable_exact_learning.pdf) presents the central comparisons, extraction methods, and precise claims; the appendices provide the supporting proof statements and arguments. The repository supplies the configurations, machine-readable tables, plots, and executable checkers needed to inspect those claims.
+The [paper](https://arxiv.org/abs/2611.21486v1) presents the central comparisons, extraction methods, and precise claims; the appendices provide the supporting proof statements and arguments. The repository supplies the configurations, machine-readable tables, plots, and executable checkers needed to inspect those claims.
 
 The training-dynamics notebook loads 1M-step add2 and mult2 selections from
 `training_dynamics` in [figures.yaml](figures.yaml). Override `RUNS` in the notebook

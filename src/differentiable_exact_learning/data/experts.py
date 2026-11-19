@@ -170,12 +170,14 @@ def task_label(task) -> str:
     raise ValueError(f"Unknown teleporting task: {task!r}")
 
 
-def task_transitions(task):
+def task_transitions(task, *, scaling_a_terminal_step=True):
     name = task_label(task)
     if name in TASK_BUILDERS:
         return TASK_BUILDERS[name]()
     family, count = name.rsplit("_m", 1)
-    return (tp.scaling_A_tm if family == "scaling_A" else tp.scaling_B_tm)(int(count))
+    if family == "scaling_A":
+        return tp.scaling_A_tm(int(count), terminal_step=scaling_a_terminal_step)
+    return tp.scaling_B_tm(int(count))
 
 
 def encode_tm(transitions, word: Sequence[str]):
@@ -373,6 +375,14 @@ class Expert:
             f"{self.environment} expert did not halt within {limit} transitions"
         )
 
+    def program_transitions(self, task):
+        label = task_label(task)
+        if label not in self._task_cache:
+            self._task_cache[label] = task_transitions(
+                label, scaling_a_terminal_step=self.config.get("scaling_a_terminal_step", True)
+            )
+        return self._task_cache[label]
+
     def encode_program(self, transitions, word: Sequence[str]):
         """Encode a binary TM program table and input word for ``universal_tp``."""
         return encode_tm(transitions, word)
@@ -384,7 +394,9 @@ class Expert:
         analysis layer. Call read/write/move with decoded symbol/motion strings.
         """
         if self.environment == "teleporting":
-            rows = self.encode_program(task_transitions(metadata["task"]), metadata["input"])
+            rows = self.encode_program(
+                self.program_transitions(metadata["task"]), metadata["input"]
+            )
             return Memory(rows, (1, 1 - len(rows)), True)
         a, b = metadata["operand_tokens"]
         row = a + ["+" if self.task == "addition" else "x"] + b
@@ -437,9 +449,7 @@ class Expert:
             if max_length < 0:
                 raise ValueError("max_length must be nonnegative")
             label = task_label(task) if task is not None else rng.choice(self.train_tasks)
-            if label not in self._task_cache:
-                self._task_cache[label] = task_transitions(label)
-            transitions = self._task_cache[label]
+            transitions = self.program_transitions(label)
             if operands is not None:
                 word = list(operands if isinstance(operands, str) else operands[0])
                 if any(d not in {"0", "1"} for d in word):

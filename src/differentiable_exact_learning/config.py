@@ -21,6 +21,12 @@ def _merge(base, update, prefix=""):
             base[key] = value
 
 
+def restore_program_encoding(data, expert_digest):
+    """Resolve the implicit scaling-A program version in the published Softmax runs."""
+    if expert_digest == "797d17e5626be99359b0510105dde63cef4a260651c65d35737ebbe190c28b77":
+        data.setdefault("scaling_a_terminal_step", False)
+
+
 def load_config(path=None, overrides=()):
     """Load package defaults, an optional YAML overlay, and strict dotted overrides."""
     config = yaml.safe_load(files(__package__).joinpath("config.yaml").read_text())
@@ -89,6 +95,7 @@ def validate_config(config):
             raise ValueError(f"{name} must be one of {sorted(allowed)}, got {value!r}")
     for name, value in (
         ("data.teaching_set", d["teaching_set"]),
+        ("data.scaling_a_terminal_step", d.get("scaling_a_terminal_step", True)),
         ("training.arithmetic_curriculum.enabled", t["arithmetic_curriculum"]["enabled"]),
         ("evaluation.final", e["final"]),
         ("run.wandb.enabled", r["wandb"]["enabled"]),
@@ -209,6 +216,11 @@ def experiment_config(config):
         or result["data"].get("variant", "default") == "default"
     ):
         result["data"].pop("variant", None)
+    if (
+        result["data"].get("scaling_a_terminal_step", True)
+        or result["data"]["environment"] != "teleporting"
+    ):
+        result["data"].pop("scaling_a_terminal_step", None)
     if not result["data"].get("teaching_set"):
         result["data"].pop("teaching_set", None)
     # Without a peak hold the schedule, and so the identity, is unchanged.

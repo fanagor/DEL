@@ -10,6 +10,8 @@ from pathlib import Path
 import numpy as np
 import torch
 
+from .config import restore_program_encoding
+
 
 def atomic_save(value, path):
     path = Path(path)
@@ -68,6 +70,10 @@ def read_checkpoint(path):
         raise ValueError(
             "Unsupported checkpoint format; legacy checkpoints need explicit conversion"
         )
+    # These released checkpoints predate the scaling-A program variant field.
+    # Reconstruct their exact encoding before the ordinary fingerprint check.
+    if "config" in checkpoint and "data" in checkpoint["config"]:
+        restore_program_encoding(checkpoint["config"]["data"], checkpoint.get("expert_digest"))
     return checkpoint
 
 

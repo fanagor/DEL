@@ -422,7 +422,7 @@ def teleporting_teaching_inputs(config):
 
 def teaching_manifest(config):
     """Reviewable mandatory teaching set and expert transition coverage."""
-    from .experts import create_expert, task_transitions
+    from .experts import create_expert
 
     validate_teaching(config)
     enabled = config.get("teaching_set", False)
@@ -434,7 +434,7 @@ def teaching_manifest(config):
         pairs = teleporting_teaching_inputs(config)
         examples = [{"task": t, "input": w} for t, w in pairs]
         for t, w in pairs:
-            rows = expert.encode_program(task_transitions(t), w)
+            rows = expert.encode_program(expert.program_transitions(t), w)
             execution = expert.simulate(rows, (1, 1 - len(rows)))
             covered.update(
                 (q, expert.vocab_rev[x])

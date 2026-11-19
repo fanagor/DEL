@@ -125,18 +125,10 @@ additional RNN and GRU histories through explicit run selections.
 An omitted model contributes no curve. Figure exports go to
 `analysis_outputs/paper_figures/training_dynamics/`.
 
-[training_dynamics.ipynb](../notebooks/training_dynamics.ipynb)
-reads the DFST add2 history above together with `DFST/mult2`,
-`RNN/add2`, `RNN/mult2`, `GRU/add2` and
-`GRU/mult2`. Each run contains ten checkpoint evaluations.
-The run configurations use DEL's supported fields and select `hard_cases: all`
-for new evaluations. Saved evaluation files record the evaluation settings in
-`evaluation_config` and each task's `hard_cases`; changing a run configuration
-does not change saved scores.
-
-The five runs listed above contain RLG measurements searched up to the evaluation
-cap. DEL's evaluator bounds the RLG search by the measured ULG. All recorded hard-case settings select all ordered repeated-digit pairs.
-The saved length-search results retain the measured scores and tested lengths.
+The six histories cover DFST, RNN, and GRU on binary addition and multiplication.
+Each history contains ten checkpoint evaluations. At every checkpoint, RLG
+tests all four ordered binary repdigit pairs. The saved evaluation files
+record the measured scores, test lengths, and evaluation settings.
 
 Use each run's `config.yaml` to train with the recorded training settings, or
 choose a representative recipe from [configs/](../configs/README.md).

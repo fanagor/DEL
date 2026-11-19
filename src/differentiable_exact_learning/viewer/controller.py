@@ -142,7 +142,7 @@ def initial_memory(source, text, task=None):
             )
         selected = task_label(task or source.task)
         if expert.environment == "teleporting":
-            rows = expert.encode_program(task_transitions(selected), text)
+            rows = expert.encode_program(expert.program_transitions(selected), text)
             return Memory(rows, (1, 1 - len(rows)), True), 1 - len(rows), selected
         return Memory([list(text)], (0, 0), False), 0, selected
     operator = "+" if expert.task == "addition" else "x"

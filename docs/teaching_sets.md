@@ -106,7 +106,7 @@ loading verifies the saved expert fingerprint against the selected controller.
 
 ### Explicit Multiplication Transition Cores
 
-The [README construction](../README.md#explicit-grid-multiplication-teaching-sets)
+The [construction in the technical reference](reference.md#explicit-grid-multiplication-teaching-sets)
 defines the algebraic families and explains the coverage roles. Both
 variants use symmetric, deduplicated sets, with operands of at most five digits
 and all single-digit products included. The formulas determine every grid teaching example without random selection

@@ -15,7 +15,9 @@ def main(argv=None):
     sub = parser.add_subparsers(dest="command", required=True)
     for name in ("train", "data", "config", "teaching-set"):
         p = sub.add_parser(name)
-        p.add_argument("--config", type=Path, help="Small recipe YAML merged into package defaults")
+        p.add_argument(
+            "--config", type=Path, help="Configuration YAML merged into package defaults"
+        )
         if name == "train":
             resume = p.add_mutually_exclusive_group()
             resume.add_argument(
@@ -34,7 +36,7 @@ def main(argv=None):
             p.add_argument("--run-dir", type=Path, help="Explicit output/resume directory")
         p.add_argument("overrides", nargs="*", help="Validated dotted key=value overrides")
     p = sub.add_parser("evaluate")
-    p.add_argument("run_dir", type=Path)
+    p.add_argument("run_dir", type=Path, metavar="RUN_OR_CHECKPOINT")
     p.add_argument("--checkpoint", default="latest.pt")
     p.add_argument("--device", default="auto")
     p.add_argument("--output", type=Path)
@@ -100,10 +102,25 @@ def main(argv=None):
                 update = {part: update}
             _merge(config["evaluation"], update, "evaluation")
         validate_config(config)
-        progress_dir = args.run_dir / "evaluation_progress"
+        if args.run_dir.is_file():
+            result_dir = args.run_dir.parent
+            default_output = args.run_dir.with_suffix(".evaluation.json")
+        else:
+            result_dir = args.run_dir
+            final_checkpoint = result_dir / "final_model_checkpoint.pt"
+            if final_checkpoint.exists():
+                selected = (
+                    final_checkpoint
+                    if args.checkpoint == "latest.pt"
+                    else result_dir / Path(args.checkpoint).name
+                )
+                default_output = selected.with_suffix(".evaluation.json")
+            else:
+                default_output = result_dir / "evaluation.json"
+        progress_dir = result_dir / "evaluation_progress"
         result = evaluate(model, expert, config, progress_dir=progress_dir)
         result["step"] = checkpoint["step"]
-        output = args.output or args.run_dir / "evaluation.json"
+        output = args.output or default_output
         atomic_json(result, output)
         print(json.dumps(result, indent=2))
     elif args.command == "animate":
