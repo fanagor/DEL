@@ -2,7 +2,7 @@
 
 **Hristo Papazov, Francesco D’Angelo, and Nicolas Flammarion · NeurIPS 2026**
 
-How much can a learner recover from watching an algorithm run? In [Differentiable Exact Learning](https://arxiv.org/abs/2611.21486v1), we give a neural controller demonstrations of an expert acting on a grid. The learner sees every symbol the expert reads and writes, and every movement of the head. The expert’s internal states remain hidden. From these observations, we train controllers on short inputs, test on much longer inputs, and recover discrete algorithms whose behavior we can prove correct.
+Can a learner exactly recover the underlying procedure by observing an algorithm's execution? In [Differentiable Exact Learning](https://arxiv.org/abs/2611.21486v1), we give a neural controller demonstrations of an expert Turing machine acting on a grid. The learner sees every symbol the expert reads and writes, and every movement of the head. The expert’s internal states remain hidden. From these observations, we train controllers on tiny datasets of short inputs, generalize to extremely long inputs, and finally extract small discrete controllers from the neural networks whose behavior provably matches the expert's.
 
 ![The learning pipeline starts with expert demonstrations, trains a neural controller, and extracts a discrete controller for verification.](docs/assets/learning_pipeline.svg)
 
@@ -92,7 +92,7 @@ Try stepping through the same input in the [interactive grid explorer](https://f
 
 A **Differentiable Finite-State Transducer (DFST)** is a neural controller with a hidden vector and three matrices for each possible read symbol. In the paper’s diagram below, follow a single observation from the highlighted grid cell on the left through the controller to the updated grid on the right.
 
-![The paper’s DFST diagram shows the observed symbol, hidden-state update, write and motion readouts, and resulting grid.](docs/assets/dfst_step.svg)
+The paper’s DFST diagram shows the observed symbol, hidden-state update, write and motion readouts, and resulting grid. ![](docs/assets/dfst_step.svg)
 
 At step $t$, the symbol $x_t$ selects a transition matrix $A[x_t]$, a write matrix $B[x_t]$, and a motion matrix $C[x_t]$. All three act on the **same pre-action hidden vector** $h_{t-1}$.
 
@@ -109,7 +109,7 @@ During autonomous execution, the controller writes the symbol with the largest s
 A **Softmax DFST** uses the same recurrence. For each read symbol $x$ and current-state index $j$, the model learns logits for each column of the three matrices and for the initial hidden state:
 
 $$
-P[x]_{:j}=\operatorname{softmax}(\Theta^P[x]_{:j}),\qquad
+P[x]_{:j}=\mathrm{softmax}(\Theta^P[x]_{:j}),\qquad
 P\in\{A,B,C\},\qquad h_0=\operatorname{softmax}(\theta^h).
 $$
 
@@ -117,7 +117,7 @@ Every column sums to one. The hidden vector therefore remains a distribution ove
 
 ### Learning from Demonstrations
 
-During training, the controller receives the expert’s read symbols in order. At each valid step, the learner predicts the expert’s write $s_{bt}$ and motion $m_{bt}$ for trajectory $b$ and time $t$. With one-hot targets $e_s$ and $e_m$ and a mask $M_{bt}$ that selects valid steps, the two-head mean-squared-error loss is
+During teacher-forcing training, the controller receives the expert’s read symbols in order. At each valid step, the learner predicts the expert’s write $s_{bt}$ and motion $m_{bt}$ for trajectory $b$ and time $t$. With one-hot targets $e_s$ and $e_m$ and a mask $M_{bt}$ that selects valid steps, the two-head mean-squared-error loss is
 
 $$
 \mathcal L =
