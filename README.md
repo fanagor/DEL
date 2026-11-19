@@ -110,7 +110,7 @@ A **Softmax DFST** uses the same recurrence. For each read symbol $x$ and curren
 
 $$
 P[x]_{:j}=\mathrm{softmax}(\Theta^P[x]_{:j}),\qquad
-P\in\{A,B,C\},\qquad h_0=\operatorname{softmax}(\theta^h).
+P\in\{A,B,C\},\qquad h_0=\mathrm{softmax}(\theta^h).
 $$
 
 Every column sums to one. The hidden vector therefore remains a distribution over states, and the two readouts give distributions over writes and motions. This structure gives the extraction procedure a direct way to read off discrete rules. The [model implementations](src/differentiable_exact_learning/models/) also include the RNN and GRU baselines, which predict the same actions from recurrent hidden states.
